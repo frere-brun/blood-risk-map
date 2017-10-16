@@ -1,0 +1,171 @@
+
+[
+	{
+		"countries": [{"name":"greece", "file": "greece.json", "specificPlaces":null}],
+		"name": "Malaria",
+		"beginDate": "21-08-2015",
+		"endDate": null,
+		"duration": "6 months",
+		"color": "pink",
+		"requiredTests": null
+	},
+	{
+		"countries": [
+			{"name":"Israel","file": "israel.json", "specificPlaces": null}, 
+			{"name":"Liban","file": null, "specificPlaces": null},
+			{"name":"Syrie","file": "syria.json", "specificPlaces": null}, 
+			{"name":"Jordanie","file": "jordan.json", "specificPlaces": null}, 
+			{"name":"Iran","file": "iran.json", "specificPlaces": null}, 
+			{"name":"Iraq","file": "iraq.json", "specificPlaces": null}, 
+			{"name":"Koweit","file": "kuwait.json", "specificPlaces": null}, 
+			{"name":"Bahrain","file": null, "specificPlaces": null}, 
+			{"name":"Quatar","file": "qatar.json", "specificPlaces": null}, 
+			{"name":"Oman","file": "oman.json", "specificPlaces": null}, 
+			{"name":"Arabie Saoudite","file": "saudiarabia.json", "specificPlaces": null},
+			{"name":"Emirats Arabes","file": "unitedarabemirates.json", "specificPlaces": null},
+			{"name":"Yémen","file": "yemen.json", "specificPlaces": null}
+		],
+		"name": "Coronavirus",
+		"beginDate": "10-06-2013",
+		"endDate": null,
+		"duration": "14 days",
+		"color": "yellow",
+		"requiredTests": null
+	},
+	{
+		"countries": [{"name":"Yémen","file": "yemen.json", "specificPlaces": "Municipalité de la Vila Franca de Xira (30 km au nord de Lisbonne)"}],
+		"name": "Légionéllose",
+		"beginDate": "07-10-2014",
+		"endDate": null,
+		"duration": "28 days",
+		"color": "green",
+		"requiredTests": null
+	},
+	{
+		"countries": [
+			{"name":"American Samoa","file": null, "specificPlaces": null},
+			{"name":"Argentina","file":"argentina.json", "specificPlaces": "Tucumán Province"},
+			{"name":"Barbados","file":null, "specificPlaces": null},
+			{"name":"Belize","file":"belize.json", "specificPlaces": null},
+			{"name":"Bolivia","file":"bolivia.json", "specificPlaces": null},
+			{"name":"Bonaire","file": null, "specificPlaces": null},
+			{"name":"Brazil","file":"brazil.json", "specificPlaces": null},
+			{"name":"Cape Verde","file": null, "specificPlaces": null},
+			{"name":"Colombia","file":"colombia.json", "specificPlaces": null},
+			{"name":"Costa Rica","file":"costarica.json", "specificPlaces": null},
+			{"name":"Curaçao","file": null, "specificPlaces": null},
+			{"name":"Dominica","file": null, "specificPlaces": null},
+			{"name":"Dominican Republic","file":"dominicarep.json", "specificPlaces": null},
+			{"name":"Ecuador","file":"ecuador.json", "specificPlaces": null},
+			{"name":"El Salvador","file":"elsalvador.json", "specificPlaces": null},
+			{"name":"Fiji","file":"fiji.json", "specificPlaces": null},
+			{"name":"French Guiana","file":"guyana.json", "specificPlaces": null},
+			{"name":"Guadeloupe","file": null, "specificPlaces": null},
+			{"name":"Guatemala","file":"guatemala.json", "specificPlaces": null},
+			{"name":"Haiti","file":"haiti.json", "specificPlaces": null},
+			{"name":"Honduras","file":"honduras.json", "specificPlaces": null},
+			{"name":"Jamaica","file":"jamaica.json", "specificPlaces": null},
+			{"name":"Martinique","file": null, "specificPlaces": null},
+			{"name":"Mexico","file":"mexico.json", "specificPlaces": null},
+			{"name":"Micronesia","file": null, "specificPlaces": null},
+			{"name":"Federated States of Nicaragua","file":"nicaragua.json", "specificPlaces": null},
+			{"name":"Panama","file":"panama.json", "specificPlaces": null},
+			{"name":"Paraguay","file":"paraguay.json", "specificPlaces": null},
+			{"name":"Peru","file":"peru.json", "specificPlaces": null},
+			{"name":"Puerto Rico","file":"puertorico.json", "specificPlaces": null},
+			{"name":"Saint Lucia","file": null, "specificPlaces": null},
+			{"name":"Saint Martin","file": null, "specificPlaces": null},
+			{"name":"Saint Vincent and the Grenadines","file": null, "specificPlaces": null},
+			{"name":"Saint-Barthélemy","file":null, "specificPlaces": null},
+			{"name":"Samoa","file": null, "specificPlaces": null},
+			{"name":"Suriname","file":"suriname.json", "specificPlaces": null},
+			{"name":"Thailand","file":"thailand.json", "specificPlaces": null},
+			{"name":"Tonga","file": null, "specificPlaces": null},
+			{"name":"Trinidad and Tobago","file":"trinidadandtobago.json", "specificPlaces": null},
+			{"name":"Venezuela","file":"venezuela.json", "specificPlaces": null},
+			{"name":"Antigua and Barbuda","file": null, "specificPlaces": null},
+			{"name":"Anguilla","file": null, "specificPlaces": null},
+			{"name":"Cayman Islands","file": null, "specificPlaces": null},
+			{"name":"Cuba","file":"cuba.json", "specificPlaces": null},
+			{"name":"Grenada","file": null, "specificPlaces": null},
+			{"name":"Guinea-Bissau","file":"guineabissau.json", "specificPlaces": null},
+			{"name":"Indonesia","file":"indonesia.json", "specificPlaces": null},
+			{"name":"Saba","file": null, "specificPlaces": null},
+			{"name":"Sint Eustatius","file": null, "specificPlaces": null},
+			{"name":"Turks and Caicos Islands","file": null, "specificPlaces": null},
+			{"name":"Vietnam","file":"vietnam.json", "specificPlaces": null},
+			{"name":"United States","file":"unitedstates.json", "specificPlaces": "US Virgin Islands Florida Miami-Dade county, Broward, Palm Beach and Pinellas counties"}
+		],
+		"name": "Zika virus",
+		"beginDate": "01-01-2016",
+		"endDate": null,
+		"duration": "28 days",
+		"color": "red",
+		"requiredTests": null
+	},
+	{
+		"countries": [
+			{"name":"Portugal","file": "portugal.json", "specificPlaces": "Algarve,région du sud jusqu’à Lisbonne"},
+			{"name": "Albanie","file": "albania.json", "specificPlaces": null},
+			{"name": "Algérie","file": "algeria.json", "specificPlaces": null},
+			{"name": "Bulgarie","file": "bulgaria.json", "specificPlaces": null},
+			{"name": "Croatie","file": "croatia.json", "specificPlaces": null},
+			{"name": "Hongrie","file": "hungary.json", "specificPlaces": null},
+			{"name": "Israël","file": "israel.json", "specificPlaces": null},
+			{"name": "Kosovo","file": "kosovo.json", "specificPlaces": null},
+			{"name": "Macédoine","file": null, "specificPlaces": null},
+			{"name": "République Tcheque","file": "czechrep.json", "specificPlaces": null},
+			{"name": "Montenegro","file": "montenegro.json", "specificPlaces": null},
+			{"name": "Palestine","file": "palestine.json", "specificPlaces": null},
+			{"name": "Roumanie","file": "romania.json", "specificPlaces": null},
+			{"name": "Russie","file": "russia.json", "specificPlaces": null},
+			{"name": "Serbie","file": "serbia.json", "specificPlaces": null},
+			{"name": "Ukraine","file": "ukraine.json", "specificPlaces": null},
+			{"name": "USA","file": "unitedstates.json", "specificPlaces": null},
+			{"name": "Canada","file": "canada.json", "specificPlaces": null},
+			{"name": "Mexique","file": "mexico.json", "specificPlaces": null},
+			{"name": "Grèce","file": "greece.json", "specificPlaces": "Grèce continentale, île de Samos péninsule d’Evia"},
+			{"name": "Italie","file": "italy.json", "specificPlaces": "Toutes les régions au Nord de Rome + Province Rome+ Lazio (20.07.2016)+Sardaigne"},
+			{"name": "Tunisie","file": "tunisia.json", "specificPlaces": "Monastir et Kebili"},
+			{"name": "Turquie","file": "turkey.json", "specificPlaces": "Antalya, Mugla, Sakarya"},
+			{"name": "Bosnie-Herzégovine","file": "bosniaandherz.json", "specificPlaces": "Bosanski Novic, Kljuc, Mrkonjic Grad, Teslic"},
+			{
+				"name": "France",
+				"file": "france.json",
+				"specificPlaces": [
+									{
+										"name": "Gard",
+										"file": "gard.json"
+									},
+									{
+										"name": "Bouches-du-Rhône",
+										"file": "bouchedurhone.json"
+									},
+									{
+										"name": "Hérault",
+										"file": "herault.json"
+									}
+								]
+			}
+		],
+		"name": "West-Nile-Virus",
+		"beginDate": "01-06-2016",
+		"endDate": "30-11-2016",
+		"duration": "0 days",
+		"color": "blue",
+		"requiredTests": "Analyse PCR/WNV"
+	}
+]
+
+
+
+
+
+
+
+
+
+
+
+
+

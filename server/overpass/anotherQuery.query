@@ -1,0 +1,12 @@
+area[name="Metz"];
+(
+  node(area);
+  <;
+) -> .a;
+(
+  rel.a["boundary"="administrative"];
+);
+/*added by auto repair*/
+(._;>;);
+/*end of auto repair*/
+out meta qt;

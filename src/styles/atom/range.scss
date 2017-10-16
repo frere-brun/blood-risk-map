@@ -1,0 +1,25 @@
+.range-box {
+	position:absolute;
+	left:40px;
+	top:120px;
+	background-color:white;
+	z-index: 999;
+	width:300px;
+	.calendar {
+		float:left;
+		padding:15px;
+		display: inline-block;
+		transition: all .35s ease;
+		transform:scale(1);
+		background-color:$color-primary;
+		color:white;
+		font-size:1.5em;
+		z-index: 1;
+		position:relative;
+		transition: color .35s ease;
+	}
+	.content {
+		padding:10px;
+		float:left;
+	}
+}
