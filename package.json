@@ -4,7 +4,7 @@
   "description": "un boilerplate angular heroku",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js"
   },
   "devDependencies": {
     "del": "^2.0.2",
