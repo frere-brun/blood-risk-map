@@ -11,5 +11,8 @@
     "momentjs": "~2.14.1",
     "moment-range": "~2.2.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "angular": "^1.0.8"
+  }
 }
