@@ -1,14 +1,14 @@
 /* # Typographic base
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-	@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Open+Sans:400,800,700,600,300,300italic,400italic,600italic,800italic,700italic|Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900);
+	@import url(//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Open+Sans:400,800,700,600,300,300italic,400italic,600italic,800italic,700italic|Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900);
 
 	$font-georgia:          	Georgia, "Times New Roman", Times, serif;
 
 	$font-helvetica:         	"Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 	$font-lucida-grande:     	"Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
 	$font-verdana:           	Verdana, Geneva, sans-serif;
-	
+
 	$font-pt-serif:				"PtSerif", Times;
 	$font-raleway:				"Raleway", sans-serif;
 	$font-open-sans:			"Oswald", sans-serif;
@@ -16,7 +16,7 @@
 	$font-monospace:        	"Bitstream Vera Sans Mono", Consolas, Courier, monospace;
 
 	$ratio: $perfect-fourth;
-	
+
 	$title-size: 2.4rem;
 	$title-font: "Titilium Web", sans-serif;
 	$text-size: 1.6rem;
@@ -29,16 +29,16 @@
 	are based on 10px sizing. So basically 1.5rem = 15px :) */
 	html 				{ font-size: 62.5%; }
 	html, body 			{ width: 100%; height: 100%; }
-	body 				{ 
+	body 				{
 						  font-family: $text-font;
 						  @include antialiased();
 						  @include font(0, $text-size, $ratio);
-						} 
+						}
 
 	/* # Titles
 	–––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-		h1, h2, h3, h4, h5, h6 { 
+		h1, h2, h3, h4, h5, h6 {
 			font-family: $title-font;
 			font-weight: 300;
 			margin-top: 0;
@@ -79,7 +79,7 @@
 		.text-left 		{ text-align: left; }
 		.text-right 	{ text-align: right; }
 		.text-center 	{ text-align: center; }
-		.text-justify 	{ text-align: justify; text-justify: newspaper; }								
+		.text-justify 	{ text-align: justify; text-justify: newspaper; }
 
 		.breakword 		{ word-wrap: break-word; }
 		.normal-wrap 	{ word-wrap: normal; }
