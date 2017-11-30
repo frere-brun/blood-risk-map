@@ -31,10 +31,15 @@ html.screen-box(ng-app="app" resize mobile-detect detect-idle force-touch-ui)
 		meta(http-equiv='cache-control', content='public')
 		link(rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
 		link(type="text/css", rel="stylesheet", href="./styles/style.css")
-		script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js")
-		script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-range/2.2.0/moment-range.min.js")
-		script(type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyDvxMRt79TVhUAvmZRYVfHEFjSlY2U363o")
 
+		// Leaflet
+		link(rel="stylesheet", href="bower_components/leaflet/dist/leaflet.css")
+
+		// JS imports from bower
+		script(type="text/javascript" src="bower_components/moment/min/moment.min.js")
+		script(type="text/javascript" src="bower_components/moment-range/dist/moment-range.min.js")
+		//- script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js")
+		//- script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-range/2.2.0/moment-range.min.js")
 	body(id="body").screen-box
 		#preloader-wrapper.screen-box.bg-white
 			#preloader
@@ -43,8 +48,37 @@ html.screen-box(ng-app="app" resize mobile-detect detect-idle force-touch-ui)
 					.panel.panel-2
 					.panel.panel-4
 					.panel.panel-3
-				#preloader-text Chargement de l'application
-		div.screen-box.bg-white.relative(ui-view="")
+				#preloader-text
+
+		//- old view
+		//- div.screen-box.bg-white.relative(ui-view="")
+
+		.screen-box
+			#search.active
+				.search-button-box
+					i.glass.icon-uxpin-icon-set-magnifying-glass-regular.touch-event
+				.search-box
+					input(type="text" ng-model="search" ng-autocomplete="result" details="details" options="autoCompleteOptions" placeholder="Rechercher")
+					i.remove-research-button.lnr.lnr-cross.touch-event(toggle-touch-active ng-click="removeResult()")
+			.range-box
+				i.lnr.lnr-calendar-full.calendar
+				.content
+					input(type="range" min="0" max="6" step="1" ng-model="rangeData")
+				.current-year
+					p 2017
+			//- .is-valid(ng-class="isAdmissible ? 'success' : 'fail'")
+			#admissibility.is-valid
+				//- p(ng-if="isAdmissible") Admissible
+				//- p(ng-if="!isAdmissible") Non Admissible
+				//- div(ng-if="!isAdmissible" ng-repeat="desease in deseases")
+				p#admissiblity
+				#notAdmissible
+					p#diseaseName
+					p#diseaseDuration
+					p#dieseaseRequiredTests
+			#map
+		
+		//- #map.screen-box.bg-white.relative(ui-view="")
 		script(src="./vendor/vendor.min.js")
 		script(src="./scripts/app.min.js")
 		| <!--[if lt IE 9]><div class="fallback">

@@ -19,11 +19,11 @@
 			p {{desease.duration}}
 			p {{desease.requiredTests}}
 	#map
-		#map-content
-			div
-				ng-map(center="{{::options.gmap.center.lat}},{{::options.gmap.center.lng}}" zoom="{{::options.gmap.zoom}}" styles="{{::options.gmap.style}}" disable-double-click-zoom="true" disable-default-u-i="true" pan-control="false" map-type-control="false" map-type-control-options="{style:'DROPDOWN_MENU'}" zoom-control="false" zoom-control-options="{style:'SMALL}")
-					//map-data(load-geo-json="ressources/optimized_grandest.geojson")
-					marker( ng-if="marker" position="{{marker.position.lat}},{{marker.position.lng}}")
+		//- #map-content
+		//- 	div
+		//- 		ng-map(center="{{::options.gmap.center.lat}},{{::options.gmap.center.lng}}" zoom="{{::options.gmap.zoom}}" styles="{{::options.gmap.style}}" disable-double-click-zoom="true" disable-default-u-i="true" pan-control="false" map-type-control="false" map-type-control-options="{style:'DROPDOWN_MENU'}" zoom-control="false" zoom-control-options="{style:'SMALL}")
+		//- 			//map-data(load-geo-json="ressources/optimized_grandest.geojson")
+		//- 			marker( ng-if="marker" position="{{marker.position.lat}},{{marker.position.lng}}")
 
 
 	//p Si vous avez séjourné entre 1980 et 1996 au Royaume-Uni (Angleterre, Pays de Galles, Écosse, Irlande du Nord, Channel Islands, Isle of Man) pendant une durée cumulée de plus de 12 mois ou si vous avez reçu une transfusion sanguine ou avez été opéré au Royaume-Uni après le 1er janvier 1980, sachez que les critères internationaux ne permettent actuellement pas au Centre de Transfusion Sanguine de vous accepter comme donneur de sang.

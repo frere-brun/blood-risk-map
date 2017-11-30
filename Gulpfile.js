@@ -47,13 +47,16 @@
           watch: rootDir.dev + '/styles/**/*.scss'
       },
       scripts: {
-          files: [rootDir.dev + '/scripts/directives/*.js', 
+          files: rootDir.dev + '/scripts/app.js',
+                 /*
+                 [rootDir.dev + '/scripts/directives/*.js', 
                   rootDir.dev + '/scripts/app.js', 
                   rootDir.dev + '/scripts/services/*.js', 
                   rootDir.dev + '/scripts/controllers/*.js'],
+                  */
           dest: rootDir.dist + '/scripts/',
           name: 'app.min.js',
-          watch: rootDir.dev + '/scripts/**/*.js'
+          watch: rootDir.dev + '/scripts/*.js' // rootDir.dev + '/scripts/**/*.js'
       },
       assets : {
         files: [rootDir.dev + '/assets/imgs/**/*{png,svg,jpg}'],
@@ -80,9 +83,9 @@
   gulp.task('svgstore', getTask('svgstore'));
 
   gulp.task('build-prod', function(cb) {
-    plugins.runSequence('build-html', 'style', 'assets', 'vendor', 'scripts', 'ressources');
+    plugins.runSequence('clean', 'jade', 'svgstore', 'style', 'assets', 'vendor', 'scripts', 'ressources');
+    // plugins.runSequence('build-html', 'style', 'assets', 'vendor', 'scripts', 'ressources');
   });
-
 
   gulp.task('build-html', function(cb) {
     plugins.runSequence('clean', 'jade', 'svgstore');

@@ -1,7 +1,7 @@
 
 [
 	{
-		"countries": [{"name":"tropics", "file": "tropics.json", "specificPlaces":null}],
+		"places": [{"name":"tropics", "file": "tropics.json", "specificPlaces":null}],
 		"name": "Tropical",
 		"beginDate": null,
 		"endDate": null,
@@ -10,7 +10,7 @@
 		"requiredTests": null
 	},
 	{
-		"countries": [{"name":"greece", "file": "greece.json", "specificPlaces":null}],
+		"places": [{"name":"greece", "file": "greece.json", "specificPlaces":null}],
 		"name": "Malaria",
 		"beginDate": "21-08-2011",
 		"endDate": null,
@@ -19,7 +19,7 @@
 		"requiredTests": null
 	},
 	{
-		"countries": [
+		"places": [
 			{"name":"Israel","file": "israel.json", "specificPlaces": null}, 
 			{"name":"Liban","file": "lebanon.json", "specificPlaces": null},
 			{"name":"Syrie","file": "syria.json", "specificPlaces": null}, 
@@ -42,7 +42,7 @@
 		"requiredTests": null
 	},
 	{
-		"countries": [{"name":"Yémen","file": "yemen.json", "specificPlaces": "Municipalité de la Vila Franca de Xira (30 km au nord de Lisbonne)"}],
+		"places": [{"name":"Yémen","file": "yemen.json", "specificPlaces": "Municipalité de la Vila Franca de Xira (30 km au nord de Lisbonne)"}],
 		"name": "Légionéllose",
 		"beginDate": "07-10-2013",
 		"endDate": null,
@@ -51,7 +51,7 @@
 		"requiredTests": null
 	},
 	{
-		"countries": [
+		"places": [
 			{"name":"American Samoa","file": null, "specificPlaces": null},
 			{"name":"Barbados","file":null, "specificPlaces": null},
 			{"name":"Bonaire","file": null, "specificPlaces": null},
@@ -115,7 +115,7 @@
 		"requiredTests": null
 	},
 	{
-		"countries": [
+		"places": [
 			{"name": "Albanie","file": "albania.json", "specificPlaces": null},
 			{"name": "Algérie","file": "algeria.json", "specificPlaces": null},
 			{"name": "Bulgarie","file": "bulgaria.json", "specificPlaces": null},

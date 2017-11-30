@@ -1,18 +1,11 @@
 {
-  "name": "angular-boilerplate",
+  "name": "blood-risk-map-frontend",
   "version": "0.1.0",
   "dependencies": {
-    "angular": "~1.4.0",
-    "ui-router": "~0.2.13",
     "jquery": "~2.1.4",
-    "gsap": "~1.18.0",
-    "angular-perfect-scrollbar": "~0.0.4",
-    "angular-filter": "~0.5.9",
+    "leaflet": "~1.2.0",
     "momentjs": "~2.14.1",
     "moment-range": "~2.2.0"
   },
-  "devDependencies": {},
-  "resolutions": {
-    "angular": "^1.0.8"
-  }
+  "devDependencies": {}
 }
