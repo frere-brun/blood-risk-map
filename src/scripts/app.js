@@ -77,23 +77,35 @@ function onEachFeature(feature, layer) {
       $("#diseaseDuration").text(feature.properties.diseaseDuration)
       $("#dieseaseRequiredTests").text(feature.properties.dieseaseRequiredTests)
       $("#notAdmissible").removeClass("hidden");
+
+      // Event is triggered so stop it
+      L.DomEvent.stopPropagation(e);
+      putMarker(e.latlng);
     });
   }
 }
 
-
-
 function onMapClick(e) {
   console.log('You just clicked on ', e);
-  if(marker === null) {
-    marker =  L.marker(e.latlng).addTo(mymap);
-  } else {
-    marker.setLatLng(e.latlng);
-  }
-  marker.addTo(mymap);
+
+  // Event not triggered before, so it doesn't belong to any layer
+  $("#admissiblity").text('Admissible');
+  $("#diseaseName").text('')
+  $("#diseaseDuration").text('')
+  $("#dieseaseRequiredTests").text('')
+  $("#notAdmissible").addClass("hidden");
+  putMarker(e.latlng);
 }
 mymap.on('click', onMapClick);
 
+function putMarker(latlng) {
+  if(marker === null) {
+    marker =  L.marker(latlng).addTo(mymap);
+  } else {
+    marker.setLatLng(latlng);
+  }
+  marker.addTo(mymap);
+}
 
 
 /*
