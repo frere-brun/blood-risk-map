@@ -40,6 +40,10 @@ html.screen-box(ng-app="app" resize mobile-detect detect-idle force-touch-ui)
 		script(type="text/javascript" src="bower_components/moment-range/dist/moment-range.min.js")
 		//- script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js")
 		//- script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-range/2.2.0/moment-range.min.js")
+
+
+		
+
 	body(id="body").screen-box
 		#preloader-wrapper.screen-box.bg-white
 			#preloader
@@ -80,6 +84,8 @@ html.screen-box(ng-app="app" resize mobile-detect detect-idle force-touch-ui)
 		
 		//- #map.screen-box.bg-white.relative(ui-view="")
 		script(src="./vendor/vendor.min.js")
+		// Extra leaflet module
+		script(type="text/javascript" src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js")
 		script(src="./scripts/app.min.js")
 		| <!--[if lt IE 9]><div class="fallback">
 		| 	<section>

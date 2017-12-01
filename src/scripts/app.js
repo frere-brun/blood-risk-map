@@ -52,7 +52,7 @@ var tileLayerOptions = {
   id: 'mapbox.streets'
 }
 L.tileLayer(tileLayerUrl, tileLayerOptions).addTo(mymap);
-var geojsonLayer = L.LayerGroup;
+var geojsonLayer = L.layerGroup();
 var geojsonLayerSources = [];
 var marker = null;
 
@@ -97,7 +97,7 @@ function getData(year, cb) {
 function diseaseToGeojsonFeature(disease) {
   // console.log('disease', disease.color, disease)
   // Get Geojson objects and put additional data for convenience
-  if (disease.featuresCollection && disease.featuresCollection.features) {
+  if (disease.featuresCollection && disease.featuresCollection.features) {    
     disease.featuresCollection.features.forEach(function(geojsonFeature) {
       geojsonFeature.properties['color'] = disease.color;
       geojsonFeature.properties['diseaseName'] = disease.name;
@@ -106,8 +106,12 @@ function diseaseToGeojsonFeature(disease) {
       geojsonFeature.properties['diseaseDuration'] = disease.duration;
       geojsonFeature.properties['dieseaseRequiredTests'] = disease.requiredTests;
 
-      geojsonLayerSources.push(geojsonFeature);
+      // Without the tilemap (gridVector)
+      // geojsonLayerSources.push(geojsonFeature);
     });
+
+    // With a gridVector
+    geojsonLayerSources.push(disease)
   }
 }
 
@@ -120,15 +124,42 @@ function geojsonFeaturesToLayer() {
 
   // Create the list of geojson layers
   var layers = [];
-  geojsonLayerSources.forEach(function(feature) {
-    var l = L.geoJSON(feature, {
-      coordsToLatLng: coordsToLatLng,
-      onEachFeature: onEachFeature,
-      filter: displayFeature,
-      style: diseaseStyle,
-      type: 'geoJSON',
-    });
-    layers.push(l);
+
+  // Without the tilemap (gridVector)
+  // geojsonLayerSources.forEach(function(feature) {
+  //    var l = L.geoJSON(feature, {style: , filter:, onEachFeature:, ...)
+  //    layers.push(l)
+  // });
+
+  // Solution for a gridVector implementation
+  geojsonLayerSources.forEach(function(disease) {
+    if (displayDisease(disease.beginDate, disease.endDate)) {
+      // https://leaflet.github.io/Leaflet.VectorGrid/vectorgrid-api-docs.html#vectorgrid
+      // unwrapping automatic of a { type: featureCollection, features: Array} object
+      var features = disease.featuresCollection;
+      var l = L.vectorGrid.slicer(features, {
+        interactive: true,
+        rendererFactory: L.svg.tile,
+        vectorTileLayerStyles: {
+          sliced: diseaseStyle,
+        },
+      });
+
+      l.on('click', function(e) {
+        var properties = e.layer.properties;
+        console.log('You just clicked on ', properties.sovereignt, e.latlng);
+        $("#admissiblity").text('Non admissible');
+        $("#diseaseName").text(properties.diseaseName)
+        $("#diseaseDuration").text(properties.diseaseDuration)
+        $("#dieseaseRequiredTests").text(properties.dieseaseRequiredTests)
+        $("#notAdmissible").removeClass("hidden");
+
+        // Event is triggered so stop it
+        L.DomEvent.stopPropagation(e);
+        putMarker(e.latlng);
+      })
+      layers.push(l);
+    }
   });
 
   // Push the list to a layer group and then add it to the map
@@ -136,9 +167,14 @@ function geojsonFeaturesToLayer() {
   mymap.addLayer(geojsonLayer);
 }
 
-function diseaseStyle(feature) {
+function diseaseStyle(properties, zoom) {
   return {
-    "color": feature.properties.color
+    fillColor: properties.color,
+    fillOpacity: 0.5,
+    stroke: true,
+    fill: true,
+    color: 'black',
+    weight: 0,
   }
 }
 
@@ -166,10 +202,28 @@ function displayFeature(feature) {
   return false;
 }
 
+// filter to display a geojson disease
+function displayDisease(beginDate, endDate) {
+  var currentYear = $("#rangeInput").val();
+  if (beginDate) {
+    var beginYear = beginDate.split('-')[2];
+    var isAfter = beginYear <= currentYear;
+
+    if (endDate) {
+      var endYear = endDate.split('-')[2];
+      var isBefore = currentYear <= endYear;
+      return isAfter && isBefore;
+    }
+    return isAfter;
+  }
+  return false;
+}
+
+
 function onEachFeature(feature, layer) {
   if (feature.properties && feature.properties.sovereignt) {
     layer.on('click', function(e) {
-      console.log('You just clicked on ', feature.properties.sovereignt);
+      console.log('You just clicked on ', feature.properties.sovereignt, e.latlng);
       $("#admissiblity").text('Non admissible');
       $("#diseaseName").text(feature.properties.diseaseName)
       $("#diseaseDuration").text(feature.properties.diseaseDuration)
@@ -181,11 +235,10 @@ function onEachFeature(feature, layer) {
       putMarker(e.latlng);
     });
   }
-
 }
 
 function onMapClick(e) {
-  console.log('You just clicked on ', e);
+  console.log('You just clicked on ', e.latlng);
 
   // Event not triggered before, so it doesn't belong to any layer
   $("#admissiblity").text('Admissible');
