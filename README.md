@@ -1,6 +1,14 @@
 How to run
 ======================
 
+Requirements
+```
+nodejs
+npm
+bower
+gulp
+```
+
 Deploy
 ```
 npm install
@@ -10,12 +18,14 @@ npm install protractor -g
 
 ```
 
+Build app
+```
+gulp production
+```
+
 Launch
 ```
 gulp
-```
-```
-gulp production
 ```
 
 MIT Licence
