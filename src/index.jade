@@ -63,9 +63,9 @@ html.screen-box(ng-app="app" resize mobile-detect detect-idle force-touch-ui)
 			.range-box
 				i.lnr.lnr-calendar-full.calendar
 				.content
-					input(type="range" min="0" max="6" step="1" ng-model="rangeData")
+					input#rangeInput(type="range")
 				.current-year
-					p 2017
+					p#year 2017
 			//- .is-valid(ng-class="isAdmissible ? 'success' : 'fail'")
 			#admissibility.is-valid
 				//- p(ng-if="isAdmissible") Admissible
