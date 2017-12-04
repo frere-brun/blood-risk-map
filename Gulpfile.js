@@ -19,7 +19,7 @@
       server : {
         port: '5000',
         url: 'http://localhost',
-        file: './server.js'
+        file: './server/server.js'
       },
       fonts: {
         files: rootDir.dev + '/assets/fonts/**/*',
@@ -48,15 +48,9 @@
       },
       scripts: {
           files: rootDir.dev + '/scripts/app.js',
-                 /*
-                 [rootDir.dev + '/scripts/directives/*.js', 
-                  rootDir.dev + '/scripts/app.js', 
-                  rootDir.dev + '/scripts/services/*.js', 
-                  rootDir.dev + '/scripts/controllers/*.js'],
-                  */
           dest: rootDir.dist + '/scripts/',
           name: 'app.min.js',
-          watch: rootDir.dev + '/scripts/*.js' // rootDir.dev + '/scripts/**/*.js'
+          watch: rootDir.dev + '/scripts/*.js'
       },
       assets : {
         files: [rootDir.dev + '/assets/imgs/**/*{png,svg,jpg}'],
@@ -65,7 +59,7 @@
         clean: rootDir.dist + '/assets/imgs/**/*'
       }
   }
-  
+
   function getTask(task) {
       return require('./gulp-tasks/' + task)(gulp, plugins, paths);
   }
@@ -78,13 +72,11 @@
   gulp.task('scripts', getTask('scripts'));
   gulp.task('vendor', getTask('vendor'));
   gulp.task('watch', getTask('watch'));
-  gulp.task('test', getTask('test'));
   gulp.task('ressources', getTask('ressources'));
   gulp.task('svgstore', getTask('svgstore'));
 
   gulp.task('build-prod', function(cb) {
     plugins.runSequence('clean', 'jade', 'svgstore', 'style', 'assets', 'vendor', 'scripts', 'ressources');
-    // plugins.runSequence('build-html', 'style', 'assets', 'vendor', 'scripts', 'ressources');
   });
 
   gulp.task('build-html', function(cb) {

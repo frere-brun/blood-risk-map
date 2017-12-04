@@ -13,9 +13,6 @@ Deploy
 ```
 npm install
 bower install
-npm install protractor -g
-./node_modules/protractor/bin/webdriver-manager update
-
 ```
 
 Build app

@@ -1,5 +1,3 @@
 node_modules/*
 bower_components/*
-public/*
-config.codekit3
 dist/*

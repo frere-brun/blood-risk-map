@@ -10,40 +10,29 @@ var app = express();
 var sh = require('sh');
 var _ = require('underscore');
 
-var ressourcesUrl = "./src/ressources/";
-var dataFile = "./src/ressources/data.json";
-var jsonFilesUrl = "./src/ressources/places/";
-var geojsonFile = "./src/ressources/generatedData.json";
+var ressourcesUrl = __dirname + "/ressources/";
+var dataFile = __dirname + "/ressources/data.json";
+var jsonFilesUrl = __dirname + "/ressources/places/";
+var geojsonFile = __dirname + "/ressources/generatedData.json";
 
 app.use(bodyParser.json());
 app.set('port', (process.env.PORT || 5000));
 app.use(cors());
 
-// require('crontab').load(function(err, crontab) {
-// 	var job = crontab.create('ls -la', null);
-// });
+app.use('/', express.static(__dirname + '/../dist/'));
+app.use("/vendor", express.static(__dirname + "/../dist/vendor"));
+app.use("/bower_components", express.static(__dirname + "/../bower_components"));
+app.use("/scripts", express.static(__dirname + "/../dist/scripts"));
+app.use("/ressources", express.static(__dirname + "/../dist/ressources"));
+app.use("/assets", express.static(__dirname + "/../dist/assets"));
+app.use("/styles", express.static(__dirname + "/../dist/styles"));
+app.use("/templates", express.static(__dirname + "/../dist/templates"));
 
-
-// sh('sh ./launchCasper.js');
-
-// Here we require the prerender middleware that will handle requests from Search Engine crawlers 
-// We set the token only if we're using the Prerender.io service 
-//app.use(require('prerender-node').set('prerenderToken', 'ds8ZK1oQ3gDwsQTAKQ56')); 
-app.use('/', express.static(__dirname + '/dist/'));
-app.use('/', express.static(__dirname + '/sitemap/'));
-app.use("/vendor", express.static(__dirname + "/dist/vendor"));
-app.use("/bower_components", express.static(__dirname + "/bower_components"));
-app.use("/scripts", express.static(__dirname + "/dist/scripts"));
-app.use("/ressources", express.static(__dirname + "/dist/ressources"));
-app.use("/assets", express.static(__dirname + "/dist/assets"));
-app.use("/styles", express.static(__dirname + "/dist/styles"));
-app.use("/templates", express.static(__dirname + "/dist/templates"));
-
-app.get('/getGeojsonFromYear/:year', function(req,res){
+app.get('/getGeojsonFromYear/:year', function(req,res) {
 
 	var file = ressourcesUrl + req.params.year + ".json";
-	jsonfile.readFile(file, function(err,obj){
-		if (err){
+	jsonfile.readFile(file, function(err,obj) {
+		if (err) {
 			return res.send(404);
 		}
 		else {
@@ -53,15 +42,15 @@ app.get('/getGeojsonFromYear/:year', function(req,res){
 });
 
 
-app.get('/generateDeseases', function(req,res){
-	jsonfile.readFile(dataFile, function(err,deseases){
-		if (err){
+app.get('/generateDeseases', function(req,res) {
+	jsonfile.readFile(dataFile, function(err,deseases) {
+		if (err) {
 			console.log(err);
 			return res.send(404);
 		}
 		else {
 
-			deseases.map(function(desease){
+			deseases.map(function(desease) {
 
 				var countryList = [];
 				var countryStr = "";
@@ -75,8 +64,8 @@ app.get('/generateDeseases', function(req,res){
 				for(var key in desease.places)
 				{
 					console.log(1);
-					if (desease.places[key].file != null){
-						jsonfile.readFile(jsonFilesUrl + desease.places[key].file, function(err,obj){
+					if (desease.places[key].file != null) {
+						jsonfile.readFile(jsonFilesUrl + desease.places[key].file, function(err,obj) {
 							if (err)
 								console.log(err);
 							else {
@@ -91,7 +80,7 @@ app.get('/generateDeseases', function(req,res){
 
 			//return res.send(200, "fichier généré");
 
-			setTimeout(function(){
+			setTimeout(function() {
 				console.log(deseases.length);
 				jsonfile.writeFile( ressourcesUrl + "generatedData.json",
 									deseases,
@@ -105,9 +94,9 @@ app.get('/generateDeseases', function(req,res){
 	});
 });
 
-app.get('/getGeojson', function(req,res){
-	jsonfile.readFile(geojsonFile, function(err,obj){
-		if (err){
+app.get('/getGeojson', function(req,res) {
+	jsonfile.readFile(geojsonFile, function(err,obj) {
+		if (err) {
 			return res.send(404);
 		}
 		else {

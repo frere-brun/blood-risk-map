@@ -1,5 +1,5 @@
 /*
-  
+
   MAIN
 
 */
@@ -16,8 +16,6 @@ var rangeOptions = {
   'max': (new Date()).getFullYear().toString(),
   'value': (new Date()).getFullYear().toString()
 }
-
-
 
 /* App Loading */
 $("#preloader-text").text(loadingSteps[0]);
@@ -77,7 +75,7 @@ function getData(year, cb) {
   $.get(url, function(data, status){
     if (status !== 'success') {
       alert('An error has occured');
-    } 
+    }
     else if (status === 'success') {
       // Extract geojson and display it as layers
       geojsonLayerSources = [];
@@ -97,7 +95,7 @@ function getData(year, cb) {
 function diseaseToGeojsonFeature(disease) {
   // console.log('disease', disease.color, disease)
   // Get Geojson objects and put additional data for convenience
-  if (disease.featuresCollection && disease.featuresCollection.features) {    
+  if (disease.featuresCollection && disease.featuresCollection.features) {
     disease.featuresCollection.features.forEach(function(geojsonFeature) {
       geojsonFeature.properties['color'] = disease.color;
       geojsonFeature.properties['diseaseName'] = disease.name;

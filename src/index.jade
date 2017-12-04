@@ -6,25 +6,26 @@ html.screen-box(ng-app="app" resize mobile-detect detect-idle force-touch-ui)
 		meta(http-equiv='X-UA-Compatible', content='IE=10')
 		meta(http-equiv='content-language', content='fr')
 
-		// for good display
+		//- for good display
 		meta(name='viewport', content='width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0')
 			
-		// titre google et d'onglet
+		//- titre google et d'onglet
 		title Don du sang
 
 		link(rel="icon" href="./assets/imgs/favicon.ico")
 
-		// texte google 
-		meta(name='description', content="Congrès des scopes")
+		//- texte google 
+		meta(name='description', content="Blood risk map")
+		meta(name='title', content="Blood risk map")
 			
-		// keywords and stuff
+		//- keywords and stuff
 		meta(name='keywords', content='scope, congrès, grand est')
 		meta(name='author', content='Frere Thibaud')
 		meta(name='copyright', content='Frere Thibaud')
 
 		base(href="/")
 
-		// url finale de l'index à mettre dans href
+		//- url finale de l'index à mettre dans href
 		link(rel='canonical', href='')
 		meta(name='revisit-after', content='15 days')
 		meta(name='robots', content='index, follow')
@@ -32,19 +33,15 @@ html.screen-box(ng-app="app" resize mobile-detect detect-idle force-touch-ui)
 		link(rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
 		link(type="text/css", rel="stylesheet", href="./styles/style.css")
 
-		// Leaflet
+		//- Leaflet
 		link(rel="stylesheet", href="bower_components/leaflet/dist/leaflet.css")
 
-		// JS imports from bower
+		//- JS imports from bower
 		script(type="text/javascript" src="bower_components/moment/min/moment.min.js")
 		script(type="text/javascript" src="bower_components/moment-range/dist/moment-range.min.js")
-		//- script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js")
-		//- script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-range/2.2.0/moment-range.min.js")
-
-
-		
 
 	body(id="body").screen-box
+	
 		#preloader-wrapper.screen-box.bg-white
 			#preloader
 				#preloader-box
@@ -53,9 +50,6 @@ html.screen-box(ng-app="app" resize mobile-detect detect-idle force-touch-ui)
 					.panel.panel-4
 					.panel.panel-3
 				#preloader-text
-
-		//- old view
-		//- div.screen-box.bg-white.relative(ui-view="")
 
 		.screen-box
 			#search.active
@@ -70,11 +64,7 @@ html.screen-box(ng-app="app" resize mobile-detect detect-idle force-touch-ui)
 					input#rangeInput(type="range")
 				.current-year
 					p#year 2017
-			//- .is-valid(ng-class="isAdmissible ? 'success' : 'fail'")
 			#admissibility.is-valid
-				//- p(ng-if="isAdmissible") Admissible
-				//- p(ng-if="!isAdmissible") Non Admissible
-				//- div(ng-if="!isAdmissible" ng-repeat="desease in deseases")
 				p#admissiblity
 				#notAdmissible
 					p#diseaseName
@@ -82,16 +72,6 @@ html.screen-box(ng-app="app" resize mobile-detect detect-idle force-touch-ui)
 					p#dieseaseRequiredTests
 			#map
 		
-		//- #map.screen-box.bg-white.relative(ui-view="")
 		script(src="./vendor/vendor.min.js")
-		// Extra leaflet module
 		script(type="text/javascript" src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js")
 		script(src="./scripts/app.min.js")
-		| <!--[if lt IE 9]><div class="fallback">
-		| 	<section>
-		| 		<p>
-		| 			You are using an <strong>outdated</strong> browser.<br>
-		| 			Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to improve your experience.
-		| 		</p>
-		| 	</section>
-		| </div><![endif]-->
