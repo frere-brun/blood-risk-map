@@ -3,12 +3,8 @@ var bodyParser = require('body-parser');
 var app = express();
 var http = require('http');
 var cors = require('cors');
-var express = require('express');
-var nodemailer = require('nodemailer');
 var jsonfile = require('jsonfile');
 var app = express();
-var sh = require('sh');
-var _ = require('underscore');
 
 var ressourcesUrl = __dirname + "/ressources/";
 var dataFile = __dirname + "/ressources/data.json";

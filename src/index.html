@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="fr">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Blood risk map</title>
+    <link rel="stylesheet" href="css/app.css?v=<%= buildTime %>">
+    <!-- <script type="text/javascript" src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script> -->
+
+</head>
+<body id="body" class="screen-box">
+    <!-- App version : <%= version %>, build time : <%= ( new Date( +buildTime ) ).toString() %> -->
+    <div id="preloader-wrapper" class="screen-box bg-white">
+      <div id="preloader">
+        <div id="preloader-box">
+          <div class="panel panel-1"></div>
+          <div class="panel panel-2"></div>
+          <div class="panel panel-4"></div>
+          <div class="panel panel-3"></div>
+        </div>
+        <div id="preloader-text"></div>
+      </div>
+    </div>
+    <div class="screen-box">
+      <div id="search" class="active">
+        <div class="search-button-box"><i class="glass icon-uxpin-icon-set-magnifying-glass-regular touch-event"></i></div>
+        <div class="search-box">
+          <input type="text" ng-model="search" ng-autocomplete="result" details="details" options="autoCompleteOptions" placeholder="Rechercher"/><i toggle-touch-active="toggle-touch-active" ng-click="removeResult()" class="remove-research-button lnr lnr-cross touch-event"></i>
+        </div>
+      </div>
+      <div class="range-box"><i class="lnr lnr-calendar-full calendar"></i>
+        <div class="content">
+          <input id="rangeInput" type="range"/>
+        </div>
+        <div class="current-year">
+          <p id="year">2017</p>
+        </div>
+      </div>
+      <div id="admissibility" class="is-valid">
+        <p id="admissiblity"></p>
+        <div id="notAdmissible">
+          <p id="diseaseName"></p>
+          <p id="diseaseDuration"></p>
+          <p id="dieseaseRequiredTests"></p>
+        </div>
+      </div>
+      <div id="map"></div>
+    </div>
+
+    <script src="js/polyfills.js?v=<%= buildTime %>"></script>
+    <script src="js/vendors.js?v=<%= buildTime %>"></script>
+    <script src="js/app.js?v=<%= buildTime %>"></script>
+</body>
+</html>

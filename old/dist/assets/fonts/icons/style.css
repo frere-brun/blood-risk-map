@@ -1,0 +1,353 @@
+@font-face {
+	font-family: 'UXPin-icon-set';
+	src:url('UXPin-icon-set.eot?kib1r2');
+	src:url('UXPin-icon-set.eot?#iefixkib1r2') format('embedded-opentype'),
+		url('UXPin-icon-set.woff?kib1r2') format('woff'),
+		url('UXPin-icon-set.ttf?kib1r2') format('truetype'),
+		url('UXPin-icon-set.svg?kib1r2#UXPin-icon-set') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-uxpin-icon-set-"], [class*=" icon-uxpin-icon-set-"] {
+	font-family: 'UXPin-icon-set';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-uxpin-icon-set-achievement-regular:before {
+	content: "\e600";
+}
+
+.icon-uxpin-icon-set-add-user-regular:before {
+	content: "\e601";
+}
+
+.icon-uxpin-icon-set-at-regular:before {
+	content: "\e602";
+}
+
+.icon-uxpin-icon-set-bag-regular:before {
+	content: "\e603";
+}
+
+.icon-uxpin-icon-set-bell-regular:before {
+	content: "\e604";
+}
+
+.icon-uxpin-icon-set-book-regular:before {
+	content: "\e605";
+}
+
+.icon-uxpin-icon-set-bookmark-regular:before {
+	content: "\e606";
+}
+
+.icon-uxpin-icon-set-box-regular:before {
+	content: "\e607";
+}
+
+.icon-uxpin-icon-set-brush-regular:before {
+	content: "\e608";
+}
+
+.icon-uxpin-icon-set-bulb-regular:before {
+	content: "\e609";
+}
+
+.icon-uxpin-icon-set-calculator-regular:before {
+	content: "\e60a";
+}
+
+.icon-uxpin-icon-set-calendar-regular:before {
+	content: "\e60b";
+}
+
+.icon-uxpin-icon-set-camcorder-regular:before {
+	content: "\e60c";
+}
+
+.icon-uxpin-icon-set-camera-regular:before {
+	content: "\e60d";
+}
+
+.icon-uxpin-icon-set-chart-regular:before {
+	content: "\e60e";
+}
+
+.icon-uxpin-icon-set-checkmark-regular:before {
+	content: "\e60f";
+}
+
+.icon-uxpin-icon-set-chemistry-regular:before {
+	content: "\e610";
+}
+
+.icon-uxpin-icon-set-clip-regular:before {
+	content: "\e611";
+}
+
+.icon-uxpin-icon-set-clock-regular:before {
+	content: "\e612";
+}
+
+.icon-uxpin-icon-set-cloud-regular:before {
+	content: "\e613";
+}
+
+.icon-uxpin-icon-set-cog-regular:before {
+	content: "\e614";
+}
+
+.icon-uxpin-icon-set-compass-regular:before {
+	content: "\e615";
+}
+
+.icon-uxpin-icon-set-compose-regular:before {
+	content: "\e616";
+}
+
+.icon-uxpin-icon-set-credit-card-regular:before {
+	content: "\e617";
+}
+
+.icon-uxpin-icon-set-cursor-regular:before {
+	content: "\e618";
+}
+
+.icon-uxpin-icon-set-dashboard-regular:before {
+	content: "\e619";
+}
+
+.icon-uxpin-icon-set-database-regular:before {
+	content: "\e61a";
+}
+
+.icon-uxpin-icon-set-display-regular:before {
+	content: "\e61b";
+}
+
+.icon-uxpin-icon-set-download-regular:before {
+	content: "\e61c";
+}
+
+.icon-uxpin-icon-set-envelope-regular:before {
+	content: "\e61d";
+}
+
+.icon-uxpin-icon-set-file-regular:before {
+	content: "\e61e";
+}
+
+.icon-uxpin-icon-set-folder-regular:before {
+	content: "\e61f";
+}
+
+.icon-uxpin-icon-set-gift-regular:before {
+	content: "\e620";
+}
+
+.icon-uxpin-icon-set-graph-regular:before {
+	content: "\e621";
+}
+
+.icon-uxpin-icon-set-heart-regular:before {
+	content: "\e622";
+}
+
+.icon-uxpin-icon-set-home-regular:before {
+	content: "\e623";
+}
+
+.icon-uxpin-icon-set-invisible-regular:before {
+	content: "\e624";
+}
+
+.icon-uxpin-icon-set-iPad-regular:before {
+	content: "\e625";
+}
+
+.icon-uxpin-icon-set-iPhone-regular:before {
+	content: "\e626";
+}
+
+.icon-uxpin-icon-set-joystick-regular:before {
+	content: "\e627";
+}
+
+.icon-uxpin-icon-set-key-regular:before {
+	content: "\e628";
+}
+
+.icon-uxpin-icon-set-life-belt-regular:before {
+	content: "\e629";
+}
+
+.icon-uxpin-icon-set-lightning-regular:before {
+	content: "\e62a";
+}
+
+.icon-uxpin-icon-set-like-regular:before {
+	content: "\e62b";
+}
+
+.icon-uxpin-icon-set-link-regular:before {
+	content: "\e62c";
+}
+
+.icon-uxpin-icon-set-macbook-regular:before {
+	content: "\e62d";
+}
+
+.icon-uxpin-icon-set-magnifying-glass-regular:before {
+	content: "\e62e";
+}
+
+.icon-uxpin-icon-set-map-regular:before {
+	content: "\e62f";
+}
+
+.icon-uxpin-icon-set-megaphone-regular:before {
+	content: "\e630";
+}
+
+.icon-uxpin-icon-set-message-regular:before {
+	content: "\e631";
+}
+
+.icon-uxpin-icon-set-microphone-regular:before {
+	content: "\e632";
+}
+
+.icon-uxpin-icon-set-money-regular:before {
+	content: "\e633";
+}
+
+.icon-uxpin-icon-set-movie-file-regular:before {
+	content: "\e634";
+}
+
+.icon-uxpin-icon-set-package-regular:before {
+	content: "\e635";
+}
+
+.icon-uxpin-icon-set-pen-regular:before {
+	content: "\e636";
+}
+
+.icon-uxpin-icon-set-pencil-regular:before {
+	content: "\e637";
+}
+
+.icon-uxpin-icon-set-pencil-ruler-regular:before {
+	content: "\e638";
+}
+
+.icon-uxpin-icon-set-picture-file-regular:before {
+	content: "\e639";
+}
+
+.icon-uxpin-icon-set-piggybank-regular:before {
+	content: "\e63a";
+}
+
+.icon-uxpin-icon-set-pin-regular:before {
+	content: "\e63b";
+}
+
+.icon-uxpin-icon-set-printer-regular:before {
+	content: "\e63c";
+}
+
+.icon-uxpin-icon-set-quote-regular:before {
+	content: "\e63d";
+}
+
+.icon-uxpin-icon-set-share-regular:before {
+	content: "\e63e";
+}
+
+.icon-uxpin-icon-set-shield-regular:before {
+	content: "\e63f";
+}
+
+.icon-uxpin-icon-set-sight-regular:before {
+	content: "\e640";
+}
+
+.icon-uxpin-icon-set-site-map-regular:before {
+	content: "\e641";
+}
+
+.icon-uxpin-icon-set-sound-regular:before {
+	content: "\e642";
+}
+
+.icon-uxpin-icon-set-spanner-regular:before {
+	content: "\e643";
+}
+
+.icon-uxpin-icon-set-star-regular:before {
+	content: "\e644";
+}
+
+.icon-uxpin-icon-set-stoper-regular:before {
+	content: "\e645";
+}
+
+.icon-uxpin-icon-set-suitcase-regular:before {
+	content: "\e646";
+}
+
+.icon-uxpin-icon-set-tack-regular:before {
+	content: "\e647";
+}
+
+.icon-uxpin-icon-set-tag-regular:before {
+	content: "\e648";
+}
+
+.icon-uxpin-icon-set-telephone-regular:before {
+	content: "\e649";
+}
+
+.icon-uxpin-icon-set-text-file-regular:before {
+	content: "\e64a";
+}
+
+.icon-uxpin-icon-set-transport-regular:before {
+	content: "\e64b";
+}
+
+.icon-uxpin-icon-set-trash-regular:before {
+	content: "\e64c";
+}
+
+.icon-uxpin-icon-set-trolley-regular:before {
+	content: "\e64d";
+}
+
+.icon-uxpin-icon-set-visible-regular:before {
+	content: "\e64e";
+}
+
+.icon-uxpin-icon-set-wallet-regular:before {
+	content: "\e64f";
+}
+
+.icon-uxpin-icon-set-window-regular:before {
+	content: "\e650";
+}
+
+.icon-uxpin-icon-set-world-regular:before {
+	content: "\e651";
+}
+
