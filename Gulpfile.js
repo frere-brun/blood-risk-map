@@ -47,7 +47,7 @@
           watch: rootDir.dev + '/styles/**/*.scss'
       },
       scripts: {
-          files: rootDir.dev + '/scripts/app.js',
+          files: rootDir.dev + '/scripts/*.js',
           dest: rootDir.dist + '/scripts/',
           name: 'app.min.js',
           watch: rootDir.dev + '/scripts/*.js'
