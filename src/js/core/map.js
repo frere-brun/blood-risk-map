@@ -55,7 +55,7 @@ export function Map() {
     // Remove the old geojsonLayer
     var self = this;
     if (this.mymap && this.mymap.hasLayer(this.geojsonLayer)) {
-      self.mymap.removeLayer(this.geojsonLayer);
+      this.mymap.removeLayer(this.geojsonLayer);
       self.geojsonLayer = null;
     }
 
@@ -67,7 +67,6 @@ export function Map() {
     //    var l = L.geoJSON(feature, {style: , filter:, onEachFeature:, ...)
     //    layers.push(l)
     // });
-
     // Solution for a gridVector implementation
     this.geojsonLayerSources.forEach(function(disease) {
       if (displayDisease(disease.beginDate, disease.endDate)) {
@@ -93,7 +92,7 @@ export function Map() {
 
           // Event is triggered so stop it
           L.DomEvent.stopPropagation(e);
-          putMarker(e.latlng);
+          self.putMarker(e.latlng);
         })
         layers.push(l);
       }
@@ -181,29 +180,29 @@ export function Map() {
   }
 
   this.putMarker = function(latlng) {
-    if(marker === null) {
-      marker =  L.marker(latlng).addTo(mymap);
+    if(this.marker === null) {
+      this.marker = L.marker(latlng).addTo(this.mymap);
     } else {
-      marker.setLatLng(latlng);
+      this.marker.setLatLng(latlng);
     }
-    marker.addTo(mymap);
+    this.marker.addTo(this.mymap);
   }
 
   this.init = function() {
     this.mymap = L.map(this.mapElt, { zoomControl:false }).setView([27, 5.6279968], 2); // Original : .setView([48.6857475, 5.6279968], 2);
     L.tileLayer(this.tileLayerUrl, this.tileLayerOptions).addTo(this.mymap);
-    // var self = this;
-    // this.mymap.on('click', function(e) {
-    //
-    //   console.log('You just clicked on ', e.latlng);
-    //
-    //   // Event not triggered before, so it doesn't belong to any layer
-    //   self.panel.admissiblity.text('Admissible');
-    //   self.panel.diseaseName.text('')
-    //   self.panel.diseaseDuration.text('')
-    //   self.panel.dieseaseRequiredTests.text('')
-    //   self.panel.notAdmissible.addClass("hidden");
-    //   putMarker(e.latlng);
-    // });
+    var self = this;
+    this.mymap.on('click', function(e) {
+
+      console.log('You just clicked on ', e.latlng);
+
+      // Event not triggered before, so it doesn't belong to any layer
+      self.panel.admissiblity.text('Admissible');
+      self.panel.diseaseName.text('')
+      self.panel.diseaseDuration.text('')
+      self.panel.dieseaseRequiredTests.text('')
+      self.panel.notAdmissible.addClass("hidden");
+      self.putMarker(e.latlng);
+    });
   }
 }
