@@ -1,1 +1,0 @@
-webpackJsonp([2],{0:function(n,o,t){n.exports=t(118)},118:function(n,o,t){"use strict";t(122),t(121),console.log(1)},121:function(n,o){},122:function(n,o,t){n.exports=t.p+"index.html"}});
