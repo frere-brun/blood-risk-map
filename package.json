@@ -1,5 +1,5 @@
 {
-  "name": "GameOfLife",
+  "name": "Blood Risk Map",
   "version": "0.0.1",
   "author": "Tfrere thibaud",
   "license": "MIT",
@@ -10,7 +10,6 @@
     "cors": "^2.7.1",
     "dat-gui": "^0.5.0",
     "detectcss": "^1.0.2",
-    "ee-image-worker": "^0.2.7",
     "es5-shim": "^4.5.8",
     "es6-promise": "~2.0.1",
     "express": "^4.13.3",
@@ -22,6 +21,7 @@
     "leaflet": "^1.2.0",
     "linebreak": "^0.3.0",
     "lodash": "^4.13.1",
+    "moment": "^2.19.3",
     "object-assign": "^4.0.1",
     "request": "^2.65.0"
   },
