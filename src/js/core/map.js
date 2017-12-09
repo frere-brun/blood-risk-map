@@ -1,36 +1,52 @@
 import L from 'leaflet';
 import $ from 'jquery';
+import {vectorGrid} from 'leaflet.vectorgrid';
 
-console.log(L);
+class Map {
+  constructor() {
+    this.mymap = null;
+    this.mapElt = 'map';
+    this.mapOptions = { zoomControl:false };
+    this.tileLayerUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+    this.tileLayerOptions = {
+      maxZoom: 18,
+      attribution: 'Going to be offline attributions soon....' +
+        'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      id: 'mapbox.streets'
+    };
 
-export function Map() {
-  console.log("map initialized");
-  this.mymap = null;
-  this.mapElt = 'map';
-  this.mapOptions = { zoomControl:false };
-  this.tileLayerUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-  this.tileLayerOptions = {
-    maxZoom: 18,
-    attribution: 'Going to be offline attributions soon....' +
-      'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    id: 'mapbox.streets'
-  };
+    this.geojsonLayer = L.layerGroup();
+    this.geojsonLayerSources = [];
+    this.marker = null;
 
-  this.geojsonLayer = L.layerGroup();
-  this.geojsonLayerSources = [];
-  this.marker = null;
+    this.panel = {
+      admissiblity: $("#admissiblity"),
+      diseaseName: $("#diseaseName"),
+      diseaseDuration: $("#diseaseDuration"),
+      dieseaseRequiredTests: $("#dieseaseRequiredTests"),
+      notAdmissible: $("#notAdmissible"),
+    }
 
-  this.panel = {
-    admissiblity: $("#admissiblity"),
-    diseaseName: $("#diseaseName"),
-    diseaseDuration: $("#diseaseDuration"),
-    dieseaseRequiredTests: $("#dieseaseRequiredTests"),
-    notAdmissible: $("#notAdmissible"),
+    this.mymap = L.map(this.mapElt, { zoomControl:false }).setView([27, 5.6279968], 2); // Original : .setView([48.6857475, 5.6279968], 2);
+    L.tileLayer(this.tileLayerUrl, this.tileLayerOptions).addTo(this.mymap);
+    var self = this;
+    this.mymap.on('click', function(e) {
+
+      console.log('You just clicked on ', e.latlng);
+
+      // Event not triggered before, so it doesn't belong to any layer
+      self.panel.admissiblity.text('Admissible');
+      self.panel.diseaseName.text('')
+      self.panel.diseaseDuration.text('')
+      self.panel.dieseaseRequiredTests.text('')
+      self.panel.notAdmissible.addClass("hidden");
+      self.putMarker(e.latlng);
+    });
   }
 
-  this.diseaseToGeojsonFeature = function(disease) {
+  diseaseToGeojsonFeature(disease) {
     // console.log('disease', disease.color, disease)
     // Get Geojson objects and put additional data for convenience
     if (disease.featuresCollection && disease.featuresCollection.features) {
@@ -47,11 +63,12 @@ export function Map() {
       });
 
       // With a gridVector
-      this.geojsonLayerSources.push(disease)
+      this.geojsonLayerSources.push(disease);
     }
   }
 
-  this.geojsonFeaturesToLayer = function() {
+
+  geojsonFeaturesToLayer(year) {
     // Remove the old geojsonLayer
     var self = this;
     if (this.mymap && this.mymap.hasLayer(this.geojsonLayer)) {
@@ -69,7 +86,7 @@ export function Map() {
     // });
     // Solution for a gridVector implementation
     this.geojsonLayerSources.forEach(function(disease) {
-      if (displayDisease(disease.beginDate, disease.endDate)) {
+      if (self.displayDisease(year, disease.beginDate, disease.endDate)) {
         // https://leaflet.github.io/Leaflet.VectorGrid/vectorgrid-api-docs.html#vectorgrid
         // unwrapping automatic of a { type: featureCollection, features: Array} object
         var features = disease.featuresCollection;
@@ -77,7 +94,7 @@ export function Map() {
           interactive: true,
           rendererFactory: L.svg.tile,
           vectorTileLayerStyles: {
-            sliced: this.diseaseStyle,
+            sliced: self.diseaseStyle,
           },
         });
 
@@ -96,6 +113,8 @@ export function Map() {
         })
         layers.push(l);
       }
+
+      
     });
 
     // Push the list to a layer group and then add it to the map
@@ -106,7 +125,7 @@ export function Map() {
     }
   }
 
-  this.diseaseStyle = function(properties, zoom) {
+  diseaseStyle(properties, zoom) {
     return {
       fillColor: properties.color,
       fillOpacity: 0.5,
@@ -117,7 +136,7 @@ export function Map() {
     }
   }
 
-  this.coordsToLatLng = function(coords) {
+  coordsToLatLng(coords) {
     // find a way to wrap around the geojson data
     var lat = coords[1];
     var lng = coords[0];
@@ -125,9 +144,7 @@ export function Map() {
   }
 
   // Filter function to display a geojson feature
-  this.displayFeature = function(feature) {
-    // GET YEAR ON SLIDER
-    var currentYear = $("#rangeInput").val();
+  displayFeature(currentYear, feature) {
     if (feature.properties.diseaseBeginDate) {
       var beginYear = feature.properties.diseaseBeginDate.split('-')[2];
       var isAfter = beginYear <= currentYear;
@@ -143,9 +160,7 @@ export function Map() {
   }
 
   // filter to display a geojson disease
-  this.displayDisease = function(beginDate, endDate) {
-    // GET YEAR ON SLIDER
-    var currentYear = $("#rangeInput").val();
+  displayDisease(currentYear, beginDate, endDate) {
     if (beginDate) {
       var beginYear = beginDate.split('-')[2];
       var isAfter = beginYear <= currentYear;
@@ -161,7 +176,7 @@ export function Map() {
   }
 
 
-  this.onEachFeature = function(feature, layer) {
+  onEachFeature(feature, layer) {
     var self = this;
     if (feature.properties && feature.properties.sovereignt) {
       layer.on('click', function(e) {
@@ -179,7 +194,7 @@ export function Map() {
     }
   }
 
-  this.putMarker = function(latlng) {
+  putMarker(latlng) {
     if(this.marker === null) {
       this.marker = L.marker(latlng).addTo(this.mymap);
     } else {
@@ -188,21 +203,10 @@ export function Map() {
     this.marker.addTo(this.mymap);
   }
 
-  this.init = function() {
-    this.mymap = L.map(this.mapElt, { zoomControl:false }).setView([27, 5.6279968], 2); // Original : .setView([48.6857475, 5.6279968], 2);
-    L.tileLayer(this.tileLayerUrl, this.tileLayerOptions).addTo(this.mymap);
-    var self = this;
-    this.mymap.on('click', function(e) {
-
-      console.log('You just clicked on ', e.latlng);
-
-      // Event not triggered before, so it doesn't belong to any layer
-      self.panel.admissiblity.text('Admissible');
-      self.panel.diseaseName.text('')
-      self.panel.diseaseDuration.text('')
-      self.panel.dieseaseRequiredTests.text('')
-      self.panel.notAdmissible.addClass("hidden");
-      self.putMarker(e.latlng);
-    });
+  resetLayerSources() {
+    this.geojsonLayerSources = [];
   }
 }
+
+
+export {Map}

@@ -1,36 +1,42 @@
 import $ from 'jquery';
+class Slider {
+  constructor() {
+    this.sliderElt = $("#rangeInput");
+    this.sliderTextField = $("#year");
+    this.rangeOptions = {
+      'step': '1',
+      'min': '2000',
+      'max': (new Date()).getFullYear().toString(),
+      'value': (new Date()).getFullYear().toString()
+    }
 
-
-export function Slider() {
-
-  this.sliderElt = $("#rangeInput");
-
-  this.sliderTextField = $("#year");
-  this.rangeOptions = {
-    'step': '1',
-    'min': '2000',
-    'max': (new Date()).getFullYear().toString(),
-    'value': (new Date()).getFullYear().toString()
+    for (var k in this.rangeOptions) {
+      this.sliderElt.attr(k, this.rangeOptions[k]);
+      if (k === 'value') {
+        this.sliderTextField.text(this.rangeOptions[k])
+      }
+    }
   }
 
-  this.init = function() {
-    console.log("slider initialized");
+  bindToMap(map) {
     var self = this;
-    Object.entries(this.rangeOptions).forEach(function([key, val]) {
-      self.sliderElt.attr(key, val);
-    });
     this.sliderElt.on('change input', function(e) {
       self.sliderTextField.text(this.value)
       if (e.type === 'change') {
         // Compute geojson layers based on the year
-        geojsonFeaturesToLayer();
+        map.geojsonFeaturesToLayer(this.value);
         /*
         Future :
         The server would probably serve a new set of geojson data according to the date
         cf : "/getGeojsonFromYear/"+year
         */
       }
-    });
+    });    
   }
 
+  getYear() {
+    return parseInt(this.sliderTextField.text());
+  }
 }
+
+export {Slider}

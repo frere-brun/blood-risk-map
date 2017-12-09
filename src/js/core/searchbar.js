@@ -1,5 +1,6 @@
-export function SearchBar() {
-  this.init = function() {
-    console.log("search bar initialized")
+class SearchBar {
+  constructor() {
+    console.log("search bar initialized");
   }
 }
+export {SearchBar}
