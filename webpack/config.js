@@ -57,6 +57,11 @@ module.exports = {
         hot:         true,
         noInfo:      true,
         inline:      true,
-        stats:       { colors: true }
+        stats:       { colors: true },
+        proxy: {
+          "/getGeojson": {
+            target: 'http://localhost:5000'
+          }
+        },
     }
 };
