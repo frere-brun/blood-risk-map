@@ -10,13 +10,13 @@ var host = pkg.config.devHost;
 
 var server = new WebpackDevServer(
     webpack( config ),
-    config.devServer  
+    config.devServer
 );
 
 
 server.listen( port, host, function( err ) {
     if( err ) {
-        console.log( err );
+      console.log( err );
     }
     var url = util.format( 'http://%s:%d', host, port );
     console.log( 'Webpack server listening at %s', url );
