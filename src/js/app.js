@@ -1,9 +1,10 @@
 import '../index.html';
 import '../css/main.scss';
 
+import { Map } from 'core/map';
+import { Panel } from 'core/panel';
 import { Slider } from 'core/slider';
 import { SearchBar } from 'core/searchbar';
-import { Map } from 'core/map';
 import $ from 'jquery';
 
 
@@ -17,13 +18,15 @@ $(document).ready(function() {
 	  ];
 
 	$("#preloader-text").text(loadingSteps[0]);
-	var searchBar = new SearchBar();
-	var slider = new Slider();
 	var mapObj = new Map();
+  var panel = new Panel();
+  var slider = new Slider();
+  var searchBar = new SearchBar();
+  mapObj.setMapClick(panel);
 	slider.bindToMap(mapObj);
 
 	$("#preloader-text").text(loadingSteps[1]);
-	getData(slider.getYear(), mapObj, function(){
+	getData(slider.getYear(), mapObj, panel, function(){
 		$("#preloader-text").text(loadingSteps[2]);
 		$("#preloader-wrapper").addClass("hidden");
 		$("#app-wrapper").removeClass("hidden");
@@ -33,7 +36,7 @@ $(document).ready(function() {
 });
 
 
-function getData(year, mapObj, cb) {
+function getData(year, mapObj, panel, cb) {
   // var url = year ? "/getGeojsonFromYear/"+year : "/getGeojson";
   var url = "/getGeojson";
   $.get(url, function(data, status){
@@ -46,7 +49,7 @@ function getData(year, mapObj, cb) {
 			data.forEach(function(disease) {
 				mapObj.diseaseToGeojsonFeature(disease);
 			});
-      mapObj.geojsonFeaturesToLayer(year);
+      mapObj.geojsonFeaturesToLayer(year, panel);
 
 			// Do some extra stuff if needed
 			// ie: display map

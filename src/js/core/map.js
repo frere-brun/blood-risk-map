@@ -31,17 +31,14 @@ class Map {
 
     this.mymap = L.map(this.mapElt, { zoomControl:false }).setView([27, 5.6279968], 2); // Original : .setView([48.6857475, 5.6279968], 2);
     L.tileLayer(this.tileLayerUrl, this.tileLayerOptions).addTo(this.mymap);
+    
+  }
+
+  setMapClick(panel) {
     var self = this;
     this.mymap.on('click', function(e) {
-
       console.log('You just clicked on ', e.latlng);
-
-      // Event not triggered before, so it doesn't belong to any layer
-      self.panel.admissiblity.text('Admissible');
-      self.panel.diseaseName.text('')
-      self.panel.diseaseDuration.text('')
-      self.panel.dieseaseRequiredTests.text('')
-      self.panel.notAdmissible.addClass("hidden");
+      panel.setOk();
       self.putMarker(e.latlng);
     });
   }
@@ -68,7 +65,7 @@ class Map {
   }
 
 
-  geojsonFeaturesToLayer(year) {
+  geojsonFeaturesToLayer(year, panel) {
     // Remove the old geojsonLayer
     var self = this;
     if (this.mymap && this.mymap.hasLayer(this.geojsonLayer)) {
@@ -101,11 +98,7 @@ class Map {
         l.on('click', function(e) {
           var properties = e.layer.properties;
           console.log('You just clicked on ', properties.sovereignt, e.latlng);
-          self.panel.admissiblity.text('Non admissible');
-          self.panel.diseaseName.text(properties.diseaseName)
-          self.panel.diseaseDuration.text(properties.diseaseDuration)
-          self.panel.dieseaseRequiredTests.text(properties.dieseaseRequiredTests)
-          self.panel.notAdmissible.removeClass("hidden");
+          panel.setNotOk(properties);
 
           // Event is triggered so stop it
           L.DomEvent.stopPropagation(e);
