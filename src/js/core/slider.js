@@ -18,18 +18,20 @@ class Slider {
     }
   }
 
-  bindToMap(map, panel) {
+  connect(connector) {
+    this.connector = connector;
+  }
+
+  bindToMap() {
     var self = this;
     this.sliderElt.on('change input', function(e) {
       self.sliderTextField.text(this.value)
       if (e.type === 'change') {
-        // Compute geojson layers based on the year
-        map.geojsonFeaturesToLayer(this.value, panel);
-        /*
-        Future :
-        The server would probably serve a new set of geojson data according to the date
-        cf : "/getGeojsonFromYear/"+year
-        */
+        if (self.connector) {
+          var args = self.getYear();
+          self.connector.setCallArgs(args);
+          self.connector.activate();
+        }
       }
     });    
   }

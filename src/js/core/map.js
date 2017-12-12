@@ -22,15 +22,20 @@ class Map {
     this.marker = null;
 
     this.mymap = L.map(this.mapElt, { zoomControl:false }).setView([27, 5.6279968], 2); // Original : .setView([48.6857475, 5.6279968], 2);
-    L.tileLayer(this.tileLayerUrl, this.tileLayerOptions).addTo(this.mymap);
-    
+    L.tileLayer(this.tileLayerUrl, this.tileLayerOptions).addTo(this.mymap);    
   }
 
-  setMapClick(panel) {
+  connect(connector) {
+    this.connector = connector;
+  }
+
+  setMapClick() {
     var self = this;
     this.mymap.on('click', function(e) {
       console.log('You just clicked on ', e.latlng);
-      panel.setOk();
+      var args = {"isOk": true};
+      self.connector.setCallArgs(args);
+      self.connector.activate();
       self.putMarker(e.latlng);
     });
   }
@@ -52,7 +57,7 @@ class Map {
   }
 
   // Build a layer with a particular style and click event from a geojson object
-  geojsonFeaturesToLayer(year, panel) {
+  geojsonFeaturesToLayer(year) {
     // Remove the old geojsonLayer
     var self = this;
     if (this.mymap && this.mymap.hasLayer(this.geojsonLayer)) {
@@ -77,8 +82,11 @@ class Map {
 
         l.on('click', function(e) {
           var properties = e.layer.properties;
-          console.log('You just clicked on ', properties.sovereignt, e.latlng);
-          panel.setNotOk(properties);          
+          console.log('You just clicked on ', properties.sovereignt, e.latlng);   
+          var args = {"isOk": false, "data": properties};
+          self.connector.setCallArgs(args);
+          self.connector.activate();
+
           L.DomEvent.stopPropagation(e); // Event is triggered so stop it
           self.putMarker(e.latlng);
         })

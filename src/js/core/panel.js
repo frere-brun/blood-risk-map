@@ -9,6 +9,14 @@ class Panel {
     this.notAdmissible = $("#notAdmissible");
   }
 
+  setPanel(args) {
+    if (args.isOk) {
+      this.setOk();
+    } else {
+      this.setNotOk(args.data);
+    }
+  }
+
   setOk() {
     this.admissiblity.text('Admissible');
     this.diseaseName.text('')
