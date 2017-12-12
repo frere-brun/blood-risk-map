@@ -21,14 +21,6 @@ class Map {
     this.geojsonLayerSources = [];
     this.marker = null;
 
-    this.panel = {
-      admissiblity: $("#admissiblity"),
-      diseaseName: $("#diseaseName"),
-      diseaseDuration: $("#diseaseDuration"),
-      dieseaseRequiredTests: $("#dieseaseRequiredTests"),
-      notAdmissible: $("#notAdmissible"),
-    }
-
     this.mymap = L.map(this.mapElt, { zoomControl:false }).setView([27, 5.6279968], 2); // Original : .setView([48.6857475, 5.6279968], 2);
     L.tileLayer(this.tileLayerUrl, this.tileLayerOptions).addTo(this.mymap);
     
@@ -54,17 +46,12 @@ class Map {
         geojsonFeature.properties['diseaseEndDate'] = disease.endDate;
         geojsonFeature.properties['diseaseDuration'] = disease.duration;
         geojsonFeature.properties['dieseaseRequiredTests'] = disease.requiredTests;
-
-        // Without the tilemap (gridVector)
-        // geojsonLayerSources.push(geojsonFeature);
       });
-
-      // With a gridVector
       this.geojsonLayerSources.push(disease);
     }
   }
 
-
+  // Build a layer with a particular style and click event from a geojson object
   geojsonFeaturesToLayer(year, panel) {
     // Remove the old geojsonLayer
     var self = this;
@@ -73,19 +60,12 @@ class Map {
       self.geojsonLayer = null;
     }
 
-    // Create the list of geojson layers
+    // Create the list of geojson layers [gridVector implementation]
+    // https://leaflet.github.io/Leaflet.VectorGrid/vectorgrid-api-docs.html#vectorgrid
+    //   unwrapping automatic of a { type: featureCollection, features: Array} object
     var layers = [];
-
-    // Without the tilemap (gridVector)
-    // geojsonLayerSources.forEach(function(feature) {
-    //    var l = L.geoJSON(feature, {style: , filter:, onEachFeature:, ...)
-    //    layers.push(l)
-    // });
-    // Solution for a gridVector implementation
     this.geojsonLayerSources.forEach(function(disease) {
       if (self.displayDisease(year, disease.beginDate, disease.endDate)) {
-        // https://leaflet.github.io/Leaflet.VectorGrid/vectorgrid-api-docs.html#vectorgrid
-        // unwrapping automatic of a { type: featureCollection, features: Array} object
         var features = disease.featuresCollection;
         var l = L.vectorGrid.slicer(features, {
           interactive: true,
@@ -98,21 +78,16 @@ class Map {
         l.on('click', function(e) {
           var properties = e.layer.properties;
           console.log('You just clicked on ', properties.sovereignt, e.latlng);
-          panel.setNotOk(properties);
-
-          // Event is triggered so stop it
-          L.DomEvent.stopPropagation(e);
+          panel.setNotOk(properties);          
+          L.DomEvent.stopPropagation(e); // Event is triggered so stop it
           self.putMarker(e.latlng);
         })
         layers.push(l);
-      }
-
-      
+      }      
     });
 
     // Push the list to a layer group and then add it to the map
     this.geojsonLayer = L.layerGroup(layers);
-
     if (this.mymap) {
       this.mymap.addLayer(this.geojsonLayer);
     }
@@ -129,35 +104,11 @@ class Map {
     }
   }
 
-  coordsToLatLng(coords) {
-    // find a way to wrap around the geojson data
-    var lat = coords[1];
-    var lng = coords[0];
-    return L.latLng(lat, lng);
-  }
-
-  // Filter function to display a geojson feature
-  displayFeature(currentYear, feature) {
-    if (feature.properties.diseaseBeginDate) {
-      var beginYear = feature.properties.diseaseBeginDate.split('-')[2];
-      var isAfter = beginYear <= currentYear;
-
-      if (feature.properties.diseaseEndDate) {
-        var endYear = feature.properties.diseaseEndDate.split('-')[2];
-        var isBefore = currentYear <= endYear;
-        return isAfter && isBefore;
-      }
-      return isAfter;
-    }
-    return false;
-  }
-
   // filter to display a geojson disease
   displayDisease(currentYear, beginDate, endDate) {
     if (beginDate) {
       var beginYear = beginDate.split('-')[2];
       var isAfter = beginYear <= currentYear;
-
       if (endDate) {
         var endYear = endDate.split('-')[2];
         var isBefore = currentYear <= endYear;
@@ -168,24 +119,6 @@ class Map {
     return false;
   }
 
-
-  onEachFeature(feature, layer) {
-    var self = this;
-    if (feature.properties && feature.properties.sovereignt) {
-      layer.on('click', function(e) {
-        console.log('You just clicked on ', feature.properties.sovereignt, e.latlng);
-        self.panel.admissiblity.text('Non admissible');
-        self.panel.diseaseName.text(feature.properties.diseaseName)
-        self.panel.diseaseDuration.text(feature.properties.diseaseDuration)
-        self.panel.dieseaseRequiredTests.text(feature.properties.dieseaseRequiredTests)
-        self.panel.notAdmissible.removeClass("hidden");
-
-        // Event is triggered so stop it
-        L.DomEvent.stopPropagation(e);
-        putMarker(e.latlng);
-      });
-    }
-  }
 
   putMarker(latlng) {
     if(this.marker === null) {

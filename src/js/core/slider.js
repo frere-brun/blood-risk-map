@@ -18,13 +18,13 @@ class Slider {
     }
   }
 
-  bindToMap(map) {
+  bindToMap(map, panel) {
     var self = this;
     this.sliderElt.on('change input', function(e) {
       self.sliderTextField.text(this.value)
       if (e.type === 'change') {
         // Compute geojson layers based on the year
-        map.geojsonFeaturesToLayer(this.value);
+        map.geojsonFeaturesToLayer(this.value, panel);
         /*
         Future :
         The server would probably serve a new set of geojson data according to the date

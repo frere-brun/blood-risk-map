@@ -23,7 +23,7 @@ $(document).ready(function() {
   var slider = new Slider();
   var searchBar = new SearchBar();
   mapObj.setMapClick(panel);
-	slider.bindToMap(mapObj);
+	slider.bindToMap(mapObj, panel);
 
 	$("#preloader-text").text(loadingSteps[1]);
 	getData(slider.getYear(), mapObj, panel, function(){
