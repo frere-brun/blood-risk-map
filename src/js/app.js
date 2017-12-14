@@ -7,6 +7,7 @@ import { Slider } from 'core/slider';
 import { SearchBar } from 'core/searchbar';
 import { Connector } from 'core/connector';
 import $ from 'jquery';
+import { Data } from '../data/data';
 
 $(document).ready(function() {
 	var loadingSteps = [
@@ -41,23 +42,28 @@ $(document).ready(function() {
 
 
 function getData(year, mapObj, cb) {
-  // var url = year ? "/getGeojsonFromYear/"+year : "/getGeojson";
-  var url = "/getGeojson";
-  $.get(url, function(data, status){
-    if (status !== 'success') {
-      alert('An error has occured');
-    }
-    else if (status === 'success') {
-      // Extract geojson and display it as layers
-			data.forEach(function(disease) {
-				mapObj.diseaseToGeojsonFeature(disease);
-			});
-      mapObj.geojsonFeaturesToLayer(year);
 
-			// Do some extra stuff if needed
-			// ie: display map
-			cb();
-    }
-    return status === "success"
-  });
+	Data.forEach(function(disease) {
+		mapObj.diseaseToGeojsonFeature(disease);
+	});
+  mapObj.geojsonFeaturesToLayer(year);
+	cb();
+
+	// $.get(url, function(data, status){
+  //   if (status !== 'success') {
+  //     alert('An error has occured');
+  //   }
+  //   else if (status === 'success') {
+  //     // Extract geojson and display it as layers
+	// 		data.forEach(function(disease) {
+	// 			mapObj.diseaseToGeojsonFeature(disease);
+	// 		});
+  //     mapObj.geojsonFeaturesToLayer(year);
+  //
+	// 		// Do some extra stuff if needed
+	// 		// ie: display map
+	// 		cb();
+  //   }
+  //   return status === "success"
+  // });
 }

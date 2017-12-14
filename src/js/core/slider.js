@@ -33,7 +33,7 @@ class Slider {
           self.connector.activate();
         }
       }
-    });    
+    });
   }
 
   getYear() {

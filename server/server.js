@@ -37,7 +37,6 @@ app.get('/getGeojsonFromYear/:year', function(req,res) {
 	});
 });
 
-
 app.get('/generateDeseases', function(req,res) {
 	jsonfile.readFile(dataFile, function(err,deseases) {
 		if (err) {
