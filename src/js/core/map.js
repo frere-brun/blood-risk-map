@@ -20,6 +20,7 @@ class Map {
     this.geojsonLayer = L.layerGroup();
     this.geojsonLayerSources = [];
     this.marker = null;
+    this.icon = L.divIcon({ className: 'pin pulse' });
 
     this.mymap = L.map(this.mapElt, { zoomControl:false }).setView([27, 5.6279968], 2); // Original : .setView([48.6857475, 5.6279968], 2);
     L.tileLayer(this.tileLayerUrl, this.tileLayerOptions).addTo(this.mymap);    
@@ -130,7 +131,7 @@ class Map {
 
   putMarker(latlng) {
     if(this.marker === null) {
-      this.marker = L.marker(latlng).addTo(this.mymap);
+      this.marker = L.marker(latlng, {icon: this.icon}).addTo(this.mymap);
     } else {
       this.marker.setLatLng(latlng);
     }
