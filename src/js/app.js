@@ -1,27 +1,27 @@
 import '../index.html';
 import '../css/main.scss';
+import $ from 'jquery';
 
 import { Map } from 'core/map';
 import { Panel } from 'core/panel';
 import { Slider } from 'core/slider';
 import { SearchBar } from 'core/searchbar';
+import { Preloader } from 'core/preloader';
+import { Disclamer } from 'core/disclamer';
 import { Connector } from 'core/connector';
-import $ from 'jquery';
 import { Data } from '../data/data';
 
 $(document).ready(function() {
-	var loadingSteps = [
-    "Chargement de l'application",
-    "Récupération des données",
-    "Création de la zone de danger"
-  ];
 
-  // Objects initialization
-	$("#preloader-text").text(loadingSteps[0]);
+	var preloader = new Preloader();
+	var disclamer = new Disclamer();
 	var mapObj = new Map();
   var panel = new Panel();
   var slider = new Slider();
   var searchBar = new SearchBar();
+
+	preloader.init();
+	disclamer.init();
 
   // Connect composants between them with a specific handler
   var c1 = new Connector(slider, mapObj, "geojsonFeaturesToLayer");
@@ -29,12 +29,7 @@ $(document).ready(function() {
   var c2 = new Connector(mapObj, panel, "setPanel");
   mapObj.setMapClick();
 
-  // Retrieve data and load actual data
-	$("#preloader-text").text(loadingSteps[1]);
 	getData(slider.getYear(), mapObj, function(){
-		$("#preloader-text").text(loadingSteps[2]);
-		$("#preloader-wrapper").addClass("hidden");
-		$("#app-wrapper").removeClass("hidden");
 	});
 
 	console.log("Main finished");

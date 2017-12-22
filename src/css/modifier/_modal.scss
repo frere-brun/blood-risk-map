@@ -68,16 +68,17 @@ $base-index: 999999999999999999999;
 	top: 0;
 	left: 0;
 	display:none;
-	//overflow: hidden;
+	overflow: hidden;
 	&>.content {
 		margin: auto;
+		min-width: 220px;
+		max-width: 500px;
 		position:relative;
 		display:flex;
 		border-radius:2px;
 		z-index: $base-index;
 		width:auto;
 		padding:15px 20px 20px 20px;
-		min-width: 220px;
 		transition: all $modal-open-duration ease('swift-in-bouncy');
 		transform:scale(0);
 	}
@@ -119,7 +120,7 @@ $base-index: 999999999999999999999;
 			height:100%;
 			position:absolute;
 			z-index: 998;
-			background-color:rgba(0,0,0,0.6);
+			background-color: white;
 			top: 0;
 			left: 0;
 			transition: all $modal-overlay-open-duration ease;
@@ -133,11 +134,10 @@ $base-index: 999999999999999999999;
 	&.-open {
 		opacity:1;
 		display:flex;
-		overflow: auto;
+		overflow: hidden;
 		.content {
 			transform:scale(1);
 			overflow: visible;
-			//overflow-y: auto;
 		}
 		.overlay::after {
 			opacity:1;

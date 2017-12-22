@@ -11,7 +11,7 @@ const Data = [
     "beginDate": null,
     "endDate": null,
     "duration": "6 months",
-    "color": "cyan",
+    "color": "red",
     "requiredTests": null,
     "featuresCollection": {
       "type": "FeatureCollection",
@@ -80,7 +80,7 @@ const Data = [
     "beginDate": "21-08-2011",
     "endDate": null,
     "duration": "6 months",
-    "color": "pink",
+    "color": "red",
     "requiredTests": null,
     "featuresCollection": {
       "type": "FeatureCollection",
@@ -457,7 +457,7 @@ const Data = [
     "beginDate": "10-06-2012",
     "endDate": null,
     "duration": "14 days",
-    "color": "yellow",
+    "color": "red",
     "requiredTests": null,
     "featuresCollection": {
       "type": "FeatureCollection",
@@ -3080,7 +3080,7 @@ const Data = [
     "beginDate": "07-10-2013",
     "endDate": null,
     "duration": "28 days",
-    "color": "green",
+    "color": "red",
     "requiredTests": null,
     "featuresCollection": {
       "type": "FeatureCollection",
@@ -14857,7 +14857,7 @@ const Data = [
     "beginDate": "01-06-2015",
     "endDate": "30-11-2018",
     "duration": "0 days",
-    "color": "blue",
+    "color": "red",
     "requiredTests": "Analyse PCR/WNV",
     "featuresCollection": {
       "type": "FeatureCollection",
