@@ -2,34 +2,36 @@ import $ from 'jquery';
 
 class Preloader {
   constructor() {
+    this.appWrapper = $(".app");
+    this.preloaderText = $(".preloader__center__text");
+    this.preloaderWrapper = $(".preloader-wrapper");
 
+    this.step = 0;
     this.loadingSteps = [
       "Chargement de l'application",
       "Récupération des données",
       "Création de la zone de danger"
     ];
-
-    this.preloaderWrapper = $(".preloader-wrapper");
-    this.preloaderText = $(".preloader__center__text");
-    this.appWrapper = $(".app");
-    console.log("preloader initialized");
+    this.nextStep();
   }
 
-  init() {
-    var self = this;
-    this.preloaderText.html(this.loadingSteps[0]);
-    window.setTimeout(function() {
-      self.preloaderText.html(self.loadingSteps[1]);
-      window.setTimeout(function() {
-      	self.preloaderText.html(self.loadingSteps[2]);
-        window.setTimeout(function() {
-        	self.preloaderWrapper.addClass("hidden");
-        	self.appWrapper.removeClass("hidden");
-        }, 1500);
-      }, 1500);
-    }, 1500);
+  nextStep() {
+    if (this.step + 1 < this.loadingSteps.length) {
+      // Display message and prepare next
+      this.preloaderText.html(this.loadingSteps[this.step]); 
+      this.step += 1;
+    } else {
+      // Or go to following element
+      this.preloaderWrapper.addClass("hidden");
+      this.appWrapper.removeClass("hidden");
+      this.connector.activate();
+    }
   }
 
+  connect(connector) {
+    console.log('connected');
+    this.connector = connector;
+  }
 }
 
 export {Preloader}
