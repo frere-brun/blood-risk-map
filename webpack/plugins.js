@@ -39,4 +39,12 @@ if( DEV ) {
     );
 }
 
+// Custom plugin for owl
+plugins.push(new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery",
+    "window.jQuery": "jquery"
+    })
+);
+
 module.exports = plugins;
