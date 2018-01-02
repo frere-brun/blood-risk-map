@@ -47,20 +47,21 @@
 
     <!-- APP -->
     <div class="app">
-      <div id="search" class="active">
-        <div class="search-button-box"><i class="icon -magnifier touch-event"></i></div>
-        <div class="search-box">
-          <input type="text" ng-model="search" ng-autocomplete="result" details="details" options="autoCompleteOptions" placeholder="Rechercher"/>
-          <i class="remove-research-button icon -cross touch-event"></i>
-        </div>
-      </div>
       <div class="range-box">
         <i class="icon -calendar"></i>
         <div class="content">
           <input id="rangeInput" type="range"/>
         </div>
         <div class="current-year">
-          <p id="year">2017</p>
+          <p id="year"></p>
+        </div>
+      </div>
+      <div id="search" class="active">
+        <div class="search-button-box"><i class="icon -magnifier touch-event"></i></div>
+        <div class="search-box">
+          <input id="search-input" type="text" placeholder="Rechercher"/>
+          <i class="remove-research-button icon -cross touch-event"></i>
+          <select id="search-results"></select>
         </div>
       </div>
       <div id="admissibility" class="is-valid">

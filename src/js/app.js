@@ -24,8 +24,10 @@ $(document).ready(function() {
   var c0 = new Connector(preloader, disclaimer, "display");
   var c1 = new Connector(slider, mapObj, "geojsonFeaturesToLayer");
   slider.bindToMap();
-  var c2 = new Connector(mapObj, panel, "setPanel");
+  var c2 = new Connector(searchBar, mapObj, "simulateClick");
+  var c3 = new Connector(mapObj, panel, "setPanel");
   mapObj.setMapClick();
+
 
   // Get data with timing
   window.setTimeout(function() {
@@ -39,6 +41,6 @@ $(document).ready(function() {
       mapObj.geojsonFeaturesToLayer(slider.getYear());
       preloader.nextStep();
       console.log("Main finished");
-    }, 1500);
-  }, 1500);
+    }, 100);
+  }, 100);
 });

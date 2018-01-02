@@ -12,7 +12,7 @@ const jsBundle = path.join( 'js', util.format( '[name].js' ) );
 const entries = {
     app:       ['app.js'],
     vendors:   ['jquery', 'moment'],
-    polyfills: ['polyfill.js', 'es6-promise']
+    polyfills: ['babel-polyfill', 'polyfill.js', 'es6-promise']
 };
 const alias = {
     //'intl$': 'intl/Intl'

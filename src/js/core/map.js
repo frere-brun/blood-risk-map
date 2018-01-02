@@ -4,9 +4,14 @@ import {vectorGrid} from 'leaflet.vectorgrid';
 
 class Map {
   constructor() {
+    // Create the map object (L.map)
     this.mymap = null;
     this.mapElt = 'map';
     this.mapOptions = { zoomControl:false };
+    this.mymap = L.map(this.mapElt, this.mapOptions).setView([27, 5.6279968], 2); // Original : .setView([48.6857475, 5.6279968], 2);
+
+    // Create the tile layer, keep reference, and add it to mymap
+    this.tileLayer = null;
     this.tileLayerUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
     this.tileLayerOptions = {
       maxZoom: 18,
@@ -16,14 +21,17 @@ class Map {
         'Imagery © <a href="http://mapbox.com">Mapbox</a>',
       id: 'mapbox.streets'
     };
+    this.tileLayer = L.tileLayer(this.tileLayerUrl, this.tileLayerOptions);
+    this.tileLayer.addTo(this.mymap);
 
+    // Create reference to future geojson tile layer
+    // * Layer group => there are several geojson diseases
     this.geojsonLayer = L.layerGroup();
     this.geojsonLayerSources = [];
+
+    // Create the custom marker with its css (refer to main.scss)
     this.marker = null;
     this.icon = L.divIcon({ className: 'pin pulse' });
-
-    this.mymap = L.map(this.mapElt, { zoomControl:false }).setView([27, 5.6279968], 2); // Original : .setView([48.6857475, 5.6279968], 2);
-    L.tileLayer(this.tileLayerUrl, this.tileLayerOptions).addTo(this.mymap);    
   }
 
   connect(connector) {
@@ -62,6 +70,7 @@ class Map {
     // Remove the old geojsonLayer
     var self = this;
     if (this.mymap && this.mymap.hasLayer(this.geojsonLayer)) {
+      console.log('removing geojsonLayer')
       this.mymap.removeLayer(this.geojsonLayer);
       self.geojsonLayer = null;
     }
@@ -98,6 +107,7 @@ class Map {
     // Push the list to a layer group and then add it to the map
     this.geojsonLayer = L.layerGroup(layers);
     if (this.mymap) {
+      console.log('adding geojsonLayer')
       this.mymap.addLayer(this.geojsonLayer);
     }
   }
@@ -128,7 +138,6 @@ class Map {
     return false;
   }
 
-
   putMarker(latlng) {
     if(this.marker === null) {
       this.marker = L.marker(latlng, {icon: this.icon}).addTo(this.mymap);
@@ -140,6 +149,18 @@ class Map {
 
   resetLayerSources() {
     this.geojsonLayerSources = [];
+  }
+
+  simulateClick(rawLatlng) {
+    var latlng =  L.latLng(rawLatlng.lat, rawLatlng.lon)
+    var layerPoint = this.mymap.project(latlng).divideBy(256).floor();
+    console.log('Point (X/Y axis)', layerPoint.x, layerPoint.y);
+
+    // Fake to simulate click
+    
+
+
+
   }
 }
 
