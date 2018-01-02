@@ -10,7 +10,6 @@ class Disclaimer {
     this.appWrapper = $(".app");
     this.isModalOpen = false;
     this.isModalOpening = false;
-    console.log("disclamer initialized");
 
     var self = this;
     this.acceptBtn.on('click', function() {

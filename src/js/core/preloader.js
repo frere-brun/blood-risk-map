@@ -29,7 +29,6 @@ class Preloader {
   }
 
   connect(connector) {
-    console.log('connected');
     this.connector = connector;
   }
 }

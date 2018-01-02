@@ -16,7 +16,7 @@ class Slider {
         this.sliderTextField.text(this.rangeOptions[k])
       }
     }
-    console.log("slider initialized");
+    // console.log("slider initialized");
   }
 
   connect(connector) {

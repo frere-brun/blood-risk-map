@@ -7,11 +7,19 @@ class SearchBar {
     this.input = $("#search-input");
     this.select = $("#search-results");
     this.results = [];
+    this.isSelected = false;
    
     var self = this;
     this.input.on('keyup', function(e) {
       if (e.which == 13) {
+        self.resetData();
         self.requestData();
+      }
+    });
+    this.input.on('focus', function() {
+      if (self.isSelected) {
+        self.isSelected = false;
+        self.input.val('');
       }
     });
 
@@ -23,9 +31,6 @@ class SearchBar {
     }).on('click', function() {
       self.selectData();
     });
-
-
-    console.log("search bar initialized");
   }
 
   connect(connector) {
@@ -38,7 +43,7 @@ class SearchBar {
       self.results = await self.provider.search({ query: self.input.val() });
       self.injectData();
 
-      // Put focus and force to open it somehow
+      // Put focus in select tag and force to open it somehow
       self.select.focus();
       self.select.attr('size', self.results.length < 5 ? self.results.length : 5);
     }
@@ -58,20 +63,25 @@ class SearchBar {
   selectData() {
     // Get backdata to clic on
     var i = this.select[0].selectedOptions[0].value;
-    var point2click = {'lat': this.results[i].x, 'lon': this.results[i].y};
+    var splitLabel = this.results[i].label.split(', ');
+    var country = splitLabel[splitLabel.length-1];
+    var target = {'lon': this.results[i].x, 'lat': this.results[i].y, 'country': country};
     
-    // Fill in input
+    // Fill in input, alter behavior and reset data
     this.input.val(this.select[0].selectedOptions[0].text);
+    this.isSelected = true;
+    this.resetData();
 
-    // Clean the old select tag
-    this.select.attr('size', 0);
-    this.select.empty();
-
-    console.log('POINT (ltlng): ', point2click)
     if(this.connector) {
-      this.connector.setCallArgs(point2click)
+      this.connector.setCallArgs(target);
       this.connector.activate();
     }
+  }
+
+  resetData() {
+    this.results = [];
+    this.select.attr('size', 0);
+    this.select.empty();
   }
 }
 export {SearchBar}

@@ -24,7 +24,7 @@ $(document).ready(function() {
   var c0 = new Connector(preloader, disclaimer, "display");
   var c1 = new Connector(slider, mapObj, "geojsonFeaturesToLayer");
   slider.bindToMap();
-  var c2 = new Connector(searchBar, mapObj, "simulateClick");
+  var c2 = new Connector(searchBar, mapObj, "enableReverseGeocoding");
   var c3 = new Connector(mapObj, panel, "setPanel");
   mapObj.setMapClick();
 
@@ -40,7 +40,7 @@ $(document).ready(function() {
     window.setTimeout(function() {
       mapObj.geojsonFeaturesToLayer(slider.getYear());
       preloader.nextStep();
-      console.log("Main finished");
+      // console.log("Main finished");
     }, 100);
   }, 100);
 });

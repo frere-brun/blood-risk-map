@@ -28,6 +28,7 @@ class Map {
     // * Layer group => there are several geojson diseases
     this.geojsonLayer = L.layerGroup();
     this.geojsonLayerSources = [];
+    this.activeDiseases = {};
 
     // Create the custom marker with its css (refer to main.scss)
     this.marker = null;
@@ -70,9 +71,9 @@ class Map {
     // Remove the old geojsonLayer
     var self = this;
     if (this.mymap && this.mymap.hasLayer(this.geojsonLayer)) {
-      console.log('removing geojsonLayer')
       this.mymap.removeLayer(this.geojsonLayer);
       self.geojsonLayer = null;
+      self.activeDiseases = {};
     }
 
     // Create the list of geojson layers [gridVector implementation]
@@ -99,15 +100,28 @@ class Map {
 
           L.DomEvent.stopPropagation(e); // Event is triggered so stop it
           self.putMarker(e.latlng);
-        })
+        });
         layers.push(l);
-      }      
+
+        // Additional data extraction for searchbar
+        if (!self.activeDiseases[disease.name]) {
+          self.activeDiseases[disease.name] = {
+            'properties': {
+              'diseaseName': disease.name,
+              'diseaseDuration': disease.duration,
+              'dieseaseRequiredTests': disease.requiredTests
+            },
+            'countries': disease.countries.map(function(country) {
+              return country.name;
+            })
+          };
+        }
+      }
     });
 
     // Push the list to a layer group and then add it to the map
     this.geojsonLayer = L.layerGroup(layers);
     if (this.mymap) {
-      console.log('adding geojsonLayer')
       this.mymap.addLayer(this.geojsonLayer);
     }
   }
@@ -151,16 +165,33 @@ class Map {
     this.geojsonLayerSources = [];
   }
 
-  simulateClick(rawLatlng) {
-    var latlng =  L.latLng(rawLatlng.lat, rawLatlng.lon)
-    var layerPoint = this.mymap.project(latlng).divideBy(256).floor();
-    console.log('Point (X/Y axis)', layerPoint.x, layerPoint.y);
+  enableReverseGeocoding(target) {
+    var latlng =  L.latLng(target.lat, target.lon)
+    this.putMarker(latlng);
 
-    // Fake to simulate click
-    
+    // Some formatting
+    // * Will need a simplification of data.json file 
+    // * and language format with OSM provider (searchBar component)
+    if (target.country == "États-Unis d'Amérique") {
+      target.country = "USA";
+    }
 
+    // Look for the given country in the list
+    var self = this;
+    var args = {"isOk": true};
+    Object.keys(this.activeDiseases).forEach(function(key,index) {
+      var d = self.activeDiseases[key];
+      for (var i=0; i<=d.countries.length; i++) {
+        if (d.countries[i] == target.country) {
+          args = {"isOk": false, "data": d.properties};
+          break;
+        }
+      }
+    });
 
-
+    // And display result
+    this.connector.setCallArgs(args);
+    this.connector.activate();
   }
 }
 
