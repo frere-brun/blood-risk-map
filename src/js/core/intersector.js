@@ -1,6 +1,9 @@
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
+import booleanDisjoint from '@turf/boolean-disjoint';
+import circle from '@turf/circle';
 import { polygon, multiPolygon } from '@turf/helpers';
 import intersect from '@turf/intersect';
+import lineIntersect from '@turf/line-intersect';
 
 class Intersector {
   constructor() {
@@ -45,10 +48,36 @@ class Intersector {
     return status;
   }
 
-  // Put some modulo to prevent tilemapping side effects on lat long
+  // Two possible methods: point or perimeter
   checkIntersection(mapMarker) {
-    var count = 0;
-    var args = {'isOk': true, 'data': []}
+    var args = {'isOk': true, 'data': []};
+    args = this.perimeterCheck(mapMarker, args);
+    // var args = this.pointCheck(mapMarker, args);
+    this.connector.setCallArgs(args);
+    this.connector.activate();
+  }
+
+  // Check if circle is not disjoint from other polygons
+  perimeterCheck(mapMarker, args) {
+    //  Construct circle
+    var radius = 30;
+    var options = {steps: 10, units: 'kilometers', properties: {foo: 'bar'}};
+    var c = circle(mapMarker, radius, options);
+
+    for (var i=0; i<this.polygons.length; i++) {
+      var p = this.polygons[i];
+      if (!booleanDisjoint(c, p)) {
+        if (args.isOk) {
+          args.isOk = false;
+        }
+        args.data.push(p.properties);
+      }
+    }
+    return args;
+  }
+
+  // Check if marker is in polygons
+  pointCheck(mapMarker, args) {
     for (var i=0; i<this.polygons.length; i++) {
       var p = this.polygons[i];
       if (booleanPointInPolygon(mapMarker, p)) {
@@ -56,14 +85,9 @@ class Intersector {
           args.isOk = false;
         }
         args.data.push(p.properties);
-        count++;
       }
     }
-
-    console.log("DIseases found", count)
-
-    this.connector.setCallArgs(args);
-    this.connector.activate();        
+    return args;
   }
 }
 

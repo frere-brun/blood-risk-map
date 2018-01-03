@@ -36,7 +36,6 @@ class Map {
     // Init event
     var self = this;
     this.mymap.on('click', function(e) {
-      console.log('You just clicked on ', e.latlng);
       self.putMarker(e.latlng);
       self.runConnector();
     });
