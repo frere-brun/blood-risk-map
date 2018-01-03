@@ -9,8 +9,6 @@
     "@turf/boolean-point-in-polygon": "^5.1.5",
     "@turf/circle": "^5.1.5",
     "@turf/helpers": "^5.1.5",
-    "@turf/intersect": "^5.1.5",
-    "@turf/line-intersect": "^5.1.5",
     "body-parser": "^1.14.1",
     "cors": "^2.7.1",
     "detectcss": "^1.0.2",

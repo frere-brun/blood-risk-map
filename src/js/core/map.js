@@ -109,8 +109,6 @@ class Map {
     } else {
       this.perimeter.setLatLng(latlng);
     }
-
-    // Add the circle here and find a way to extract a big geojson repr (more than 2 points....)
   }
 
   enableReverseGeocoding(target) {

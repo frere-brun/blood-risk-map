@@ -1,9 +1,8 @@
-import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
-import booleanDisjoint from '@turf/boolean-disjoint';
 import circle from '@turf/circle';
+import booleanDisjoint from '@turf/boolean-disjoint';
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
 import { polygon, multiPolygon } from '@turf/helpers';
-import intersect from '@turf/intersect';
-import lineIntersect from '@turf/line-intersect';
+
 
 class Intersector {
   constructor() {
