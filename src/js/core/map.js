@@ -49,10 +49,15 @@ class Map {
   runConnector() {
     if (this.connector) {
       var tmp = this.marker.getLatLng();
-      var args = [tmp.lng, tmp.lat];
+      var args = [this.normalizeLng(tmp.lng), tmp.lat];
       this.connector.setCallArgs(args);
       this.connector.activate();        
     }
+  }
+
+  // Ensure a longitude is always in bound
+  normalizeLng(lng) {
+    return L.Util.wrapNum(lng, [-180, 180], true);
   }
 
   updateDiseaseLayers(geojsonFeatures) {
