@@ -10,20 +10,15 @@ class Slider {
       'value': (new Date()).getFullYear().toString()
     }
 
+    // Initialize attributes
     for (var k in this.rangeOptions) {
       this.sliderElt.attr(k, this.rangeOptions[k]);
       if (k === 'value') {
         this.sliderTextField.text(this.rangeOptions[k])
       }
     }
-    // console.log("slider initialized");
-  }
 
-  connect(connector) {
-    this.connector = connector;
-  }
-
-  bindToMap() {
+    // Set up events
     var self = this;
     this.sliderElt.on('change input', function(e) {
       self.sliderTextField.text(this.value)
@@ -36,6 +31,24 @@ class Slider {
       }
     });
   }
+
+  connect(connector) {
+    this.connector = connector;
+  }
+
+  // bindToMap() {
+  //   var self = this;
+  //   this.sliderElt.on('change input', function(e) {
+  //     self.sliderTextField.text(this.value)
+  //     if (e.type === 'change') {
+  //       if (self.connector) {
+  //         var args = self.getYear();
+  //         self.connector.setCallArgs(args);
+  //         self.connector.activate();
+  //       }
+  //     }
+  //   });
+  // }
 
   getYear() {
     return parseInt(this.sliderTextField.text());

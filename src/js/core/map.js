@@ -27,7 +27,6 @@ class Map {
     // Create reference to future geojson tile layer
     // * Layer group => there are several geojson diseases
     this.geojsonLayer = L.layerGroup();
-    this.geojsonLayerSources = [];
     this.activeDiseases = {};
 
     // Create the custom marker with its css (refer to main.scss)
@@ -50,25 +49,8 @@ class Map {
     });
   }
 
-  diseaseToGeojsonFeature(disease) {
-    // console.log('disease', disease.color, disease)
-    // Get Geojson objects and put additional data for convenience
-    if (disease.featuresCollection && disease.featuresCollection.features) {
-      disease.featuresCollection.features.forEach(function(geojsonFeature) {
-        geojsonFeature.properties['color'] = disease.color;
-        geojsonFeature.properties['diseaseName'] = disease.name;
-        geojsonFeature.properties['diseaseBeginDate'] = disease.beginDate;
-        geojsonFeature.properties['diseaseEndDate'] = disease.endDate;
-        geojsonFeature.properties['diseaseDuration'] = disease.duration;
-        geojsonFeature.properties['dieseaseRequiredTests'] = disease.requiredTests;
-      });
-      this.geojsonLayerSources.push(disease);
-    }
-  }
-
-  // Build a layer with a particular style and click event from a geojson object
-  geojsonFeaturesToLayer(year) {
-    // Remove the old geojsonLayer
+  updateDiseaseLayers(geojsonFeatures) {
+    console.log('updateDiseaseLayers', geojsonFeatures)
     var self = this;
     if (this.mymap && this.mymap.hasLayer(this.geojsonLayer)) {
       this.mymap.removeLayer(this.geojsonLayer);
@@ -76,47 +58,15 @@ class Map {
       self.activeDiseases = {};
     }
 
-    // Create the list of geojson layers [gridVector implementation]
-    // https://leaflet.github.io/Leaflet.VectorGrid/vectorgrid-api-docs.html#vectorgrid
-    //   unwrapping automatic of a { type: featureCollection, features: Array} object
     var layers = [];
-    this.geojsonLayerSources.forEach(function(disease) {
-      if (self.displayDisease(year, disease.beginDate, disease.endDate)) {
-        var features = disease.featuresCollection;
-        var l = L.vectorGrid.slicer(features, {
-          interactive: true,
-          rendererFactory: L.svg.tile,
-          vectorTileLayerStyles: {
-            sliced: self.diseaseStyle,
-          },
-        });
-
-        l.on('click', function(e) {
-          var properties = e.layer.properties;
-          console.log('You just clicked on ', properties.sovereignt, e.latlng);   
-          var args = {"isOk": false, "data": properties};
-          self.connector.setCallArgs(args);
-          self.connector.activate();
-
-          L.DomEvent.stopPropagation(e); // Event is triggered so stop it
-          self.putMarker(e.latlng);
-        });
-        layers.push(l);
-
-        // Additional data extraction for searchbar
-        if (!self.activeDiseases[disease.name]) {
-          self.activeDiseases[disease.name] = {
-            'properties': {
-              'diseaseName': disease.name,
-              'diseaseDuration': disease.duration,
-              'dieseaseRequiredTests': disease.requiredTests
-            },
-            'countries': disease.countries.map(function(country) {
-              return country.name;
-            })
-          };
-        }
-      }
+    geojsonFeatures.forEach(function(features) {
+      var l = L.vectorGrid.slicer(features, {
+        rendererFactory: L.svg.tile,
+        vectorTileLayerStyles: {
+          sliced: self.diseaseStyle,
+        },
+      });
+      layers.push(l);
     });
 
     // Push the list to a layer group and then add it to the map
@@ -125,6 +75,67 @@ class Map {
       this.mymap.addLayer(this.geojsonLayer);
     }
   }
+
+  // // Build a layer with a particular style and click event from a geojson object
+  // geojsonFeaturesToLayer(year) {
+  //   // Remove the old geojsonLayer
+  //   var self = this;
+  //   if (this.mymap && this.mymap.hasLayer(this.geojsonLayer)) {
+  //     this.mymap.removeLayer(this.geojsonLayer);
+  //     self.geojsonLayer = null;
+  //     self.activeDiseases = {};
+  //   }
+
+  //   // Create the list of geojson layers [gridVector implementation]
+  //   // https://leaflet.github.io/Leaflet.VectorGrid/vectorgrid-api-docs.html#vectorgrid
+  //   //   unwrapping automatic of a { type: featureCollection, features: Array} object
+  //   var layers = [];
+  //   this.geojsonLayerSources.forEach(function(disease) {
+  //     if (self.displayDisease(year, disease.beginDate, disease.endDate)) {
+  //       var features = disease.featuresCollection;
+  //       var l = L.vectorGrid.slicer(features, {
+  //         interactive: true,
+  //         rendererFactory: L.svg.tile,
+  //         vectorTileLayerStyles: {
+  //           sliced: self.diseaseStyle,
+  //         },
+  //       });
+
+  //       l.on('click', function(e) {
+  //         var properties = e.layer.properties;
+  //         console.log('You just clicked on ', properties.sovereignt, e.latlng);   
+  //         var args = {"isOk": false, "data": properties};
+  //         self.connector.setCallArgs(args);
+  //         self.connector.activate();
+
+  //         L.DomEvent.stopPropagation(e); // Event is triggered so stop it
+  //         self.putMarker(e.latlng);
+  //       });
+  //       layers.push(l);
+
+  //       // Additional data extraction for searchbar
+  //       if (!self.activeDiseases[disease.name]) {
+  //         self.activeDiseases[disease.name] = {
+  //           'properties': {
+  //             'diseaseName': disease.name,
+  //             'diseaseDuration': disease.duration,
+  //             'dieseaseRequiredTests': disease.requiredTests
+  //           },
+  //           'countries': disease.countries.map(function(country) {
+  //             return country.name;
+  //           })
+  //         };
+  //       }
+  //     }
+  //   });
+
+  //   // Push the list to a layer group and then add it to the map
+  //   this.geojsonLayer = L.layerGroup(layers);
+  //   console.log('this.geojsonLayer', this.geojsonLayer)
+  //   if (this.mymap) {
+  //     this.mymap.addLayer(this.geojsonLayer);
+  //   }
+  // }
 
   diseaseStyle(properties, zoom) {
     return {
@@ -137,21 +148,6 @@ class Map {
     }
   }
 
-  // filter to display a geojson disease
-  displayDisease(currentYear, beginDate, endDate) {
-    if (beginDate) {
-      var beginYear = beginDate.split('-')[2];
-      var isAfter = beginYear <= currentYear;
-      if (endDate) {
-        var endYear = endDate.split('-')[2];
-        var isBefore = currentYear <= endYear;
-        return isAfter && isBefore;
-      }
-      return isAfter;
-    }
-    return false;
-  }
-
   putMarker(latlng) {
     if(this.marker === null) {
       this.marker = L.marker(latlng, {icon: this.icon}).addTo(this.mymap);
@@ -161,9 +157,6 @@ class Map {
     this.marker.addTo(this.mymap);
   }
 
-  resetLayerSources() {
-    this.geojsonLayerSources = [];
-  }
 
   enableReverseGeocoding(target) {
     var latlng =  L.latLng(target.lat, target.lon)
