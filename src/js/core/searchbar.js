@@ -6,6 +6,7 @@ class SearchBar {
     this.provider = new OpenStreetMapProvider();
     this.input = $("#search-input");
     this.select = $("#search-results");
+    this.select.addClass('hidden')
     this.results = [];
     this.isSelected = false;
    
@@ -58,6 +59,7 @@ class SearchBar {
       option.value = index;
       self.select.append(option);
     });
+    this.select.removeClass('hidden')
   }
 
   selectData() {
@@ -82,6 +84,7 @@ class SearchBar {
     this.results = [];
     this.select.attr('size', 0);
     this.select.empty();
+    this.select.addClass('hidden')
   }
 }
 export {SearchBar}

@@ -63,6 +63,13 @@ $touch-offset: $touch-size / 2;
 			padding-left:15px;
 			transition: all 200ms ease;
 		}
+		select {
+			width:$mobile-search-size;
+			margin:0;
+			padding:0;
+			padding-left:15px;
+			transition: all 200ms ease;
+		}
 		.remove-research-button {
 			position:absolute;
 			top:0px;
