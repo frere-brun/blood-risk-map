@@ -1,16 +1,16 @@
 // Loads the data and only dispatch the useful one
-import $ from 'jquery';
-
 class GeojsonManager {
-  constructor(map) {
+  constructor(map, intersector) {
     this.geojsonLayerSources = [];
     this.currentGeojson = [];
     this.oldYear = null;
 
     this.mapRef = map;
+    this.intersectorRef = intersector;
   }
 
   // Get Geojson objects and put additional data for convenience
+  // Can be optimized, such information should not be needed for display
   diseaseToGeojsonFeature(disease) {
     if (disease.featuresCollection && disease.featuresCollection.features) {
       disease.featuresCollection.features.forEach(function(geojsonFeature) {
@@ -27,7 +27,6 @@ class GeojsonManager {
 
   // Filter on selected year, only returns the featureCollections
   updateCurrentGeojson(year) {
-    console.log('updating data');
     if (this.oldYear != year) {
       var self = this;
       this.oldYear = year;
@@ -37,10 +36,10 @@ class GeojsonManager {
           self.currentGeojson.push(disease.featuresCollection)
         }
       });
+      
+      // Update the map display
+      this.updateReferences();
     }
-
-    // Update the map display
-    this.updateMap();
   }
 
   // Filtering function
@@ -58,13 +57,14 @@ class GeojsonManager {
     return false;
   }
 
-  updateMap() {
-    console.log('updating ap')
+  updateReferences() {
     if (this.mapRef !== undefined) {
-      console.log('2')
       this.mapRef.updateDiseaseLayers(this.currentGeojson);
+    }
+    if (this.intersectorRef !== undefined) {
+      this.intersectorRef.updatePolygones(this.currentGeojson);
     }
   }
 }
 
-export {GeojsonManager}
+export {GeojsonManager};

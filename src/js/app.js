@@ -9,6 +9,7 @@ import { SearchBar } from 'core/searchbar';
 import { Preloader } from 'core/preloader';
 import { Disclaimer } from 'core/disclaimer';
 import { Connector } from 'core/connector';
+import { Intersector }from 'core/intersector';
 import { GeojsonManager } from 'core/geojsonManager';
 import { Data } from '../data/data';
 
@@ -20,18 +21,19 @@ $(document).ready(function() {
   var slider = new Slider();
   var panel = new Panel();
   var mapObj = new Map();
-  var manager = new GeojsonManager(mapObj);
-  
-  
-
+  var intersector = new Intersector();
+  var manager = new GeojsonManager(mapObj, intersector);
 
   // Connect composants between them with a specific handler
   var c0 = new Connector(preloader, disclaimer, "display");
+  // Slider updates the data to display
   var c1 = new Connector(slider, manager, "updateCurrentGeojson");
-  // slider.bindToMap();
-  var c2 = new Connector(searchBar, mapObj, "enableReverseGeocoding");
-  var c3 = new Connector(mapObj, panel, "setPanel");
-  mapObj.setMapClick();
+  // Map interections need to be checked afterward
+  var c2 = new Connector(mapObj, intersector, "checkIntersection");
+  // Searchbar puts marker on map
+  var c3 = new Connector(searchBar, mapObj, "enableReverseGeocoding");
+  // Check result is finally displayed in the panel
+  var c4 = new Connector(intersector, panel, "setPanel");
 
 
   // Get data with timing

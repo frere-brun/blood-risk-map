@@ -36,20 +36,6 @@ class Slider {
     this.connector = connector;
   }
 
-  // bindToMap() {
-  //   var self = this;
-  //   this.sliderElt.on('change input', function(e) {
-  //     self.sliderTextField.text(this.value)
-  //     if (e.type === 'change') {
-  //       if (self.connector) {
-  //         var args = self.getYear();
-  //         self.connector.setCallArgs(args);
-  //         self.connector.activate();
-  //       }
-  //     }
-  //   });
-  // }
-
   getYear() {
     return parseInt(this.sliderTextField.text());
   }
