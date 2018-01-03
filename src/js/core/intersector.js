@@ -8,6 +8,7 @@ import lineIntersect from '@turf/line-intersect';
 class Intersector {
   constructor() {
     this.polygons = [];
+    this.perimeter = 30; // 30km
   }
 
   connect(connector) {
@@ -60,8 +61,8 @@ class Intersector {
   // Check if circle is not disjoint from other polygons
   perimeterCheck(mapMarker, args) {
     //  Construct circle
-    var radius = 30;
-    var options = {steps: 10, units: 'kilometers', properties: {foo: 'bar'}};
+    var radius = this.perimeter;
+    var options = {steps: 10, units: 'kilometers'};
     var c = circle(mapMarker, radius, options);
 
     for (var i=0; i<this.polygons.length; i++) {

@@ -31,6 +31,8 @@ class Map {
 
     // Create the custom marker with its css (refer to main.scss)
     this.marker = null;
+    this.perimeter = null;
+    this.perimeterRadius = 30000; // 30km;
     this.icon = L.divIcon({ className: 'pin pulse' });
 
     // Init event
@@ -50,7 +52,7 @@ class Map {
       var tmp = this.marker.getLatLng();
       var args = [this.normalizeLng(tmp.lng), tmp.lat];
       this.connector.setCallArgs(args);
-      this.connector.activate();        
+      this.connector.activate();
     }
   }
 
@@ -86,7 +88,7 @@ class Map {
 
   diseaseStyle(properties, zoom) {
     return {
-      fillColor: properties.color,
+      fillColor: properties.color, 
       fillOpacity: 0.5,
       stroke: true,
       fill: true,
@@ -100,6 +102,12 @@ class Map {
       this.marker = L.marker(latlng, {icon: this.icon}).addTo(this.mymap);
     } else {
       this.marker.setLatLng(latlng);
+    }
+
+    if (this.perimeter === null) {
+      this.perimeter = L.circle(latlng, {radius: this.perimeterRadius}).addTo(this.mymap);
+    } else {
+      this.perimeter.setLatLng(latlng);
     }
 
     // Add the circle here and find a way to extract a big geojson repr (more than 2 points....)
