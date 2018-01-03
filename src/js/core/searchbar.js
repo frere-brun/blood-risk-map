@@ -1,4 +1,4 @@
-import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import $ from 'jquery';
 
 class SearchBar {
