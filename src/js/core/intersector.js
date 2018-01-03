@@ -47,13 +47,20 @@ class Intersector {
 
   // Put some modulo to prevent tilemapping side effects on lat long
   checkIntersection(mapMarker) {
-    var args = {'isOk': true}
+    var count = 0;
+    var args = {'isOk': true, 'data': []}
     for (var i=0; i<this.polygons.length; i++) {
       var p = this.polygons[i];
-      if (booleanPointInPolygon(mapMarker, p)) {       
-        args = {'isOk': false, 'data': p.properties}
+      if (booleanPointInPolygon(mapMarker, p)) {
+        if (args.isOk) {
+          args.isOk = false;
+        }
+        args.data.push(p.properties);
+        count++;
       }
     }
+
+    console.log("DIseases found", count)
 
     this.connector.setCallArgs(args);
     this.connector.activate();        

@@ -2,14 +2,13 @@ import $ from 'jquery';
 
 class Panel {
   constructor() {
-    this.admissiblity = $("#admissiblity");
-    this.diseaseName = $("#diseaseName");
-    this.diseaseDuration = $("#diseaseDuration");
-    this.dieseaseRequiredTests = $("#dieseaseRequiredTests");
-    this.notAdmissible = $("#notAdmissible");
+    this.panel = $("#panel");
+    this.status = $("#panel-status");
+    this.diseases = $("#panel-details");
   }
 
   setPanel(args) {
+    this.diseases.empty();
     if (args.isOk) {
       this.setOk();
     } else {
@@ -18,20 +17,44 @@ class Panel {
   }
 
   setOk() {
-    this.admissiblity.text('Admissible');
-    this.diseaseName.text('')
-    this.diseaseDuration.text('')
-    this.dieseaseRequiredTests.text('')
-    this.notAdmissible.addClass("hidden");
+    this.status.text('Admissible');
+    if (!this.panel.hasClass("is-valid")) {
+      this.panel.removeClass("is-not-valid");
+      this.panel.addClass("is-valid");
+    }
   }
 
   setNotOk(data) {
-    this.admissiblity.text('Non admissible');
-    this.diseaseName.text(data.diseaseName)
-    this.diseaseDuration.text(data.diseaseDuration)
-    this.dieseaseRequiredTests.text(data.dieseaseRequiredTests)
-    this.notAdmissible.removeClass("hidden");
+    this.status.text('Non admissible');
+
+    // dump data
+    var self = this;
+    data.forEach(function(d) {
+      var div = self.createDiseaseDetails(d);
+      self.diseases.append(div);     
+    });
+
+    if (this.panel.hasClass("is-valid")) {
+      this.panel.removeClass("is-valid");
+      this.panel.addClass("is-not-valid");
+    }
   }
+
+  createDiseaseDetails(d) {
+    var div = document.createElement('div');
+    div.appendChild(this.createParagraph(d.diseaseName));
+    div.appendChild(this.createParagraph(d.diseaseDuration));
+    div.appendChild(this.createParagraph(d.dieseaseRequiredTests));
+    return div;
+  }
+
+  createParagraph(text) {
+    var p = document.createElement('p')
+    var t = document.createTextNode(text);
+    p.appendChild(t);
+    return p;
+  }
+
 }
 
 export {Panel}
