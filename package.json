@@ -60,7 +60,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0",
-    "webpack-notifier": "^1.2.1"
+    "webpack-notifier": "^1.6.0"
   },
   "main": "server.js",
   "scripts": {
