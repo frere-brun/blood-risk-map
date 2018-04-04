@@ -7,14 +7,23 @@ class Map {
     // Create the map object (L.map)
     this.mymap = null;
     this.mapElt = 'map';
-    this.mapOptions = { zoomControl:false };
-    this.mymap = L.map(this.mapElt, this.mapOptions).setView([27, 5.6279968], 2); // Original : .setView([48.6857475, 5.6279968], 2);
-    
+    this.bounds = L.latLngBounds(L.latLng(-89.98155760646617, -180), L.latLng(89.99346179538875, 180));
+    this.mapOptions = {
+      zoomControl:false,
+      minZoom: 3,
+      maxZoom: 6,
+      maxBounds: this.bounds,
+      maxBoundsViscosity: 1.0
+     };
+    this.mymap = L.map(this.mapElt, this.mapOptions).setView([51.505, -0.09], 2); // Original : .setView([48.6857475, 5.6279968], 2);
+    this.mymap.setMaxBounds(this.bounds);
+
     // Create the tile layer, keep reference, and add it to mymap
     this.tileLayer = null;
-    this.tileLayerUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+    this.tileLayerUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
     this.tileLayerOptions = {
-      maxZoom: 18,
+      minZoom: 3,
+      maxZoom: 6,
       attribution: 'Going to be offline attributions soon....' +
         'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -88,7 +97,7 @@ class Map {
 
   diseaseStyle(properties, zoom) {
     return {
-      fillColor: properties.color, 
+      fillColor: "rgba(255,0,0,0.2)",
       fillOpacity: 0.5,
       stroke: true,
       fill: true,

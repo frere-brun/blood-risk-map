@@ -1,6 +1,0 @@
-[out:json];
-relation
-["name"="France"]
-["boundary"="administrative"];
-(._;>;);
-out;
