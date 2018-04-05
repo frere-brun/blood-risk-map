@@ -42,11 +42,10 @@ $(document).ready(function() {
       manager.diseaseToGeojsonFeature(disease);
     });
     preloader.nextStep();
-
     // Load danger zone with timing
     window.setTimeout(function() {
-      manager.updateCurrentGeojson(slider.getYear())
+      manager.updateCurrentGeojson(slider.getYear());
       preloader.nextStep();
     }, 100);
-  }, 100);
+  }, 3000);
 });

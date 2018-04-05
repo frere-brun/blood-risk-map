@@ -9,13 +9,13 @@ class SearchBar {
     this.select.addClass('hidden')
     this.results = [];
     this.isSelected = false;
-   
+
     var self = this;
     this.input.on('keyup', function(e) {
-      if (e.which == 13) {
-        self.resetData();
-        self.requestData();
-      }
+      // if (e.which == 13) {
+      // }
+      self.resetData();
+      self.requestData();
     });
     this.input.on('focus', function() {
       if (self.isSelected) {
@@ -28,7 +28,7 @@ class SearchBar {
     this.select.on('keyup', function(e) {
       if (e.which == 13) {
         self.selectData();
-      }      
+      }
     }).on('click', function() {
       self.selectData();
     });
@@ -68,7 +68,7 @@ class SearchBar {
     var splitLabel = this.results[i].label.split(', ');
     var country = splitLabel[splitLabel.length-1];
     var target = {'lon': this.results[i].x, 'lat': this.results[i].y, 'country': country};
-    
+
     // Fill in input, alter behavior and reset data
     this.input.val(this.select[0].selectedOptions[0].text);
     this.isSelected = true;
