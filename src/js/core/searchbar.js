@@ -1,4 +1,5 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
+import { debounce } from 'underscore';
 import $ from 'jquery';
 
 class SearchBar {
@@ -11,12 +12,10 @@ class SearchBar {
     this.isSelected = false;
 
     var self = this;
-    this.input.on('keyup', function(e) {
-      // if (e.which == 13) {
-      // }
-      self.resetData();
+    this.input.on('keyup', debounce(function(e) {
+      self.resetData()
       self.requestData();
-    });
+    }, 200));
     this.input.on('focus', function() {
       if (self.isSelected) {
         self.isSelected = false;
@@ -45,7 +44,7 @@ class SearchBar {
       self.injectData();
 
       // Put focus in select tag and force to open it somehow
-      self.select.focus();
+      // self.select.focus();
       self.select.attr('size', self.results.length < 5 ? self.results.length : 5);
     }
     asyncFn();
