@@ -8,6 +8,7 @@ class Disclaimer {
     this.acceptBtn = $("#acceptBtn");
     this.declineBtn = $("#declineBtn");
     this.appWrapper = $(".app");
+    this.isDisclamedActive = false;
     this.isModalOpen = false;
     this.isModalOpening = false;
 
@@ -21,20 +22,24 @@ class Disclaimer {
   }
 
   display() {
-    this.modal.addClass("-opening");
-    this.body.addClass("no-scroll");
-    this.modal.addClass("-open");
-    this.modal.removeClass("-opening");
+    if(this.isDisclamedActive) {
+      this.modal.addClass("-opening");
+      this.body.addClass("no-scroll");
+      this.modal.addClass("-open");
+      this.modal.removeClass("-opening");
+    }
   }
 
   hide() {
-    this.modal.addClass("-closing");
-    var self = this;
-    window.setTimeout(function() {
-      self.modal.removeClass("-open");
-      self.modal.removeClass("-closing");
-      self.body.removeClass("no-scroll");
-    }, 350);
+    if(this.isDisclamedActive) {
+      this.modal.addClass("-closing");
+      var self = this;
+      window.setTimeout(function() {
+        self.modal.removeClass("-open");
+        self.modal.removeClass("-closing");
+        self.body.removeClass("no-scroll");
+      }, 350);
+    }
   }
 }
 
