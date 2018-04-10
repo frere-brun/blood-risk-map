@@ -48,7 +48,22 @@
 
     <!-- APP -->
     <div class="app">
-      <div class="range-box">
+      <!-- Datepicker -->
+      <div id="datepicker">
+        <div class="date-button-box"><i class="icon -magnifier touch-event"></i></div>
+        <div class="date-boxes">
+          <div class="date-box">
+            <p>Date de départ</p>
+            <input id="dateStart" type="date"/>
+          </div>
+          <div class="date-box">
+            <p>Date de retour</p>
+            <input id="dateEnd" type="date"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="range-box">
         <i class="icon -calendar"></i>
         <div class="content">
           <input id="rangeInput" type="range"/>
@@ -56,7 +71,8 @@
         <div class="current-year">
           <p id="year"></p>
         </div>
-      </div>
+      </div> -->
+      <!-- Searchbar -->
       <div id="search" class="active">
         <div class="search-button-box"><i class="icon -magnifier touch-event"></i></div>
         <div class="search-box">
@@ -65,6 +81,7 @@
           <select id="search-results"></select>
         </div>
       </div>
+      <!-- Diagnosis -->
       <div id="panel" class="is-valid">
         <p id="panel-status"></p>
         <div id="panel-details"></div>

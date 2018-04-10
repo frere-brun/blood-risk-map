@@ -1,10 +1,10 @@
+import moment from 'moment';
+
 // Loads the data and only dispatch the useful one
 class GeojsonManager {
   constructor(map, intersector) {
     this.geojsonLayerSources = [];
     this.currentGeojson = [];
-    this.oldYear = null;
-
     this.mapRef = map;
     this.intersectorRef = intersector;
   }
@@ -26,20 +26,58 @@ class GeojsonManager {
   }
 
   // Filter on selected year, only returns the featureCollections
-  updateCurrentGeojson(year) {
-    if (this.oldYear != year) {
-      var self = this;
-      this.oldYear = year;
-      this.currentGeojson = [];
-      this.geojsonLayerSources.forEach(function(disease) {
-        if (self.yearFilter(year, disease.beginDate, disease.endDate)) {
-          self.currentGeojson.push(disease.featuresCollection)
-        }
-      });
-      
-      // Update the map display
-      this.updateReferences();
+  updateCurrentGeojson(periodObj) {
+    var self = this;
+    this.currentGeojson = [];
+    this.geojsonLayerSources.forEach(function(disease) {
+      if (self.periodFilter(periodObj, disease.beginDate, disease.endDate, disease.duration)) {
+        self.currentGeojson.push(disease.featuresCollection)
+      }
+    });
+
+    // Update the map display
+    this.updateReferences();
+  }
+
+  periodFilter(periodObj, beginDate, endDate, duration) {
+    // If no begin date, stop here
+    if (!beginDate) {
+      return false;
     }
+
+    var momBegin = moment(beginDate, "YYYY-MM-DD");
+
+    // Disease began after the journey
+    if (momBegin.isAfter(periodObj.end)) {
+      return true;
+    }
+
+    // Check end date first
+    if (endDate) {
+      var momEnd = moment(endDate, "YYYY-MM-DD");
+      return momBegin.isBefore(periodObj.start) && momEnd.isAfter(periodObj.end);
+    }
+
+    // If no end date is specified, check duration
+    if (duration) {
+      var momDuration
+      if (duration.toLowerCase().includes('day')) {
+        var nbDays = parseInt(duration.split(' ')[0]);
+        momDuration = momBegin.add(nbDays, 'days');
+      }
+      else if (duration.toLowerCase().includes('month')) {
+        var nbMonths = parseInt(duration.split(' ')[0]);
+        momDuration = momBegin.add(nbMonths, 'months');
+      }
+      else if (duration.toLowerCase().includes('year')) {
+        var nbYears = parseInt(duration.split(' ')[0]);
+        momDuration = momBegin.add(nbYears, 'years');
+      }
+      return momBegin.isBefore(periodObj.start) && momDuration.isAfter(periodObj.end);
+    }
+
+    // Default case again
+    return false;
   }
 
   // Filtering function
