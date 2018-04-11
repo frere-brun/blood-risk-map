@@ -8,6 +8,8 @@ class SearchBar {
     this.input = $("#search-input");
     this.placeBox = $("#search");
     this.select = $("#search-results");
+    this.selectedItem = null;
+    this.selectNumberItems = null;
     this.step = $(".place .step");
     this.select.parent().addClass('hidden');
     this.results = [];
@@ -15,6 +17,11 @@ class SearchBar {
 
     var self = this;
     this.input.on('keyup', debounce(function(e) {
+      // if (e.keyCode == 40) {
+      //   self.input.blur();
+      //   self.select.focus();
+      // } else {
+      // }
       self.resetData();
       self.requestData();
     }, 200));
@@ -22,21 +29,34 @@ class SearchBar {
       if (self.isSelected) {
         self.isSelected = false;
         self.input.val('');
-        this.placeBox.addClass("box--is-focused");
+        self.placeBox.addClass("box--is-focused");
       }
     });
     this.input.on('blur', function() {
-      self.resetData();
-      this.placeBox.removeClass("box--is-focused");
+      // self.resetData();
+      self.placeBox.removeClass("box--is-focused");
     });
+
     // Select data from list on keyUp and click
     this.select.on('keyup', function(e) {
-      if (e.which == 13) {
-        self.selectData();
-      }
+      // Try to make keyboard navigation
+      // console.log('keyup', e)
+      // if (e.which == 40) {
+      //   if (self.selectNumberItems > self.selectedItem + 1) {
+      //     self.selectedItem += 1;
+      //   }
+      // } else if (e.which == 38) {
+      //   if (self.selectNumberItems > 0) {
+      //     self.selectedItem -= 1;
+      //   }
+      // }
+      // if (e.which == 13) {
+      //   self.selectData(self.selectedItem);
+      // }
     }).on('click', function(e) {
-      console.log(e.target);
-      self.selectData();
+      var targetIndex = $(e.target).attr('aria-value')
+      self.selectedItem = targetIndex;
+      self.selectData(targetIndex);
     });
   }
 
@@ -64,26 +84,28 @@ class SearchBar {
 
   injectData() {
     var self = this;
+    this.selectNumberItems = 0;
     this.results.forEach((elt, index) => {
       var option = {
         text: elt.label,
         value:  index
       };
-      this.step.addClass("step--valid");
+      self.step.addClass("step--valid");
       self.select.append("<li class='touch' aria-value=" + option.value + ">" + this.highlightMatches(self.input.val(), option.text) + "</li>");
+      self.selectNumberItems += 1;
     });
     this.select.parent().removeClass('hidden');
   }
 
-  selectData() {
+  selectData(targetIndex) {
     // Get backdata to clic on
-    var i = this.select[0].selectedOptions[0].value;
+    var i = targetIndex;
     var splitLabel = this.results[i].label.split(', ');
     var country = splitLabel[splitLabel.length-1];
     var target = {'lon': this.results[i].x, 'lat': this.results[i].y, 'country': country};
 
     // Fill in input, alter behavior and reset data
-    this.input.val(this.select[0].selectedOptions[0].text);
+    this.input.val(this.results[i].label);
     this.isSelected = true;
     this.resetData();
 
@@ -95,7 +117,6 @@ class SearchBar {
 
   resetData() {
     this.results = [];
-    // this.select.attr('size', 0);
     this.select.empty();
     this.select.parent().addClass('hidden');
   }
