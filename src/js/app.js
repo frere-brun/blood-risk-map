@@ -40,6 +40,8 @@ $(document).ready(function() {
   var c4 = new Connector(intersector, panel, "setPanel");
 
 
+	$("html").addClass("-loaded");
+
   // Get data with timing
   window.setTimeout(function() {
     Data.forEach(function(disease) {

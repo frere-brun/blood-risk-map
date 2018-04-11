@@ -1,0 +1,18 @@
+.marker {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -20px 0 0 -20px;
+  &:after {
+    content: "";
+    background: url("../assets/marker.svg");
+    background-size: cover;
+    width: 25px;
+    height: 36px;
+    margin: -27px 0 0 -6.5px;
+    position: absolute;
+  }
+}

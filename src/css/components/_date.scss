@@ -1,0 +1,12 @@
+
+#date {
+	position:absolute;
+	top:40px;
+  left:40px;
+	width: 620px;
+	z-index: 999;
+}
+
+.date__icon:after {
+  background-image: url("../assets/calendar-full.svg");
+}

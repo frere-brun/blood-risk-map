@@ -1,0 +1,38 @@
+// OVERRIDES OF NATIVES FIELDSET LABEL AND INPUTS
+// BE CAREFULL
+
+fieldset {
+	margin: 0;
+	margin-top: 7px; // Magic number
+	border-left: 1px solid color("grey", "lighten-3");
+	padding-left: 20px;
+	&--is-focused {
+		label {
+			color: darken(#D8D8D8, 20%);
+		}
+	}
+}
+
+label {
+	margin: 0;
+  font-family: "Lato";
+  font-size: 12px;
+  color: #D8D8D8;
+  letter-spacing: 3.2px;
+  text-transform: uppercase;
+	user-select: none;
+}
+
+input:not([type="submit"]),
+textarea,
+select {
+	padding: 0;
+	margin-bottom: 0;
+	border: 0px solid #D1D1D1;
+	box-shadow: none;
+	&:focus {
+		outline: 0;
+		border: 0px solid #D1D1D1;
+		box-shadow: none;
+	}
+}

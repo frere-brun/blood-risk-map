@@ -42,7 +42,7 @@ class Map {
     this.marker = null;
     this.perimeter = null;
     this.perimeterRadius = 30000; // 30km;
-    this.icon = L.divIcon({ className: 'pin pulse' });
+    this.icon = L.divIcon({ className: 'marker' });
 
     // Init event
     var self = this;

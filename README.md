@@ -30,3 +30,13 @@ Heroku auto publish
 Use this command to disable production mode and install devDependencies for building the app directly on heroku's servers
 
 heroku config:set NPM_CONFIG_PRODUCTION=false
+
+
+CSS
+===================
+
+This is based on
+
+http://tfrere.github.io/rocket-css
+
+Please check the documentation for more information

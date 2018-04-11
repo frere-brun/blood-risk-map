@@ -6,29 +6,36 @@ class SearchBar {
   constructor() {
     this.provider = new OpenStreetMapProvider();
     this.input = $("#search-input");
+    this.placeBox = $("#search");
     this.select = $("#search-results");
-    this.select.addClass('hidden')
+    this.step = $(".place .step");
+    this.select.parent().addClass('hidden');
     this.results = [];
     this.isSelected = false;
 
     var self = this;
     this.input.on('keyup', debounce(function(e) {
-      self.resetData()
+      self.resetData();
       self.requestData();
     }, 200));
     this.input.on('focus', function() {
       if (self.isSelected) {
         self.isSelected = false;
         self.input.val('');
+        this.placeBox.addClass("box--is-focused");
       }
     });
-
+    this.input.on('blur', function() {
+      self.resetData();
+      this.placeBox.removeClass("box--is-focused");
+    });
     // Select data from list on keyUp and click
     this.select.on('keyup', function(e) {
       if (e.which == 13) {
         self.selectData();
       }
-    }).on('click', function() {
+    }).on('click', function(e) {
+      console.log(e.target);
       self.selectData();
     });
   }
@@ -50,15 +57,22 @@ class SearchBar {
     asyncFn();
   }
 
+  highlightMatches(search, text) {
+    var re = new RegExp(search, "gi");
+    return text.replace(re, "<b>" + search + "</b>");
+  }
+
   injectData() {
     var self = this;
     this.results.forEach((elt, index) => {
-      var option = document.createElement('option');
-      option.text = elt.label;
-      option.value = index;
-      self.select.append(option);
+      var option = {
+        text: elt.label,
+        value:  index
+      };
+      this.step.addClass("step--valid");
+      self.select.append("<li class='touch' aria-value=" + option.value + ">" + this.highlightMatches(self.input.val(), option.text) + "</li>");
     });
-    this.select.removeClass('hidden')
+    this.select.parent().removeClass('hidden');
   }
 
   selectData() {
@@ -81,9 +95,9 @@ class SearchBar {
 
   resetData() {
     this.results = [];
-    this.select.attr('size', 0);
+    // this.select.attr('size', 0);
     this.select.empty();
-    this.select.addClass('hidden')
+    this.select.parent().addClass('hidden');
   }
 }
 export {SearchBar}

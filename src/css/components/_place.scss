@@ -1,0 +1,41 @@
+.place {
+	position:fixed;
+	top:160px;
+	left:40px;
+	width: 460px;
+	z-index:999;
+	.place--focused {
+		border-bottom-right-radius: 0;
+	}
+}
+
+.place__icon:after {
+	background-image: url("../assets/plane.svg");
+	transform: rotate(65deg);
+}
+
+// OVERRIDE
+.place input {
+	width: 260px;
+	background-color: transparent;
+}
+
+.dropdown .results {
+	margin-top: 20px;
+	left: 0;
+	width: 380px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	&:before {
+		top: 0;
+	}
+	ul {
+		margin-top: 0;
+	}
+	li {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 51px;
+		line-height: 2;
+	}
+}

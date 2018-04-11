@@ -1,0 +1,36 @@
+.status-light {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 5px;
+}
+
+.status-light__circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  border: 1px solid color("grey", "lighten-2");
+  margin: 3px 0;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  &:first-child {
+    margin-top: 0px;
+  }
+  &:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+.response--is-valid {
+  .status-light__circle:first-child {
+    background-color: #2DDA36;
+  }
+}
+
+.response--is-invalid {
+  .status-light__circle:last-child {
+    background-color: #ff0000;
+  }
+}

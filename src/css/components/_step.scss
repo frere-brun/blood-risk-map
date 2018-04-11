@@ -1,0 +1,41 @@
+.step {
+  float: left; // to remove
+  padding: 10px;
+  width: 60px;
+  margin-right: 10px;
+}
+
+.step__number {
+  font-family: "Lato";
+  font-size: 40px;
+  color: #E8E8E8;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  z-index: 0;
+  position: relative;
+  opacity: 1;
+  user-select: none;
+}
+
+.step__checkmark {
+  background-image: url("../assets/checkmark.svg");
+  background-size: cover;
+  color: #00FF00;
+  z-index: 1;
+  opacity: 0;
+  position: absolute;
+  top: 28.5px; // Magic numbers: Size of svg
+  left: 24.5px;
+  width: 31px;
+  height: 23px;
+}
+
+.step--valid {
+  .step__number {
+    opacity: 0.2;
+  }
+  .step__checkmark {
+    opacity: 1;
+  }
+}

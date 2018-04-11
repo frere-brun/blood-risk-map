@@ -1,0 +1,35 @@
+.admissibility {
+  position: absolute;
+  top: 40px;
+  right: 80px;
+  width: 260px;
+  z-index: 999;
+}
+
+.admissibility__label {
+  color: white;
+  font-size: 11px;
+  letter-spacing: 1.6px;
+}
+
+.admissibility__title {
+  font-family: "Lato";
+  font-size: 22px;
+  color: white;
+  letter-spacing: 1.6px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+}
+
+.response--is-valid {
+  .admissibility {
+    background-color: #2DDA36;
+  }
+}
+
+.response--is-invalid {
+  .admissibility {
+    background-color: #FF0000;
+  }
+}

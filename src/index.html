@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Blood risk map</title>
+    <style>
+
+      html {
+      	opacity: 0;
+      	transition: opacity 200ms ease;
+      }
+      html.-loaded {
+        opacity: 1;
+      }
+    </style>
     <link rel="stylesheet" href="css/app.css?v=<%= buildTime %>">
     <!-- <script type="text/javascript" src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script> -->
 
@@ -15,14 +25,10 @@
     <!-- PRELOADER -->
     <div class="preloader-wrapper">
       <div class="preloader">
-        <div class="preloader__center">
-          <div class="preloader__center__panel preloader__center__panel--1"></div>
-          <div class="preloader__center__panel preloader__center__panel--2"></div>
-          <div class="preloader__center__panel preloader__center__panel--4"></div>
-          <div class="preloader__center__panel preloader__center__panel--3"></div>
+        <div class="preloader__logo">
         </div>
-        <div class="preloader__center__title">Le saviez vous ?</div>
-        <div class="preloader__center__text">La Croix-Rouge française, ce sont plus de 59 000 bénévoles et 18 000 salariés présents sur l’ensemble du territoire. Auxiliaire des pouvoirs publics dans ses missions humanitaires, la Croix-Rouge française mène un combat de tous les instants pour soulager la souffrance des hommes.</div>
+        <div class="preloader__title">Le saviez vous ?</div>
+        <div class="preloader__text">La Croix-Rouge française, ce sont plus de <b>59 000 bénévoles</b> et <b>18 000 salariés</b> présents sur <b>l’ensemble du territoire</b>. Auxiliaire des pouvoirs publics dans ses missions humanitaires, <b>la Croix-Rouge française mène un combat de tous les instants pour soulager la souffrance des hommes.</b></div>
       </div>
     </div>
 
@@ -48,45 +54,84 @@
 
     <!-- APP -->
     <div class="app">
-      <!-- Datepicker -->
-      <div id="datepicker">
-        <div class="date-button-box"><i class="icon -magnifier touch-event"></i></div>
-        <div class="date-boxes">
-          <div class="date-box">
-            <p>Date de départ</p>
-            <input id="dateStart" type="date"/>
+
+      <!-- DATE RANGE -->
+      <div id="date" class="date box">
+        <div class="step step--valid">
+          <div class="step__number">
+            1
           </div>
-          <div class="date-box">
-            <p>Date de retour</p>
-            <input id="dateEnd" type="date"/>
+          <div class="step__checkmark"></div>
+        </div>
+        <fieldset>
+          <label>Date de départ</label>
+          <input id="dateStart" aria-label="departure-date" type="date" />
+        </fieldset>
+        <fieldset>
+          <label>Date de retour</label>
+          <input id="dateEnd" aria-label="return-date"  type="date" />
+        </fieldset>
+        <div class="box__icon date__icon"></div>
+      </div>
+
+      <!-- PLACE -->
+      <div id="search" class="place box">
+        <div class="step">
+          <div class="step__number">
+            2
           </div>
+          <div class="step__checkmark"></div>
+        </div>
+
+        <fieldset class="toggle-dropdown dropdown -visible">
+          <label>Destination</label>
+          <input id="search-input" type="text" placeholder="Paris, Dakkar, Alger..."/>
+          <i class="remove-research-button icon -cross touch-event"></i>
+          <div class="results">
+            <ul class="place__results" id="search-results">
+              <!-- PLACE RESULTS -->
+            </ul>
+          </div>
+        </fieldset>
+        <div class="box__icon place__icon"></div>
+      </div>
+
+      <!-- RESPONSE -->
+      <div id="response" class="response">
+
+        <!-- STATUS-LIGHT -->
+        <div class="box status-light">
+          <div class="status-light__circle"></div>
+          <div class="status-light__circle"></div>
+          <div class="status-light__circle"></div>
+        </div>
+
+        <!-- ADMISSIBILITY -->
+        <div id="admissibility" class="box admissibility">
+          <label id="admissibility-status" class="admissibility__label admissibility__status"></label>
+          <h3 id="admissibility-duration" class="admissibility__title admissibility__duration"></h3>
+          <label id="admissibility-delay" class="admissibility__label admissibility__delay"></label>
+        </div>
+
+        <!-- DIAGNOSIS -->
+        <div id="diagnosis" class="box diagnosis">
+          <ul id="diagnosis-details" class="diagnosis__details">
+            <!-- DIAGNOSIS RESULTS -->
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- RESET FORM -->
+      <div id="resetForm" class="reset-form reset-form--visible">
+        <div class="reset-form__text">
+          Appuies sur <span class="reset-form__text__enter">enter</span> pour <br/> recommencer
         </div>
       </div>
 
-      <!-- <div class="range-box">
-        <i class="icon -calendar"></i>
-        <div class="content">
-          <input id="rangeInput" type="range"/>
-        </div>
-        <div class="current-year">
-          <p id="year"></p>
-        </div>
-      </div> -->
-      <!-- Searchbar -->
-      <div id="search" class="active">
-        <div class="search-button-box"><i class="icon -magnifier touch-event"></i></div>
-        <div class="search-box">
-          <input id="search-input" type="text" placeholder="Rechercher"/>
-          <i class="remove-research-button icon -cross touch-event"></i>
-          <select id="search-results"></select>
-        </div>
-      </div>
-      <!-- Diagnosis -->
-      <div id="panel" class="is-valid">
-        <p id="panel-status"></p>
-        <div id="panel-details"></div>
-      </div>
-      <div id="map"></div>
+      <!-- MAP -->
+      <div id="map" class="map"></div>
+
     </div>
 
     <script src="js/polyfills.js?v=<%= buildTime %>"></script>

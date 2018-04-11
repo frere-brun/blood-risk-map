@@ -2,9 +2,14 @@ import $ from 'jquery';
 
 class Panel {
   constructor() {
-    this.panel = $("#panel");
-    this.status = $("#panel-status");
-    this.diseases = $("#panel-details");
+    this.response = $("#response");
+
+    this.status = $("#admissibility-status");
+    this.delay = $("#admissibility-delay");
+    this.duration = $("#admissibility-duration");
+
+    this.diseases = $("#diagnosis-details");
+
   }
 
   setPanel(args) {
@@ -17,42 +22,31 @@ class Panel {
   }
 
   setOk() {
-    this.status.text('Admissible');
-    if (!this.panel.hasClass("is-valid")) {
-      this.panel.removeClass("is-not-valid");
-      this.panel.addClass("is-valid");
-    }
+
+    this.status.text("Admissible");
+    this.duration.text("C'est fantastique");
+    this.delay.text("");
+
+    this.response.addClass("response--is-valid").removeClass("response--is-invalid");
   }
 
   setNotOk(data) {
-    this.status.text('Non admissible');
+
+    this.status.text("Non admissible");
+    this.duration.text("6 Mois d'attente");
+    this.delay.text("Admissible à partir du 24/11/18");
 
     // dump data
     var self = this;
+
     data.forEach(function(d) {
-      var div = self.createDiseaseDetails(d);
-      self.diseases.append(div);     
+      var tests = "";
+      if( d.dieseaseRequiredTests )
+        tests = "<p class='diagnosis__details__item__test'>" + d.dieseaseRequiredTests + "</p>";
+      self.diseases.append("<li class='diagnosis__details__item'><div class='diagnosis__details__item__head'><h3 class='diagnosis__details__item__title'>" + d.diseaseName + "</h3><label class='diagnosis__details__item__label'>" + d.diseaseDuration + "</label></div>" + tests + "</li>");
     });
 
-    if (this.panel.hasClass("is-valid")) {
-      this.panel.removeClass("is-valid");
-      this.panel.addClass("is-not-valid");
-    }
-  }
-
-  createDiseaseDetails(d) {
-    var div = document.createElement('div');
-    div.appendChild(this.createParagraph(d.diseaseName));
-    div.appendChild(this.createParagraph(d.diseaseDuration));
-    div.appendChild(this.createParagraph(d.dieseaseRequiredTests));
-    return div;
-  }
-
-  createParagraph(text) {
-    var p = document.createElement('p')
-    var t = document.createTextNode(text);
-    p.appendChild(t);
-    return p;
+    this.response.addClass("response--is-invalid").removeClass("response--is-valid");
   }
 
 }

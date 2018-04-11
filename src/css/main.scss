@@ -63,14 +63,32 @@
 @import "modifier/level";
 @import "modifier/filter";
 
-@import "components/map";
-@import "components/map-marker";
-@import "components/is-valid";
-@import "components/is-not-valid";
-@import "components/range";
 @import "components/preloader";
-@import "components/searchbar";
-@import "components/datepicker";
+@import "components/box";
+@import "components/map";
+@import "components/marker";
+@import "components/step";
+@import "components/input";
+@import "components/date";
+@import "components/place";
+@import "components/response";
+@import "components/status-light";
+@import "components/diagnosis";
+@import "components/admissibility";
+@import "components/reset-form";
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
 
 * {
 	box-sizing: border-box;
@@ -87,9 +105,6 @@ html, body, .app {
 }
 
 @include break-point("desktop") {
-	.article p {
-		max-width: 50%;
-	}
 	.display-on-large {
 		display:block!important;
 	}
