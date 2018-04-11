@@ -42,8 +42,13 @@ class Panel {
     data.forEach(function(d) {
       var tests = "";
       if( d.dieseaseRequiredTests )
-        tests = "<p class='diagnosis__details__item__test'>" + d.dieseaseRequiredTests + "</p>";
-      self.diseases.append("<li class='diagnosis__details__item'><div class='diagnosis__details__item__head'><h3 class='diagnosis__details__item__title'>" + d.diseaseName + "</h3><label class='diagnosis__details__item__label'>" + d.diseaseDuration + "</label></div>" + tests + "</li>");
+        // Construct HTML line by line
+        var title = "<h3 class='diagnosis__details__item__title'>" + d.diseaseName + "</h3>";
+        var label = "<label class='diagnosis__details__item__label'>" + d.diseaseDuration + "</label>";
+        var div = "<div class='diagnosis__details__item__head'>" + title + label + "</div>";
+        var tests = "<p class='diagnosis__details__item__test'>" + d.dieseaseRequiredTests + "</p>";
+        var li = "<li class='diagnosis__details__item'>" + div + tests + "</li>";
+      self.diseases.append(li);
     });
 
     this.response.addClass("response--is-invalid").removeClass("response--is-valid");

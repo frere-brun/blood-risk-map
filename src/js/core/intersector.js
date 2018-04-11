@@ -18,7 +18,7 @@ class Intersector {
     var self = this;
     this.polygons = [];
     geojsonFeatures.forEach(function(featureCollections) {
-      featureCollections.features.forEach(function(f) {        
+      featureCollections.features.forEach(function(f) {
         var p = undefined;
         var type = f.geometry.type;
         var coords = f.geometry.coordinates;
@@ -33,7 +33,7 @@ class Intersector {
         }
 
         if (p !== undefined) {
-          self.polygons.push(p);          
+          self.polygons.push(p);
         }
       });
     });
@@ -70,7 +70,9 @@ class Intersector {
         if (args.isOk) {
           args.isOk = false;
         }
-        args.data.push(p.properties);
+        if (args.data.length == 0 || !this.containObject(args.data, p.properties)) {
+            args.data.push(p.properties);
+        }
       }
     }
     return args;
@@ -88,6 +90,14 @@ class Intersector {
       }
     }
     return args;
+  }
+
+  // Check if data is already in array
+  containObject(array, obj) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i].diseaseName == obj.diseaseName) return true;
+    }
+    return false;
   }
 }
 
