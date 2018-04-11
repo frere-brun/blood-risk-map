@@ -120,5 +120,16 @@ class SearchBar {
     this.select.empty();
     this.select.parent().addClass('hidden');
   }
+
+  injectAddress(address) {
+    console.log('injectAddress', address)
+    var lon = address[0];
+    var lat = address[1];
+    var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat="+lat+"&lon="+lon;
+    var self = this;
+    $.get( url, function( data ) {
+      self.input.val(data.display_name);
+    });
+  }
 }
 export {SearchBar}

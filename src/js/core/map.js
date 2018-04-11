@@ -57,6 +57,7 @@ class Map {
   }
 
   runConnector() {
+    console.log('map run connector');
     if (this.connector) {
       var tmp = this.marker.getLatLng();
       var args = [this.normalizeLng(tmp.lng), tmp.lat];

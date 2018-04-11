@@ -34,10 +34,12 @@ $(document).ready(function() {
   var c1 = new Connector(datePicker, manager, "updateCurrentGeojson");
   // Map interections need to be checked afterward
   var c2 = new Connector(mapObj, intersector, "checkIntersection");
-  // Searchbar puts marker on map
-  var c3 = new Connector(searchBar, mapObj, "enableReverseGeocoding");
+	// Map completes searchbar after click
+	var c3 = new Connector(mapObj, searchBar, "injectAddress");
+  // Se4rchbar puts marker on map
+  var c4 = new Connector(searchBar, mapObj, "enableReverseGeocoding");
   // Check result is finally displayed in the panel
-  var c4 = new Connector(intersector, panel, "setPanel");
+  var c5 = new Connector(intersector, panel, "setPanel");
 
 
 	$("html").addClass("-loaded");
