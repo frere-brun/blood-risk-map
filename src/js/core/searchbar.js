@@ -127,9 +127,11 @@ class SearchBar {
     var lat = address[1];
     var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat="+lat+"&lon="+lon;
     var self = this;
-    $.get( url, function( data ) {
+    let asyncFn = async function() {
+      const data = await $.ajax(url);
       self.input.val(data.display_name);
-    });
+    }
+    asyncFn();
   }
 }
 export {SearchBar}
