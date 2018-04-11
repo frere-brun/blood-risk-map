@@ -53,16 +53,23 @@ class Map {
   }
 
   connect(connector) {
-    this.connector = connector;
+    if (!this.connector) {
+      this.connector = connector;
+    } else {
+      this.secondConnector = connector;
+    }
   }
 
   runConnector() {
-    console.log('map run connector');
+    var tmp = this.marker.getLatLng();
+    var args = [this.normalizeLng(tmp.lng), tmp.lat];
     if (this.connector) {
-      var tmp = this.marker.getLatLng();
-      var args = [this.normalizeLng(tmp.lng), tmp.lat];
       this.connector.setCallArgs(args);
       this.connector.activate();
+    }
+    if (this.secondConnector) {
+      this.secondConnector.setCallArgs(args);
+      this.secondConnector.activate();
     }
   }
 
