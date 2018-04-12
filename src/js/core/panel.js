@@ -40,14 +40,20 @@ class Panel {
     var self = this;
 
     data.forEach(function(d) {
-      var tests = "";
-      if( d.dieseaseRequiredTests )
-        // Construct HTML line by line
-        var title = "<h3 class='diagnosis__details__item__title'>" + d.diseaseName + "</h3>";
-        var label = "<label class='diagnosis__details__item__label'>" + d.diseaseDuration + "</label>";
-        var div = "<div class='diagnosis__details__item__head'>" + title + label + "</div>";
-        var tests = "<p class='diagnosis__details__item__test'>" + d.dieseaseRequiredTests + "</p>";
-        var li = "<li class='diagnosis__details__item'>" + div + tests + "</li>";
+      var title = "Maladie Inconnue";
+      if (d.diseaseName) {
+        title = "<h3 class='diagnosis__details__item__title'>" + d.diseaseName + "</h3>";
+      }
+      var label = "Délai inconnu";
+      if (d.diseaseDuration) {
+        label = "<label class='diagnosis__details__item__label'>" + d.diseaseDuration + "</label>";
+      }
+      var tests = "Tests inconnus";
+      if( d.dieseaseRequiredTests ) {
+        tests = "<p class='diagnosis__details__item__test'>" + d.dieseaseRequiredTests + "</p>";
+      }
+      var div = "<div class='diagnosis__details__item__head'>" + title + label + "</div>";
+      var li = "<li class='diagnosis__details__item'>" + div + tests + "</li>";
       self.diseases.append(li);
     });
 

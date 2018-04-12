@@ -71,7 +71,7 @@ class Intersector {
           args.isOk = false;
         }
         if (args.data.length == 0 || !this.containObject(args.data, p.properties)) {
-            args.data.push(p.properties);
+          args.data.push(p.properties);
         }
       }
     }
