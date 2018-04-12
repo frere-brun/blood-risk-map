@@ -8,7 +8,7 @@ const Data = [
       }
     ],
     "name": "Tropical",
-    "beginDate": null,
+    "beginDate": "21-08-2011",
     "endDate": null,
     "duration": "6 months",
     "color": "red",
