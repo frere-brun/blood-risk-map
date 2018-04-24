@@ -84,7 +84,7 @@ class PeriodPicker {
       this.putFocusOnEnd();
     }
     if (this.start && this.end) {
-      this.step.addClass("step--valid");
+      this.step.addClass("step--is-valid");
       var args = {
         start: this.start,
         end: this.end
@@ -104,7 +104,7 @@ class PeriodPicker {
     this.dateStart.val('');
     this.end = null;
     this.dateEnd.val('');
-    this.step.removeClass("step--valid");
+    this.step.removeClass("step--is-valid");
   }
 }
 

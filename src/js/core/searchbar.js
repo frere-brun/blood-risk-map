@@ -79,7 +79,7 @@ class SearchBar {
         text: elt.label,
         value:  index
       };
-      self.step.addClass("step--valid");
+      self.step.addClass("step--is-valid");
       self.select.append("<li class='touch' aria-value=" + option.value + ">" + this.highlightMatches(self.input.val(), option.text) + "</li>");
       self.selectNumberItems += 1;
     });
@@ -141,7 +141,7 @@ class SearchBar {
 
   forceReset() {
     this.input.val('');
-    this.step.removeClass("step--valid");
+    this.step.removeClass("step--is-valid");
   }
 
 }
