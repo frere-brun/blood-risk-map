@@ -21,6 +21,7 @@ class DatePicker {
         self.getPeriod();
       } else {
         alert('La date de départ doit précéder la date de retour');
+        self.start = null;
         console.log('start', self.start, ' - end -', self.end)
       }
     });
@@ -32,6 +33,7 @@ class DatePicker {
         self.getPeriod();
       } else {
         alert('La date de retour doit succéder la date de départ');
+        self.end = null;
         console.log('start', self.start, ' - end -', self.end)
       }
     });
@@ -72,6 +74,10 @@ class DatePicker {
       this.connector.setCallArgs(args);
       this.connector.activate();
     }
+  }
+
+  isSet() {
+    return this.start && this.end;
   }
 }
 

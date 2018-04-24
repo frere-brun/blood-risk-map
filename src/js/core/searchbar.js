@@ -3,7 +3,8 @@ import { debounce } from 'underscore';
 import $ from 'jquery';
 
 class SearchBar {
-  constructor() {
+  constructor(datePicker) {
+    this.datePicker = datePicker;
     this.provider = new OpenStreetMapProvider();
     this.input = $("#search-input");
     this.placeBox = $("#search");
@@ -17,20 +18,33 @@ class SearchBar {
 
     var self = this;
     this.input.on('keyup', debounce(function(e) {
-      // if (e.keyCode == 40) {
-      //   self.input.blur();
-      //   self.select.focus();
-      // } else {
-      // }
-      self.resetData();
-      self.requestData();
+      if (! self.datePicker.isSet()) {
+        alert('Fuck Off');
+        // self.datePicker.putFocus();
+      } else {
+        // if (e.keyCode == 40) {
+        //   self.input.blur();
+        //   self.select.focus();
+        // } else {
+        // }
+        self.resetData();
+        self.requestData();
+      }
+
     }, 200));
     this.input.on('focus', function() {
-      if (self.isSelected) {
-        self.isSelected = false;
-        self.input.val('');
-        self.placeBox.addClass("box--is-focused");
+      if (! self.datePicker.isSet()) {
+        alert('Tu dois d\'abord choisir la période de ton voyage');
+        self.input.blur();
+        // self.datePicker.putFocus();
+      } else {
+        if (self.isSelected) {
+          self.isSelected = false;
+          self.input.val('');
+          self.placeBox.addClass("box--is-focused");
+        }
       }
+
     });
     this.input.on('blur', function() {
       // self.resetData();

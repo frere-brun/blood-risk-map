@@ -19,11 +19,11 @@ $(document).ready(function() {
 
 	var preloader = new Preloader();
 	var disclaimer = new Disclaimer();
-  var searchBar = new SearchBar();
-  // var slider = new Slider();
 	var datePicker = new DatePicker();
+  // var slider = new Slider();
+	var searchBar = new SearchBar(datePicker);
   var panel = new Panel();
-  var mapObj = new Map();
+  var mapObj = new Map(datePicker);
   var intersector = new Intersector();
   var manager = new GeojsonManager(mapObj, intersector);
 

@@ -7,7 +7,9 @@ const PERIMETER = 100;
 
 
 class Map {
-  constructor() {
+  constructor(datePicker) {
+    this.datePicker = datePicker;
+
     // Create the map object (L.map)
     this.mymap = null;
     this.mapElt = 'map';
@@ -51,8 +53,12 @@ class Map {
     // Init event
     var self = this;
     this.mymap.on('click', function(e) {
-      self.putMarker(e.latlng);
-      self.runConnector();
+      if (! self.datePicker.isSet()) {
+        alert('Tu dois d\'abord choisir la période de ton voyage');
+      } else {
+        self.putMarker(e.latlng);
+        self.runConnector();
+      }
     });
   }
 
@@ -108,9 +114,11 @@ class Map {
   }
 
   diseaseStyle() {
+    // Hidden to prevent bad behavior
     return {
       fillColor: "rgba(255,0,0,0.2)",
-      fillOpacity: 0.5,
+      fillOpacity: 0,
+      opacity: 0,
       stroke: true,
       fill: true,
       color: 'blue',
@@ -150,6 +158,7 @@ class Map {
     this.putMarker(latlng);
     this.runConnector();
   }
+
 }
 
 
