@@ -1,10 +1,10 @@
+
 # Blood Risk Map
 
-----
-##What is it
+## What is it
 The objective of this app is to inform people about their capacities to give their blood according to their past travels.
 
-##How does it works
+## How does it works
 First, put the travel period.
 
 Secondly, enter an address, or simply put a marker on the map.
