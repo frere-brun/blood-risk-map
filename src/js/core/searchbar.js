@@ -7,7 +7,7 @@ class SearchBar {
     this.periodPicker = periodPicker;
     this.provider = new OpenStreetMapProvider();
     this.input = $("#search-input");
-    this.placeBox = $("#search");
+    this.box = $("#search.box");
     this.select = $("#search-results");
     this.selectedItem = null;
     this.selectNumberItems = null;
@@ -26,17 +26,16 @@ class SearchBar {
         alert('Tu dois d\'abord choisir la période de ton voyage');
         self.input.blur();
       } else {
+        self.box.addClass("box--is-focused");
         if (self.isSelected) {
           self.isSelected = false;
           self.input.val('');
-          self.placeBox.addClass("box--is-focused");
           self.deactivateReset();
         }
       }
-
     });
     this.input.on('blur', function() {
-      self.placeBox.removeClass("box--is-focused");
+      self.box.removeClass("box--is-focused");
     });
 
     // Select data from list on keyUp and click

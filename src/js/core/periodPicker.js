@@ -5,11 +5,12 @@ import moment from 'moment';
 class PeriodPicker {
   constructor() {
     this.step = $("#date .step");
-
+    this.box = $("#date.box");
     this.input = $("#search-input");
 
     this.dateStart = $("#dateStart");
     this.dateEnd = $("#dateEnd");
+    this.dateInputs = $("#dateStart, #dateEnd");
 
     this.start = null;
     this.end = null;
@@ -19,6 +20,12 @@ class PeriodPicker {
      * Allow user to type in directly before submitting results
     */
     var self = this;
+    this.dateInputs.on('focus', function(e) {
+      self.box.addClass("box--is-focused");
+    });
+    this.dateInputs.on('blur', function(e) {
+      self.box.removeClass("box--is-focused");
+    });
     this.dateStart.on('change', function(e) {
       console.log('dateStart', this.value);
       // Check validity
