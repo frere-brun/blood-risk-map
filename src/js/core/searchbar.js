@@ -18,25 +18,13 @@ class SearchBar {
 
     var self = this;
     this.input.on('keyup', debounce(function(e) {
-      if (! self.datePicker.isSet()) {
-        alert('Fuck Off');
-        // self.datePicker.putFocus();
-      } else {
-        // if (e.keyCode == 40) {
-        //   self.input.blur();
-        //   self.select.focus();
-        // } else {
-        // }
-        self.resetData();
-        self.requestData();
-      }
-
+      self.resetData();
+      self.requestData();
     }, 200));
     this.input.on('focus', function() {
       if (! self.datePicker.isSet()) {
         alert('Tu dois d\'abord choisir la période de ton voyage');
         self.input.blur();
-        // self.datePicker.putFocus();
       } else {
         if (self.isSelected) {
           self.isSelected = false;
@@ -48,27 +36,11 @@ class SearchBar {
 
     });
     this.input.on('blur', function() {
-      // self.resetData();
       self.placeBox.removeClass("box--is-focused");
     });
 
     // Select data from list on keyUp and click
-    this.select.on('keyup', function(e) {
-      // Try to make keyboard navigation
-      // console.log('keyup', e)
-      // if (e.which == 40) {
-      //   if (self.selectNumberItems > self.selectedItem + 1) {
-      //     self.selectedItem += 1;
-      //   }
-      // } else if (e.which == 38) {
-      //   if (self.selectNumberItems > 0) {
-      //     self.selectedItem -= 1;
-      //   }
-      // }
-      // if (e.which == 13) {
-      //   self.selectData(self.selectedItem);
-      // }
-    }).on('click', function(e) {
+    this.select.on('click', function(e) {
       var targetIndex = $(e.target).attr('aria-value')
       self.selectedItem = targetIndex;
       self.selectData(targetIndex);
@@ -85,8 +57,7 @@ class SearchBar {
     let asyncFn = async function() {
       self.results = await self.provider.search({ query: self.input.val() });
       self.injectData();
-
-
+      
       // Put focus in select tag and force to open it somehow
       // self.select.focus();
       self.select.attr('size', self.results.length < 5 ? self.results.length : 5);
