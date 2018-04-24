@@ -1,5 +1,5 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
-import { debounce } from 'underscore';
+import { debounce, uniq } from 'underscore';
 import $ from 'jquery';
 
 class SearchBar {
@@ -84,6 +84,7 @@ class SearchBar {
       self.results = await self.provider.search({ query: self.input.val() });
       self.injectData();
 
+
       // Put focus in select tag and force to open it somehow
       // self.select.focus();
       self.select.attr('size', self.results.length < 5 ? self.results.length : 5);
@@ -99,6 +100,7 @@ class SearchBar {
   injectData() {
     var self = this;
     this.selectNumberItems = 0;
+    this.results = uniq(this.results, 'label');
     this.results.forEach((elt, index) => {
       var option = {
         text: elt.label,
