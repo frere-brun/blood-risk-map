@@ -61,15 +61,15 @@ class GeojsonManager {
     // If no end date is specified, check duration
     if (duration) {
       var momDuration
-      if (duration.toLowerCase().includes('day')) {
+      if (duration.toLowerCase().includes('jour')) {
         var nbDays = parseInt(duration.split(' ')[0]);
         momDuration = momBegin.add(nbDays, 'days');
       }
-      else if (duration.toLowerCase().includes('month')) {
+      else if (duration.toLowerCase().includes('mois')) {
         var nbMonths = parseInt(duration.split(' ')[0]);
         momDuration = momBegin.add(nbMonths, 'months');
       }
-      else if (duration.toLowerCase().includes('year')) {
+      else if (duration.toLowerCase().includes('année')) {
         var nbYears = parseInt(duration.split(' ')[0]);
         momDuration = momBegin.add(nbYears, 'years');
       }

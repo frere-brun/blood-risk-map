@@ -44,6 +44,7 @@ class SearchBar {
       self.selectedItem = targetIndex;
       self.selectData(targetIndex);
       self.activateReset();
+      self.step.addClass("step--is-valid");
     });
   }
 
@@ -78,7 +79,6 @@ class SearchBar {
         text: elt.label,
         value:  index
       };
-      self.step.addClass("step--is-valid");
       self.select.append("<li class='touch' aria-value=" + option.value + ">" + this.highlightMatches(self.input.val(), option.text) + "</li>");
       self.selectNumberItems += 1;
     });
