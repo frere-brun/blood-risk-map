@@ -2,6 +2,10 @@ import L from 'leaflet';
 import $ from 'jquery';
 import {vectorGrid} from 'leaflet.vectorgrid';
 
+const PERIMETER = 100;
+
+
+
 class Map {
   constructor() {
     // Create the map object (L.map)
@@ -41,7 +45,7 @@ class Map {
     // Create the custom marker with its css (refer to main.scss)
     this.marker = null;
     this.perimeter = null;
-    this.perimeterRadius = 30000; // 30km;
+    this.perimeterRadius = PERIMETER * 1000; // 30km;
     this.icon = L.divIcon({ className: 'marker' });
 
     // Init event
@@ -103,7 +107,7 @@ class Map {
     }
   }
 
-  diseaseStyle(properties, zoom) {
+  diseaseStyle() {
     return {
       fillColor: "rgba(255,0,0,0.2)",
       fillOpacity: 0.5,
@@ -111,6 +115,19 @@ class Map {
       fill: true,
       color: 'blue',
       weight: 0,
+    }
+  }
+
+  perimeterStyle() {
+    // Hidden perimeter
+    return {
+      fillColor: "rgba(255,0,0,0.2)",
+      fillOpacity: 0,
+      opacity: 0,
+      stroke: true,
+      fill: true,
+      color: '#FF0000',
+      weight: 2,
     }
   }
 
@@ -122,7 +139,7 @@ class Map {
     }
 
     if (this.perimeter === null) {
-      this.perimeter = L.circle(latlng, {radius: this.perimeterRadius}).addTo(this.mymap);
+      this.perimeter = L.circle(latlng, {radius: this.perimeterRadius, ...(this.perimeterStyle()) }).addTo(this.mymap);
     } else {
       this.perimeter.setLatLng(latlng);
     }

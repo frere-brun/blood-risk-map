@@ -3,7 +3,6 @@ import '../css/main.scss';
 import $ from 'jquery';
 import moment from 'moment';
 
-
 import { Map } from 'core/map';
 import { Panel } from 'core/panel';
 // import { Slider } from 'core/slider';
