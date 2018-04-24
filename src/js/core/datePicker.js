@@ -6,6 +6,8 @@ class DatePicker {
   constructor() {
     this.step = $("#date .step");
 
+    this.input = $("#search-input");
+
     this.dateStart = $("#dateStart");
     this.dateEnd = $("#dateEnd");
 
@@ -47,6 +49,14 @@ class DatePicker {
     this.connector = connector;
   }
 
+  putFocusOnStart() {
+    this.dateStart.focus();
+  }
+
+  putFocusOnEnd() {
+    this.dateEnd.focus();
+  }
+
   isBefore(value) {
     if (!this.end) {
       return true;
@@ -70,6 +80,9 @@ class DatePicker {
   }
 
   getPeriod() {
+    if (this.start && ! this.end) {
+      this.putFocusOnEnd();
+    }
     if (this.start && this.end) {
       this.step.addClass("step--valid");
       var args = {
@@ -78,6 +91,7 @@ class DatePicker {
       }
       this.connector.setCallArgs(args);
       this.connector.activate();
+      this.input.focus();
     }
   }
 

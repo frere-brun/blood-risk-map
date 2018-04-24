@@ -62,6 +62,10 @@ $(document).ready(function() {
 			}
       manager.updateCurrentGeojson(periodNow);
       preloader.nextStep();
+
+			datePicker.putFocusOnStart();
+
+
     }, 100);
   }, 3000);
 });

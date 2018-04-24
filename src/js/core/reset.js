@@ -29,6 +29,7 @@ class Reset {
     this.map.forceReset();
 
     this.setInactive();
+    this.datePicker.putFocusOnStart();
   }
 
   setInactive() {
