@@ -1,42 +1,49 @@
-Purposes
-=================
+# Blood Risk Map
 
-A tiny blood risk map experiment
+----
+##What is it
+The objective of this app is to inform people about their capacities to give their blood according to their past travels.
+
+##How does it works
+First, put the travel period.
+
+Secondly, enter an address, or simply put a marker on the map.
+
+The diagnosis will show up !
+
+License
+============
+
+This application is provided under the **MIT license**
+
 
 Requirements
 ============
 
-Install NodeJS
+NodeJs & NPM
 
-Dependencies Installation
-=========================
-npm install
 
-Dev
-===
-npm run start
+Project installation
+====================
 
-Release
-=======
-npm run build
+    npm install
 
-Publish
-=======
-npm run publish
+Project set up
+==============
 
-Heroku auto publish
-===================
-
-Use this command to disable production mode and install devDependencies for building the app directly on heroku's servers
-
-heroku config:set NPM_CONFIG_PRODUCTION=false
+    npm run dev
 
 
 CSS
 ===================
 
-This is based on
-
-http://tfrere.github.io/rocket-css
+This is based on [rocket-css]
+(http://tfrere.github.io/rocket-css).
 
 Please check the documentation for more information
+
+Contributors
+============
+
+ * [Arnaud Brun](https://github.com/arnaud-brun)
+ * [Thibaud Frere](https://github.com/tfrere)
