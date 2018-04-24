@@ -10,7 +10,7 @@ const Data = [
     "name": "Tropical",
     "beginDate": "21-08-2011",
     "endDate": null,
-    "duration": "6 months",
+    "duration": "6 mois",
     "color": "red",
     "requiredTests": null,
     "featuresCollection": {
@@ -79,7 +79,7 @@ const Data = [
     "name": "Malaria",
     "beginDate": "21-08-2011",
     "endDate": null,
-    "duration": "6 months",
+    "duration": "6 mois",
     "color": "red",
     "requiredTests": null,
     "featuresCollection": {
@@ -456,7 +456,7 @@ const Data = [
     "name": "Coronavirus",
     "beginDate": "10-06-2012",
     "endDate": null,
-    "duration": "14 days",
+    "duration": "14 jours",
     "color": "red",
     "requiredTests": null,
     "featuresCollection": {
@@ -3079,7 +3079,7 @@ const Data = [
     "name": "Légionéllose",
     "beginDate": "07-10-2013",
     "endDate": null,
-    "duration": "28 days",
+    "duration": "28 jours",
     "color": "red",
     "requiredTests": null,
     "featuresCollection": {
@@ -3605,7 +3605,7 @@ const Data = [
     "name": "Zika virus",
     "beginDate": "01-01-2014",
     "endDate": null,
-    "duration": "28 days",
+    "duration": "28 jours",
     "color": "red",
     "requiredTests": null,
     "featuresCollection": {
@@ -14856,7 +14856,7 @@ const Data = [
     "name": "West-Nile-Virus",
     "beginDate": "01-06-2015",
     "endDate": "30-11-2018",
-    "duration": "0 days",
+    "duration": "0 jours",
     "color": "red",
     "requiredTests": "Analyse PCR/WNV",
     "featuresCollection": {
