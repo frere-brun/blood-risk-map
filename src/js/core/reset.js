@@ -3,13 +3,13 @@ import $ from 'jquery';
 const SPACEKEYCODE = 32;
 
 class Reset {
-  constructor(datePicker, searchBar, panel, map) {
+  constructor(periodPicker, searchBar, panel, map) {
     this.window = $(window);
     this.resetElement = $(".reset-form");
 
     this.isActive = false;
 
-    this.datePicker = datePicker;
+    this.periodPicker = periodPicker;
     this.searchBar = searchBar;
     this.panel = panel;
     this.map = map;
@@ -23,13 +23,13 @@ class Reset {
   }
 
   forceReset() {
-    this.datePicker.forceReset();
+    this.periodPicker.forceReset();
     this.searchBar.forceReset();
     this.panel.forceReset();
     this.map.forceReset();
 
     this.setInactive();
-    this.datePicker.putFocusOnStart();
+    this.periodPicker.putFocusOnStart();
   }
 
   setInactive() {

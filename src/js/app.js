@@ -6,7 +6,7 @@ import moment from 'moment';
 import { Map } from 'core/map';
 import { Panel } from 'core/panel';
 // import { Slider } from 'core/slider';
-import { DatePicker } from 'core/datePicker';
+import { PeriodPicker } from 'core/periodPicker';
 import { SearchBar } from 'core/searchbar';
 import { Preloader } from 'core/preloader';
 import { Disclaimer } from 'core/disclaimer';
@@ -21,21 +21,21 @@ $(document).ready(function() {
 
 	var preloader = new Preloader();
 	var disclaimer = new Disclaimer();
-	var datePicker = new DatePicker();
+	var periodPicker = new PeriodPicker();
   // var slider = new Slider();
-	var searchBar = new SearchBar(datePicker);
+	var searchBar = new SearchBar(periodPicker);
   var panel = new Panel();
-  var mapObj = new Map(datePicker);
+  var mapObj = new Map(periodPicker);
   var intersector = new Intersector();
   var manager = new GeojsonManager(mapObj, intersector);
 
-	var reset = new Reset(datePicker, searchBar, panel, mapObj);
+	var reset = new Reset(periodPicker, searchBar, panel, mapObj);
 	searchBar.allowReset(reset);
 
   // Connect composants between them with a specific handler
   var c0 = new Connector(preloader, disclaimer, "display");
   // Slider updates the data to display
-  var c1 = new Connector(datePicker, manager, "updateCurrentGeojson");
+  var c1 = new Connector(periodPicker, manager, "updateCurrentGeojson");
   // Map interections need to be checked afterward
   var c2 = new Connector(mapObj, intersector, "checkIntersection");
 	// Map completes searchbar after click
@@ -63,7 +63,7 @@ $(document).ready(function() {
       manager.updateCurrentGeojson(periodNow);
       preloader.nextStep();
 
-			datePicker.putFocusOnStart();
+			periodPicker.putFocusOnStart();
 
 
     }, 100);

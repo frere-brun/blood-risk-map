@@ -2,7 +2,7 @@ import $ from 'jquery';
 import moment from 'moment';
 
 // Should be renamed 'PeriodPicker' instead....'
-class DatePicker {
+class PeriodPicker {
   constructor() {
     this.step = $("#date .step");
 
@@ -108,4 +108,4 @@ class DatePicker {
   }
 }
 
-export {DatePicker}
+export {PeriodPicker}

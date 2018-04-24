@@ -8,8 +8,8 @@ const ORIGIN = [51.505, -0.09];
 
 
 class Map {
-  constructor(datePicker) {
-    this.datePicker = datePicker;
+  constructor(periodPicker) {
+    this.periodPicker = periodPicker;
 
     // Create the map object (L.map)
     this.mymap = null;
@@ -54,7 +54,7 @@ class Map {
     // Init event
     var self = this;
     this.mymap.on('click', function(e) {
-      if (! self.datePicker.isSet()) {
+      if (! self.periodPicker.isSet()) {
         alert('Tu dois d\'abord choisir la période de ton voyage');
       } else {
         self.putMarker(e.latlng);

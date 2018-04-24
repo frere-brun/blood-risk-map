@@ -3,8 +3,8 @@ import { debounce, uniq } from 'underscore';
 import $ from 'jquery';
 
 class SearchBar {
-  constructor(datePicker) {
-    this.datePicker = datePicker;
+  constructor(periodPicker) {
+    this.periodPicker = periodPicker;
     this.provider = new OpenStreetMapProvider();
     this.input = $("#search-input");
     this.placeBox = $("#search");
@@ -22,7 +22,7 @@ class SearchBar {
       self.requestData();
     }, 200));
     this.input.on('focus', function() {
-      if (! self.datePicker.isSet()) {
+      if (! self.periodPicker.isSet()) {
         alert('Tu dois d\'abord choisir la période de ton voyage');
         self.input.blur();
       } else {
@@ -57,7 +57,7 @@ class SearchBar {
     let asyncFn = async function() {
       self.results = await self.provider.search({ query: self.input.val() });
       self.injectData();
-      
+
       // Put focus in select tag and force to open it somehow
       // self.select.focus();
       self.select.attr('size', self.results.length < 5 ? self.results.length : 5);
