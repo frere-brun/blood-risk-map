@@ -4,6 +4,7 @@ import {vectorGrid} from 'leaflet.vectorgrid';
 
 const PERIMETER = 100;
 
+const ORIGIN = [51.505, -0.09];
 
 
 class Map {
@@ -21,7 +22,7 @@ class Map {
       maxBounds: this.bounds,
       maxBoundsViscosity: 1.0
      };
-    this.mymap = L.map(this.mapElt, this.mapOptions).setView([51.505, -0.09], 2); // Original : .setView([48.6857475, 5.6279968], 2);
+    this.mymap = L.map(this.mapElt, this.mapOptions).setView(ORIGIN, 2); // Original : .setView([48.6857475, 5.6279968], 2);
     this.mymap.setMaxBounds(this.bounds);
 
     // Create the tile layer, keep reference, and add it to mymap
@@ -157,6 +158,20 @@ class Map {
     var latlng =  L.latLng(target.lat, target.lon)
     this.putMarker(latlng);
     this.runConnector();
+  }
+
+  forceReset() {
+    if(this.marker) {
+      this.marker.remove();
+      this.marker = null;
+    }
+
+    if(this.perimeter) {
+      this.perimeter.remove();
+      this.perimeter = null;
+    }
+
+    this.mymap.setView(ORIGIN, 2);
   }
 
 }

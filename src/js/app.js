@@ -15,6 +15,8 @@ import { Intersector }from 'core/intersector';
 import { GeojsonManager } from 'core/geojsonManager';
 import { Data } from '../data/data';
 
+import { Reset } from 'core/reset';
+
 $(document).ready(function() {
 
 	var preloader = new Preloader();
@@ -26,6 +28,9 @@ $(document).ready(function() {
   var mapObj = new Map(datePicker);
   var intersector = new Intersector();
   var manager = new GeojsonManager(mapObj, intersector);
+
+	var reset = new Reset(datePicker, searchBar, panel, mapObj);
+	searchBar.allowReset(reset);
 
   // Connect composants between them with a specific handler
   var c0 = new Connector(preloader, disclaimer, "display");

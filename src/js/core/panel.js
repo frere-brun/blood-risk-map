@@ -22,7 +22,6 @@ class Panel {
   }
 
   setOk() {
-
     this.status.text("Admissible");
     this.duration.text("C'est fantastique");
     this.delay.text("");
@@ -31,14 +30,12 @@ class Panel {
   }
 
   setNotOk(data) {
-
     this.status.text("Non admissible");
     this.duration.text("6 Mois d'attente");
     this.delay.text("Admissible à partir du 24/11/18");
 
     // dump data
     var self = this;
-
     data.forEach(function(d) {
       var title = "Maladie Inconnue";
       if (d.diseaseName) {
@@ -58,6 +55,14 @@ class Panel {
     });
 
     this.response.addClass("response--is-invalid").removeClass("response--is-valid");
+  }
+
+  forceReset() {
+    this.response.removeClass("response--is-invalid").removeClass("response--is-valid");
+    this.status.empty();
+    this.delay.empty();
+    this.duration.empty();
+    this.diseases.empty();
   }
 
 }

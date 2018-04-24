@@ -42,6 +42,7 @@ class SearchBar {
           self.isSelected = false;
           self.input.val('');
           self.placeBox.addClass("box--is-focused");
+          self.deactivateReset();
         }
       }
 
@@ -71,6 +72,7 @@ class SearchBar {
       var targetIndex = $(e.target).attr('aria-value')
       self.selectedItem = targetIndex;
       self.selectData(targetIndex);
+      self.activateReset();
     });
   }
 
@@ -149,5 +151,27 @@ class SearchBar {
     }
     asyncFn();
   }
+
+  allowReset(reset) {
+    this.reset = reset
+  }
+
+  activateReset(reset) {
+    if (this.reset) {
+      this.reset.setActive();
+    }
+  }
+
+  deactivateReset(reset) {
+    if (this.reset) {
+      this.reset.setInactive();
+    }
+  }
+
+  forceReset() {
+    this.input.val('');
+    this.step.removeClass("step--valid");
+  }
+
 }
 export {SearchBar}

@@ -1,7 +1,11 @@
 import $ from 'jquery';
 import moment from 'moment';
+
+// Should be renamed 'PeriodPicker' instead....'
 class DatePicker {
   constructor() {
+    this.step = $("#date .step");
+
     this.dateStart = $("#dateStart");
     this.dateEnd = $("#dateEnd");
 
@@ -67,6 +71,7 @@ class DatePicker {
 
   getPeriod() {
     if (this.start && this.end) {
+      this.step.addClass("step--valid");
       var args = {
         start: this.start,
         end: this.end
@@ -78,6 +83,14 @@ class DatePicker {
 
   isSet() {
     return this.start && this.end;
+  }
+
+  forceReset() {
+    this.start = null;
+    this.dateStart.val('');
+    this.end = null;
+    this.dateEnd.val('');
+    this.step.removeClass("step--valid");
   }
 }
 
