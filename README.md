@@ -11,6 +11,12 @@ Secondly, enter an address, or simply put a marker on the map.
 
 The diagnosis will show up !
 
+## ShortCuts
+
+Press "Enter" to show / hide the disease layer
+
+Press "Space" to reset the form
+
 License
 ============
 

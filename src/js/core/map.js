@@ -2,14 +2,17 @@ import L from 'leaflet';
 import $ from 'jquery';
 import {vectorGrid} from 'leaflet.vectorgrid';
 
+// NEED TO BE MOVED IN A CONFIG FILE
 const PERIMETER = 100;
-
 const ORIGIN = [51.505, -0.09];
-
+var SHOWDISEASES = false;
+const SHOWDISEASESKEY = 13;
 
 class Map {
   constructor(periodPicker) {
     this.periodPicker = periodPicker;
+    this.window = $(window);
+    this.hasToDisplayDiseases = false;
 
     // Create the map object (L.map)
     this.mymap = null;
@@ -61,6 +64,13 @@ class Map {
         self.runConnector();
       }
     });
+
+    this.window.on('keypress', function(e) {
+      if(e.keyCode == SHOWDISEASESKEY) {
+        SHOWDISEASES = !SHOWDISEASES;
+      }
+    });
+
   }
 
   connect(connector) {
@@ -118,8 +128,8 @@ class Map {
     // Hidden to prevent bad behavior
     return {
       fillColor: "rgba(255,0,0,0.2)",
-      fillOpacity: 0,
-      opacity: 0,
+      fillOpacity: SHOWDISEASES ? 1 : 0,
+      opacity: SHOWDISEASES ? 1 : 0,
       stroke: true,
       fill: true,
       color: 'blue',
@@ -131,8 +141,8 @@ class Map {
     // Hidden perimeter
     return {
       fillColor: "rgba(255,0,0,0.2)",
-      fillOpacity: 0,
-      opacity: 0,
+      fillOpacity: SHOWDISEASES ? 1 : 0,
+      opacity: SHOWDISEASES ? 1 : 0,
       stroke: true,
       fill: true,
       color: '#FF0000',

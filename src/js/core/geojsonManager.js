@@ -1,12 +1,23 @@
 import moment from 'moment';
 
+// Need to be moved in a config file 
+const SHOWDISEASESKEY = 13;
+
 // Loads the data and only dispatch the useful one
 class GeojsonManager {
   constructor(map, intersector) {
     this.geojsonLayerSources = [];
     this.currentGeojson = [];
     this.mapRef = map;
+    this.window = $(window);
     this.intersectorRef = intersector;
+
+    var self = this;
+    this.window.on('keypress', function(e) {
+      if(e.keyCode == SHOWDISEASESKEY) {
+        self.mapRef.updateDiseaseLayers(self.currentGeojson);
+      }
+    });
   }
 
   // Get Geojson objects and put additional data for convenience

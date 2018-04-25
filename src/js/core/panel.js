@@ -147,7 +147,7 @@ class Panel {
     if (!longestDurationToWait.isBefore(moment())) {
 
       this.status.text("Non admissible");
-      this.duration.text(longestDurationToWait.fromNow() + " d'attente");
+      this.duration.text(longestDurationToWait.add(1, "day").fromNow() + " d'attente");
       this.delay.text("Admissible à partir du " + longestDurationToWait.format("DD/MM/YY"));
       this.response.addClass("response--is-invalid").removeClass("response--is-valid");
 
