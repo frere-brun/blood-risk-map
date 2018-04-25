@@ -4,8 +4,11 @@
 	left:40px;
 	width: 460px;
 	z-index:999;
-	.place--focused {
+	&.box--is-focused {
 		border-bottom-right-radius: 0;
+		.place__icon:after {
+			transform: rotate(65deg) translateY(-5px);
+		}
 	}
 }
 
@@ -16,8 +19,9 @@
 
 // OVERRIDE
 .place input {
-	width: 260px;
+	width: 210px;
 	background-color: transparent;
+	text-overflow: ellipsis;
 }
 
 .dropdown .results {
@@ -38,4 +42,18 @@
 		height: 51px;
 		line-height: 2;
 	}
+}
+
+.place.box--is-focused {
+  input {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+   .results {
+     display: block;
+		 border: 1px solid color("primary", "base");
+		 z-index: 9999999999;
+		left: -2px;
+		border-top: 1px transparent;
+   }
 }

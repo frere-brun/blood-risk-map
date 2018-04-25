@@ -23,7 +23,7 @@ class Map {
       maxBoundsViscosity: 1.0
      };
     this.mymap = L.map(this.mapElt, this.mapOptions).setView(ORIGIN, 2); // Original : .setView([48.6857475, 5.6279968], 2);
-    this.mymap.setMaxBounds(this.bounds);
+    // this.mymap.setMaxBounds(this.bounds);
 
     // Create the tile layer, keep reference, and add it to mymap
     this.tileLayer = null;
@@ -143,8 +143,10 @@ class Map {
   putMarker(latlng) {
     if(this.marker === null) {
       this.marker = L.marker(latlng, {icon: this.icon}).addTo(this.mymap);
+      this.mymap.panTo(this.marker.getLatLng());
     } else {
       this.marker.setLatLng(latlng);
+      this.mymap.panTo(this.marker.getLatLng());
     }
 
     if (this.perimeter === null) {

@@ -43,7 +43,7 @@ class Intersector {
     var status = {
       'diseaseName': disease.properties.diseaseName,
       'diseaseDuration': disease.properties.diseaseDuration,
-      'dieseaseRequiredTests': disease.properties.dieseaseRequiredTests
+      'diseaseRequiredTests': disease.properties.diseaseRequiredTests
     };
     return status;
   }

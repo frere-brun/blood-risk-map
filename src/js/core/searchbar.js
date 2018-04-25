@@ -11,16 +11,18 @@ class SearchBar {
     this.select = $("#search-results");
     this.selectedItem = null;
     this.selectNumberItems = null;
-    this.step = $(".place .step");
+    this.step = $("#search .step");
     this.select.parent().addClass('hidden');
     this.results = [];
     this.isSelected = false;
 
     var self = this;
+
     this.input.on('keyup', debounce(function(e) {
       self.resetData();
       self.requestData();
     }, 200));
+
     this.input.on('focus', function() {
       if (! self.periodPicker.isSet()) {
         alert('Tu dois d\'abord choisir la période de ton voyage');
@@ -34,18 +36,23 @@ class SearchBar {
         }
       }
     });
+
     this.input.on('blur', function() {
-      self.box.removeClass("box--is-focused");
+      if(this.isSelected)
+        self.box.removeClass("box--is-focused");
     });
 
     // Select data from list on keyUp and click
     this.select.on('click', function(e) {
-      var targetIndex = $(e.target).attr('aria-value')
+      var targetIndex = $(e.target).attr('aria-value');
+      console.log(1, targetIndex);
       self.selectedItem = targetIndex;
       self.selectData(targetIndex);
       self.activateReset();
+      self.box.removeClass("box--is-focused");
       self.step.addClass("step--is-valid");
     });
+
   }
 
   connect(connector) {
@@ -88,10 +95,12 @@ class SearchBar {
   selectData(targetIndex) {
     // Get backdata to clic on
     var i = targetIndex;
+    console.log(this.results[i].label);
     var splitLabel = this.results[i].label.split(', ');
     var country = splitLabel[splitLabel.length-1];
     var target = {'lon': this.results[i].x, 'lat': this.results[i].y, 'country': country};
 
+    console.log("should be filled", this.results[i].label);
     // Fill in input, alter behavior and reset data
     this.input.val(this.results[i].label);
     this.isSelected = true;
@@ -110,13 +119,14 @@ class SearchBar {
   }
 
   injectAddress(address) {
-    console.log('injectAddress', address)
+    console.log('injectAddress', address);
     var lon = address[0];
     var lat = address[1];
     var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat="+lat+"&lon="+lon;
     var self = this;
     let asyncFn = async function() {
       const data = await $.ajax(url);
+      self.step.addClass("step--is-valid");
       self.input.val(data.display_name);
     }
     asyncFn();

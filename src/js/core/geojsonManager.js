@@ -19,7 +19,7 @@ class GeojsonManager {
         geojsonFeature.properties['diseaseBeginDate'] = disease.beginDate;
         geojsonFeature.properties['diseaseEndDate'] = disease.endDate;
         geojsonFeature.properties['diseaseDuration'] = disease.duration;
-        geojsonFeature.properties['dieseaseRequiredTests'] = disease.requiredTests;
+        geojsonFeature.properties['diseaseRequiredTests'] = disease.requiredTests;
       });
       this.geojsonLayerSources.push(disease);
     }
@@ -61,15 +61,15 @@ class GeojsonManager {
     // If no end date is specified, check duration
     if (duration) {
       var momDuration
-      if (duration.toLowerCase().includes('jour')) {
+      if (duration.toLowerCase().includes('day')) {
         var nbDays = parseInt(duration.split(' ')[0]);
         momDuration = momBegin.add(nbDays, 'days');
       }
-      else if (duration.toLowerCase().includes('mois')) {
+      else if (duration.toLowerCase().includes('month')) {
         var nbMonths = parseInt(duration.split(' ')[0]);
         momDuration = momBegin.add(nbMonths, 'months');
       }
-      else if (duration.toLowerCase().includes('année')) {
+      else if (duration.toLowerCase().includes('year')) {
         var nbYears = parseInt(duration.split(' ')[0]);
         momDuration = momBegin.add(nbYears, 'years');
       }

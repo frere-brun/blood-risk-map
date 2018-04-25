@@ -2,17 +2,24 @@
 	position:absolute;
 	right:40px;
 	top:160px;
-	width: 300px;
+	width: 310px;
+	min-height: 40px;
 	z-index: 999;
 	color:white;
   background-color:white;
-}
-
-.response--is-valid {
-	.diagnosis {
-		display: none;
+	p {
+		margin: 0;
+	}
+	&>label {
+		margin-bottom: 10px;
 	}
 }
+
+// .response--is-valid {
+// 	.diagnosis {
+// 		display: none;
+// 	}
+// }
 
 
 .diagnosis__details {
