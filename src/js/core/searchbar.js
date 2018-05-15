@@ -25,8 +25,7 @@ class SearchBar {
 
     this.input.on('focus', function() {
       if (! self.periodPicker.isSet()) {
-        alert('Tu dois d\'abord choisir la période de ton voyage');
-        self.input.blur();
+        self.periodPicker.putFocusOnStart();
       } else {
         self.box.addClass("box--is-focused");
         if (self.isSelected) {
