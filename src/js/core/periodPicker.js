@@ -27,28 +27,51 @@ class PeriodPicker {
       self.box.removeClass("box--is-focused");
     });
     this.dateStart.on('change', function(e) {
-      console.log('dateStart', this.value);
-      // Check validity
-      if (self.isBefore(this.value)) {
-        self.setStart(this.value);
-        self.getPeriod();
-      } else {
-        alert('La date de départ doit précéder la date de retour');
-        self.start = null;
-        console.log('start', self.start, ' - end -', self.end)
-      }
+      // Force reset on dateEnd
+      self.dateEnd.val('');
+      self.end = null;
+
+      // Set dateStart and put focus on dateEnd
+      self.setStart(this.value);
+      this.putFocusOnEnd();
+      //
+      // // Check validity
+      // if (self.isBefore(this.value)) {
+      //
+      //
+      // } else {
+      //   alert('La date de départ doit précéder la date de retour');
+      //   self.start = null;
+      //   console.log('start', self.start, ' - end -', self.end)
+      // }
     });
     this.dateEnd.on('change', function(e) {
-      console.log('dateEnd', this.value);
-      // Check validity
+      if (!self.start) {
+        self.putFocusOnStart();
+        return;
+      }
+
       if (self.isAfter(this.value)) {
         self.setEnd(this.value);
         self.getPeriod();
       } else {
         alert('La date de retour doit succéder la date de départ');
+        self.dateEnd.val('');
         self.end = null;
         console.log('start', self.start, ' - end -', self.end)
       }
+
+
+      // console.log('dateEnd', this.value);
+      // // Check validity
+      // if (self.isAfter(this.value)) {
+      //   self.setEnd(this.value);
+      //   self.getPeriod();
+      // } else {
+      //   alert('La date de retour doit succéder la date de départ');
+      //   self.end = null;
+      //   console.log('start', self.start, ' - end -', self.end)
+      // }
     });
   }
 
@@ -87,9 +110,6 @@ class PeriodPicker {
   }
 
   getPeriod() {
-    if (this.start && ! this.end) {
-      this.putFocusOnEnd();
-    }
     if (this.start && this.end) {
       this.step.addClass("step--is-valid");
       var args = {
