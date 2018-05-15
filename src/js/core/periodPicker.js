@@ -21,6 +21,7 @@ class PeriodPicker {
     */
     var self = this;
     this.dateInputs.on('focus', function(e) {
+      self.box.removeClass("box--is-focused");
       self.box.addClass("box--is-focused");
     });
     this.dateInputs.on('blur', function(e) {
