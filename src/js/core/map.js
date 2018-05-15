@@ -58,7 +58,7 @@ class Map {
     var self = this;
     this.mymap.on('click', function(e) {
       if (! self.periodPicker.isSet()) {
-        alert('Tu dois d\'abord choisir la période de ton voyage');
+        self.periodPicker.putFocusOnStart();
       } else {
         self.putMarker(e.latlng);
         self.runConnector();
