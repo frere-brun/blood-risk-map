@@ -40,7 +40,7 @@ class PeriodPicker {
 
       // Set dateStart and put focus on dateEnd
       self.setStart(this.value);
-      this.putFocusOnEnd();
+      self.putFocusOnEnd();
     });
     this.dateEnd.on('change', function(e) {
       if (!self.start) {
