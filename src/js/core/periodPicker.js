@@ -34,16 +34,6 @@ class PeriodPicker {
       // Set dateStart and put focus on dateEnd
       self.setStart(this.value);
       this.putFocusOnEnd();
-      //
-      // // Check validity
-      // if (self.isBefore(this.value)) {
-      //
-      //
-      // } else {
-      //   alert('La date de départ doit précéder la date de retour');
-      //   self.start = null;
-      //   console.log('start', self.start, ' - end -', self.end)
-      // }
     });
     this.dateEnd.on('change', function(e) {
       if (!self.start) {
@@ -55,23 +45,11 @@ class PeriodPicker {
         self.setEnd(this.value);
         self.getPeriod();
       } else {
-        alert('La date de retour doit succéder la date de départ');
         self.dateEnd.val('');
         self.end = null;
+        self.box.addClass("box--is-invalid");
         console.log('start', self.start, ' - end -', self.end)
       }
-
-
-      // console.log('dateEnd', this.value);
-      // // Check validity
-      // if (self.isAfter(this.value)) {
-      //   self.setEnd(this.value);
-      //   self.getPeriod();
-      // } else {
-      //   alert('La date de retour doit succéder la date de départ');
-      //   self.end = null;
-      //   console.log('start', self.start, ' - end -', self.end)
-      // }
     });
   }
 
@@ -111,6 +89,7 @@ class PeriodPicker {
 
   getPeriod() {
     if (this.start && this.end) {
+      this.box.removeClass("box--is-invalid");
       this.step.addClass("step--is-valid");
       var args = {
         start: this.start,
