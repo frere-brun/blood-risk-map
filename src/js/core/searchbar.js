@@ -127,6 +127,7 @@ class SearchBar {
       const data = await $.ajax(url);
       self.step.addClass("step--is-valid");
       self.input.val(data.display_name);
+      self.reset.setActive();
     }
     asyncFn();
   }
