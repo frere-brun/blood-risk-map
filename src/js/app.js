@@ -30,6 +30,7 @@ $(document).ready(function() {
   var manager = new GeojsonManager(mapObj, intersector);
 
 	var reset = new Reset(periodPicker, searchBar, panel, mapObj);
+	periodPicker.allowReset(reset);
 	searchBar.allowReset(reset);
 
   // Connect composants between them with a specific handler

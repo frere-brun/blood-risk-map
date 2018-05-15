@@ -27,6 +27,12 @@ class PeriodPicker {
     this.dateInputs.on('blur', function(e) {
       self.box.removeClass("box--is-focused");
     });
+    this.box.on('click', function() {
+      if(self.start && self.end && self.reset) {
+        self.reset.forceReset();
+        return;
+      }
+    });
     this.dateStart.on('change', function(e) {
       // Force reset on dateEnd
       self.dateEnd.val('');
@@ -113,6 +119,11 @@ class PeriodPicker {
     this.dateEnd.val('');
     this.step.removeClass("step--is-valid");
   }
+
+  allowReset(reset) {
+    this.reset = reset;
+  }
+
 }
 
 export {PeriodPicker}

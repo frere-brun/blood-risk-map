@@ -150,6 +150,7 @@ class SearchBar {
 
   forceReset() {
     this.input.val('');
+    this.box.removeClass("box--is-focused");
     this.step.removeClass("step--is-valid");
   }
 
