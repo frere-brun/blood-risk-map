@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head lang="fr">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Blood risk map</title>
+    <style>
+
+      html {
+      	opacity: 0;
+      	transition: opacity 200ms ease;
+      }
+      html.-loaded {
+        opacity: 1;
+      }
+    </style>
+    <link rel="stylesheet" href="css/app.css?v=1526397362349">
+    <!-- <script type="text/javascript" src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script> -->
+
+</head>
+<body id="body">
+    <!-- App version : 1.1.1, build time : Tue May 15 2018 17:16:02 GMT+0200 (CEST) -->
+
+    <!-- PRELOADER -->
+    <div class="preloader-wrapper">
+      <div class="preloader">
+        <div class="preloader__logo">
+        </div>
+        <div class="preloader__title">Le saviez vous ?</div>
+        <div class="preloader__text">La Croix-Rouge française, ce sont plus de <b>59 000 bénévoles</b> et <b>18 000 salariés</b> présents sur <b>l’ensemble du territoire</b>. Auxiliaire des pouvoirs publics dans ses missions humanitaires, <b>la Croix-Rouge française mène un combat de tous les instants pour soulager la souffrance des hommes.</b></div>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER MODAL -->
+    <div class="disclaimer modal">
+      <div class="overlay close-modal"></div>
+      <div class="content">
+        <div class=" content-wrapper">
+          <header class="">
+            <h5>Disclaimer</h5>
+            <div class="close-button close-modal">
+              <i class="icon -cross"></i>
+            </div>
+          </header>
+          <p>Si vous avez séjourné entre 1980 et 1996 au Royaume-Uni (Angleterre, Pays de Galles, Écosse, Irlande du Nord, Channel Islands, Isle of Man) pendant une durée cumulée de plus de 12 mois ou si vous avez reçu une transfusion sanguine ou avez été opéré au Royaume-Uni après le 1er janvier 1980, sachez que les critères internationaux ne permettent actuellement pas au Centre de Transfusion Sanguine de vous accepter comme donneur de sang.</p>
+          <footer class="merge -large -horizontal">
+            <button id="acceptBtn" class="button">Accept</button>
+            <button id="declineBtn" class="button">Decline</button>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <!-- APP -->
+    <div class="app">
+
+      <!-- DATE RANGE -->
+      <div id="date" class="date box">
+        <div class="step">
+          <div class="step__number">
+            1
+          </div>
+          <div class="step__checkmark"></div>
+          <div class="step__cross"></div>
+        </div>
+        <fieldset>
+          <label>Date de départ</label>
+          <input id="dateStart" aria-label="departure-date" type="date" />
+        </fieldset>
+        <fieldset>
+          <label>Date de retour</label>
+          <input id="dateEnd" aria-label="return-date"  type="date" />
+        </fieldset>
+        <div class="box__icon date__icon"></div>
+        <div class="box__error" id="date-error-message">La date est invalide</div>
+      </div>
+
+      <!-- PLACE -->
+      <div id="search" class="place box">
+        <div class="step">
+          <div class="step__number">
+            2
+          </div>
+          <div class="step__checkmark"></div>
+          <div class="step__cross"></div>
+        </div>
+
+        <fieldset class="toggle-dropdown dropdown">
+          <label>Destination</label>
+          <input id="search-input" type="text" placeholder="Paris, Dakkar, Alger..."/>
+          <i class="remove-research-button icon -cross touch-event"></i>
+          <div class="results">
+            <ul class="place__results" id="search-results">
+              <!-- PLACE RESULTS -->
+            </ul>
+          </div>
+        </fieldset>
+        <div class="box__icon place__icon"></div>
+      </div>
+
+      <!-- RESPONSE -->
+      <div id="response" class="response">
+
+        <!-- STATUS-LIGHT -->
+        <div class="box status-light">
+          <div class="status-light__circle"></div>
+          <div class="status-light__circle"></div>
+          <div class="status-light__circle"></div>
+        </div>
+
+        <!-- ADMISSIBILITY -->
+        <div id="admissibility" class="box admissibility">
+          <label id="admissibility-status" class="admissibility__label admissibility__status"></label>
+          <h3 id="admissibility-duration" class="admissibility__title admissibility__duration"></h3>
+          <label id="admissibility-delay" class="admissibility__label admissibility__delay"></label>
+        </div>
+
+        <!-- DIAGNOSIS -->
+        <div id="diagnosis" class="box diagnosis">
+          <label>Maladies impliquées</label>
+          <ul id="diagnosis-details" class="diagnosis__details">
+            <!-- DIAGNOSIS RESULTS -->
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- RESET FORM -->
+      <div id="resetForm" class="reset-form">
+        <div class="reset-form__text">
+          Appuies sur <span class="reset-form__text__enter">espace</span> pour <br/> recommencer
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div id="map" class="map"></div>
+
+    </div>
+
+    <script src="js/polyfills.js?v=1526397362349"></script>
+    <script src="js/vendors.js?v=1526397362349"></script>
+    <script src="js/app.js?v=1526397362349"></script>
+</body>
+</html>
