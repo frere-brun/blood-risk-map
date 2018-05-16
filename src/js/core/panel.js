@@ -107,7 +107,23 @@ class Panel {
       momDuration = moment($('#dateEnd').val()).add(nbYears, 'years');
     }
     return momDuration;
+  }
 
+  durationToFrench(diseaseDuration) {
+    var duration;
+    if (diseaseDuration.toLowerCase().includes('day')) {
+      var nbDays = parseInt(diseaseDuration.split(' ')[0]);
+      duration = nbDays + "Jours";
+    }
+    else if (diseaseDuration.toLowerCase().includes('month')) {
+      var nbMonths = parseInt(diseaseDuration.split(' ')[0]);
+      duration = nbMonths + "Mois";
+    }
+    else if (diseaseDuration.toLowerCase().includes('year')) {
+      var nbYears = parseInt(diseaseDuration.split(' ')[0]);
+      duration = nbYears + "Années";
+    }
+    return duration;
   }
 
   setNotOk(data) {
@@ -126,7 +142,7 @@ class Panel {
       }
       var label = "Délai inconnu";
       if (disease.diseaseDuration) {
-        label = "<label class='diagnosis__details__item__label'>" + disease.diseaseDuration + "</label>";
+        label = "<label class='diagnosis__details__item__label'>" + self.durationToFrench(disease.diseaseDuration) + "</label>";
         // We need to compare each diseaseDuration to get the longest
         var duration = self.durationToMoment(disease.diseaseDuration);
         if(duration.isAfter(longestDurationToWait))
