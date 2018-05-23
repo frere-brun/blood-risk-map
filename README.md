@@ -1,6 +1,8 @@
 
 # Blood Risk Map
 
+[Demo](https://frere-brun.github.io/blood-risk-map/build)
+
 ## What is it
 The objective of this app is to inform people about their capacities to give their blood according to their past travels.
 
