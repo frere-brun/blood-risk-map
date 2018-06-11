@@ -8,6 +8,9 @@
   // for safety
   min-height: 80px;
   transform: all 200ms ease("swift-in");
+  &--is-hidden {
+    display: none;
+  }
   &--is-invalid {
     border: 1px solid color("primary", "base");
     .box__error {
@@ -27,6 +30,11 @@
 
   }
 }
+
+.box--is-hidden {
+  display: none;
+}
+
 
 .box__error {
   display: none;

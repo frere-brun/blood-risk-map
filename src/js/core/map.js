@@ -3,7 +3,7 @@ import $ from 'jquery';
 import {vectorGrid} from 'leaflet.vectorgrid';
 
 // NEED TO BE MOVED IN A CONFIG FILE
-const PERIMETER = 100;
+const PERIMETER = 50; // in KM
 const ORIGIN = [51.505, -0.09];
 var SHOWDISEASES = false;
 const SHOWDISEASESKEY = 13;
@@ -20,8 +20,8 @@ class Map {
     this.bounds = L.latLngBounds(L.latLng(-89.98155760646617, -180), L.latLng(89.99346179538875, 180));
     this.mapOptions = {
       zoomControl:false,
-      minZoom: 3,
-      maxZoom: 6,
+      minZoom: 4, // default 3
+      maxZoom: 8, // default 6
       maxBounds: this.bounds,
       maxBoundsViscosity: 1.0
      };
@@ -51,7 +51,7 @@ class Map {
     // Create the custom marker with its css (refer to main.scss)
     this.marker = null;
     this.perimeter = null;
-    this.perimeterRadius = PERIMETER * 1000; // 30km;
+    this.perimeterRadius = PERIMETER * 1000; // km;
     this.icon = L.divIcon({ className: 'marker' });
 
     // Init event
@@ -68,6 +68,14 @@ class Map {
     this.window.on('keypress', function(e) {
       if(e.keyCode == SHOWDISEASESKEY) {
         SHOWDISEASES = !SHOWDISEASES;
+        if(SHOWDISEASES) {
+          $(".legend").addClass("legend--visible");
+          // $(".box:not(.legend), .reset-form").hide();
+        }
+          else {
+          $(".legend").removeClass("legend--visible");
+          // $(".box:not(.legend), .reset-form").show();
+        }
       }
     });
 
@@ -108,10 +116,11 @@ class Map {
     var self = this;
     var layers = [];
     geojsonFeatures.forEach(function(features) {
+      console.log(features.features[0].properties.color);
       var l = L.vectorGrid.slicer(features, {
         rendererFactory: L.svg.tile,
         vectorTileLayerStyles: {
-          sliced: self.diseaseStyle,
+          sliced: self.diseaseStyle(features.features[0].properties.color),
         },
       });
       layers.push(l);
@@ -124,12 +133,12 @@ class Map {
     }
   }
 
-  diseaseStyle() {
+  diseaseStyle(color) {
     // Hidden to prevent bad behavior
     return {
-      fillColor: "rgba(255,0,0,0.2)",
-      fillOpacity: SHOWDISEASES ? 1 : 0,
-      opacity: SHOWDISEASES ? 1 : 0,
+      fillColor: color,
+      fillOpacity: SHOWDISEASES ? 0.3 : 0,
+      opacity: SHOWDISEASES ? 0.3 : 0,
       stroke: true,
       fill: true,
       color: 'blue',
